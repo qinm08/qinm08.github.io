@@ -1,11 +1,90 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
+<!doctype html>
+
+
+
   
-  <title>翻译：Hadoop权威指南之Spark-1 | Ming&#39;s Coding Life</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文翻译自O’Reilly出版Tom White所著《Hadoop: The Definitive Guide》第4版第19章，向作者致敬。该书英文第4版已于2015年4月出版，至今已近15个月，而市面上中文第3版还在大行其道。Spark一章是第4版新增的内容，笔者在学习过程中顺便翻译记录，由于笔者也在学习，并无实战经验，难免翻译不妥或出错，欢迎方家来信斧正。翻译纯属兴趣，不做商业用途。秦铭，Em">
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="hadoop,spark," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="本文翻译自O’Reilly出版Tom White所著《Hadoop: The Definitive Guide》第4版第19章，向作者致敬。该书英文第4版已于2015年4月出版，至今已近15个月，而市面上中文第3版还在大行其道。Spark一章是第4版新增的内容，笔者在学习过程中顺便翻译记录，由于笔者也在学习，并无实战经验，难免翻译不妥或出错，欢迎方家来信斧正。翻译纯属兴趣，不做商业用途。秦铭，Em">
 <meta property="og:type" content="article">
 <meta property="og:title" content="翻译：Hadoop权威指南之Spark-1">
 <meta property="og:url" content="https://qinm08.github.io/2016/07/17/hadoop-the-definitive-guide-spark-1/index.html">
@@ -15,82 +94,194 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="翻译：Hadoop权威指南之Spark-1">
 <meta name="twitter:description" content="本文翻译自O’Reilly出版Tom White所著《Hadoop: The Definitive Guide》第4版第19章，向作者致敬。该书英文第4版已于2015年4月出版，至今已近15个月，而市面上中文第3版还在大行其道。Spark一章是第4版新增的内容，笔者在学习过程中顺便翻译记录，由于笔者也在学习，并无实战经验，难免翻译不妥或出错，欢迎方家来信斧正。翻译纯属兴趣，不做商业用途。秦铭，Em">
-  
-    <link rel="alternative" href="/atom.xml" title="Ming&#39;s Coding Life" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" type="image/x-icon" href="/css/images/blacktocat.png">
-  
-
-<!--
-  <link href="//fonts.googleapis.com/css?family=Inconsolata:400,700|Open+Sans:700,400" rel="stylesheet" type="text/css">
-
-  
 
 
--->
 
-  <link rel="stylesheet" href="/css/style.css">
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
 
+
+
+
+  <link rel="canonical" href="https://qinm08.github.io/2016/07/17/hadoop-the-definitive-guide-spark-1/"/>
+
+  <title> 翻译：Hadoop权威指南之Spark-1 | Ming's Coding Life </title>
 </head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <div id="header">
-  <div id="header-outer" class="outer">
-    <div id="header-inner" class="inner">
-      <div id="header-title">
-        <h1 id="logo-wrap">
-          <a href="/" id="logo">Ming&#39;s Coding Life
-          
-              <span id="subtitle">不忘初心，方得始终</span>
-          
-          </a>
-        </h1>
-      </div>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qinm08.github.io"></form>
-      </div>
-    </div>
-  </div>
-</div>
-      <div class="outer">
-        <section id="main"><article id="post-hadoop-the-definitive-guide-spark-1" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/07/17/hadoop-the-definitive-guide-spark-1/" class="article-date">
-  <time datetime="2016-07-16T16:03:56.969Z" itemprop="datePublished">2016-07-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      翻译：Hadoop权威指南之Spark-1
-    </h1>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
   
 
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ming's Coding Life</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">不忘初心，方得始终</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                翻译：Hadoop权威指南之Spark-1
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-17T00:03:56+08:00" content="2016-07-17">
+              2016-07-17
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/17/hadoop-the-definitive-guide-spark-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/07/17/hadoop-the-definitive-guide-spark-1/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
       
         <p>本文翻译自O’Reilly出版Tom White所著《Hadoop: The Definitive Guide》第4版第19章，向作者致敬。该书英文第4版已于2015年4月出版，至今已近15个月，而市面上中文第3版还在大行其道。Spark一章是第4版新增的内容，笔者在学习过程中顺便翻译记录，由于笔者也在学习，并无实战经验，难免翻译不妥或出错，欢迎方家来信斧正。翻译纯属兴趣，不做商业用途。秦铭，Email地址<a href="mailto:qinm08@gmail.com" target="_blank" rel="external">qinm08@gmail.com</a>。</p>
 <hr>
@@ -136,103 +327,306 @@
 
       
     </div>
-    <footer class="article-footer">
-      <a data-url="https://qinm08.github.io/2016/07/17/hadoop-the-definitive-guide-spark-1/" data-id="ciqpd29fi0000g9sl3hibwo2c" class="article-share-link">Share</a>
-      
-        <a href="https://qinm08.github.io/2016/07/17/hadoop-the-definitive-guide-spark-1/#disqus_thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hadoop/">hadoop</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spark/">spark</a></li></ul>
 
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hadoop/" rel="tag">#hadoop</a>
+          
+            <a href="/tags/spark/" rel="tag">#spark</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/17/hadoop-the-definitive-guide-spark-2/" rel="prev" title="翻译：Hadoop权威指南之Spark-2">
+                翻译：Hadoop权威指南之Spark-2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
     </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
-  
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
     
-<nav id="article-nav">
-  
-    <a href="/2016/07/17/hadoop-the-definitive-guide-spark-2/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          翻译：Hadoop权威指南之Spark-2
-        
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
       </div>
-    </a>
-  
-  
-</nav>
-
-  
-</article>
-
-
-<section id="comments">
-  <div id="disqus_thread">
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
   </div>
-</section>
-</section>
+
+
+        </div>
         
           
-            <aside id="sidebar">
-    <div class="widget-wrap fixed">
-    <h3 class="widget-title">Anchors</h3>
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
 
-    <div class="widget">
-        <ul class='toc'>
-        <li><a class='anchor' href='#logo'>Title</a></li>
-        <li><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Installing-Spark"><span class="toc-number">1.</span> <span class="toc-text">Installing Spark</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#An-Example"><span class="toc-number">2.</span> <span class="toc-text">An Example</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spark-Applications-Jobs-Stages-Tasks"><span class="toc-number">3.</span> <span class="toc-text">Spark Applications, Jobs, Stages, Tasks</span></a></li></ol></li>
-        <li><a class='anchor' href='#comments'>Comments</a></li> 
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
         </ul>
-    </div>
-</div>
-</aside>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Ming Qin" />
+          <p class="site-author-name" itemprop="name">Ming Qin</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
           
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
         
-      </div>
-      <div id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2016 Ming Qin<br>
-      <img src="/css/images/email.png" height="12" width="16"/> <a href="mailto:qinm08@gmail.com"> qinm08@gmail.com</a><br>
-      <img src="/css/images/github.png" height="16" width="16"/> <a href="https://github.com/qinm08" target="_blank"> https://github.com/qinm08</a><br>
-    </div>
-  </div>
-</div>
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Installing-Spark"><span class="nav-number">1.</span> <span class="nav-text">Installing Spark</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#An-Example"><span class="nav-number">2.</span> <span class="nav-text">An Example</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spark-Applications-Jobs-Stages-Tasks"><span class="nav-number">3.</span> <span class="nav-text">Spark Applications, Jobs, Stages, Tasks</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
 
     </div>
-    <nav id="mobile-nav">
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
   
-    <a href="/" class="mobile-nav-link">Home</a>
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ming Qin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
   
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-<script>
-  var disqus_shortname = 'qinm08';
-  
-  var disqus_url = 'https://qinm08.github.io/2016/07/17/hadoop-the-definitive-guide-spark-1/';
-  
-  (function(){
-    var dsq = document.createElement('script');
-    dsq.type = 'text/javascript';
-    dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
 
 
-<!--
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
--->
 
 
 
-<script src="/js/script.js"></script>
 
-  </div>
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'qinm08';
+      var disqus_identifier = '2016/07/17/hadoop-the-definitive-guide-spark-1/';
+      var disqus_title = "翻译：Hadoop权威指南之Spark-1";
+      var disqus_url = 'https://qinm08.github.io/2016/07/17/hadoop-the-definitive-guide-spark-1/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
 </body>
 </html>
