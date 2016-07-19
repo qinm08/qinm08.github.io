@@ -94,7 +94,7 @@
 <meta property="og:description" content="A Scala Standalone Application在Spark shell中运行了一个小程序之后，你可能想要把它打包成自包含应用，这样就可以多次运行了。
 示例19-1. 使用Spark找出最高气温的Scala应用
 123456789101112131415import org.apache.spark.SparkContext._import org.apache.spark.&amp;#123">
-<meta property="og:updated_time" content="2016-07-19T19:31:27.526Z">
+<meta property="og:updated_time" content="2016-07-19T19:33:21.654Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="翻译：Hadoop权威指南之Spark-2">
 <meta name="twitter:description" content="A Scala Standalone Application在Spark shell中运行了一个小程序之后，你可能想要把它打包成自包含应用，这样就可以多次运行了。
@@ -325,9 +325,9 @@
         <h2 id="A-Scala-Standalone-Application"><a href="#A-Scala-Standalone-Application" class="headerlink" title="A Scala Standalone Application"></a>A Scala Standalone Application</h2><p>在Spark shell中运行了一个小程序之后，你可能想要把它打包成自包含应用，这样就可以多次运行了。</p>
 <p>示例19-1. 使用Spark找出最高气温的Scala应用</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.apache.spark.<span class="type">SparkContext</span>._</div><div class="line"><span class="keyword">import</span> org.apache.spark.&#123;<span class="type">SparkConf</span>, <span class="type">SparkContext</span>&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">MaxTemperature</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]) &#123;</div><div class="line">        <span class="keyword">val</span> conf = <span class="keyword">new</span> <span class="type">SparkConf</span>().setAppName(<span class="string">"Max Temperature"</span>)</div><div class="line">        <span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(conf)</div><div class="line">        sc.textFile(args(<span class="number">0</span>))</div><div class="line">          .map(_.split(<span class="string">"\t"</span>))</div><div class="line">          .filter(rec =&gt; (rec(<span class="number">1</span>) != <span class="string">"9999"</span> &amp;&amp; rec(<span class="number">2</span>).matches(<span class="string">"[01459]"</span>)))</div><div class="line">          .map(rec =&gt; (rec(<span class="number">0</span>).toInt, rec(<span class="number">1</span>).toInt))</div><div class="line">          .reduceByKey((a, b) =&gt; <span class="type">Math</span>.max(a, b))</div><div class="line">          .saveAsTextFile(args(<span class="number">1</span>))</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<a id="more"></a>
 <p>运行独立程序时，没有shell为我们提供SparkContext，我们需要自己创建。我们用一个SparkConf来创建这个实例。SparkConf可以用来向应用中传递多个Spark属性，这里我们仅仅设置应用的名字。</p>
 <p>还有一些别的微小变化。首先是我们使用命令行参数来指定输入和输出路径。另外还使用了方法链来避免为每一个RDD创建中间变量，这样程序更紧凑，如果需要的话，我们仍然可以在Scala IDE中查看每次转变（transformation）的类型信息。</p>
+<a id="more"></a>
 <blockquote>
 <p>并非所有的Spark定义的transformation都可用于RDD类本身。在本例中，reduceByKey()（仅仅在键值对的RDD上起作用）实际上定义在PairRDDFunctions类中，但我们能用下面的import来让Scala隐含地把RDD[(Int, Int)]转为PairRDDFunctions：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">import org.apache.spark.SparkContext._</div></pre></td></tr></table></figure></p>
 <p>这个import不同于Spark使用的隐式转型函数，因此理所当然地值得包含在程序中。</p>
