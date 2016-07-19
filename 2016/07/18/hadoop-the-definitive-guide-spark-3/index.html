@@ -84,16 +84,19 @@
 
 
 
-<meta name="description" content="本文翻译自O’Reilly出版Tom White所著《Hadoop: The Definitive Guide》第4版第19章，向作者致敬。该书英文第4版已于2015年4月出版，至今已近15个月，而市面上中文第3版还在大行其道。Spark一章是第4版新增的内容，笔者在学习过程中顺便翻译记录，由于笔者也在学习，并无实战经验，难免翻译不妥或出错，欢迎方家来信斧正。翻译纯属兴趣，不做商业用途。秦铭，Em">
+<meta name="description" content="Resilient Distributed DatasetsRDD是每个spark程序的核心，本节我们来看看更多细节。
+Creation创建RDD有三种方式：从一个内存中的对象集合，被称为并行化（parallelizing） 一个集合；使用一个外部存储（比如HDFS）的数据集；转变（transform）已存在的RDD。在对少量的输入数据并行地进行CPU密集型运算时，第一种方式非常有用。例如，下面执">
 <meta property="og:type" content="article">
 <meta property="og:title" content="翻译：Hadoop权威指南之Spark-3">
 <meta property="og:url" content="https://qinm08.github.io/2016/07/18/hadoop-the-definitive-guide-spark-3/index.html">
 <meta property="og:site_name" content="Ming's Coding Life">
-<meta property="og:description" content="本文翻译自O’Reilly出版Tom White所著《Hadoop: The Definitive Guide》第4版第19章，向作者致敬。该书英文第4版已于2015年4月出版，至今已近15个月，而市面上中文第3版还在大行其道。Spark一章是第4版新增的内容，笔者在学习过程中顺便翻译记录，由于笔者也在学习，并无实战经验，难免翻译不妥或出错，欢迎方家来信斧正。翻译纯属兴趣，不做商业用途。秦铭，Em">
-<meta property="og:updated_time" content="2016-07-19T06:33:29.467Z">
+<meta property="og:description" content="Resilient Distributed DatasetsRDD是每个spark程序的核心，本节我们来看看更多细节。
+Creation创建RDD有三种方式：从一个内存中的对象集合，被称为并行化（parallelizing） 一个集合；使用一个外部存储（比如HDFS）的数据集；转变（transform）已存在的RDD。在对少量的输入数据并行地进行CPU密集型运算时，第一种方式非常有用。例如，下面执">
+<meta property="og:updated_time" content="2016-07-19T19:31:36.525Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="翻译：Hadoop权威指南之Spark-3">
-<meta name="twitter:description" content="本文翻译自O’Reilly出版Tom White所著《Hadoop: The Definitive Guide》第4版第19章，向作者致敬。该书英文第4版已于2015年4月出版，至今已近15个月，而市面上中文第3版还在大行其道。Spark一章是第4版新增的内容，笔者在学习过程中顺便翻译记录，由于笔者也在学习，并无实战经验，难免翻译不妥或出错，欢迎方家来信斧正。翻译纯属兴趣，不做商业用途。秦铭，Em">
+<meta name="twitter:description" content="Resilient Distributed DatasetsRDD是每个spark程序的核心，本节我们来看看更多细节。
+Creation创建RDD有三种方式：从一个内存中的对象集合，被称为并行化（parallelizing） 一个集合；使用一个外部存储（比如HDFS）的数据集；转变（transform）已存在的RDD。在对少量的输入数据并行地进行CPU密集型运算时，第一种方式非常有用。例如，下面执">
 
 
 
@@ -316,9 +319,7 @@
       
 
       
-        <p>本文翻译自O’Reilly出版Tom White所著《Hadoop: The Definitive Guide》第4版第19章，向作者致敬。该书英文第4版已于2015年4月出版，至今已近15个月，而市面上中文第3版还在大行其道。Spark一章是第4版新增的内容，笔者在学习过程中顺便翻译记录，由于笔者也在学习，并无实战经验，难免翻译不妥或出错，欢迎方家来信斧正。翻译纯属兴趣，不做商业用途。秦铭，Email地址<a href="mailto:qinm08@gmail.com" target="_blank" rel="external">qinm08@gmail.com</a>。</p>
-<hr>
-<h1 id="Resilient-Distributed-Datasets"><a href="#Resilient-Distributed-Datasets" class="headerlink" title="Resilient Distributed Datasets"></a>Resilient Distributed Datasets</h1><p>RDD是每个spark程序的核心，本节我们来看看更多细节。</p>
+        <h1 id="Resilient-Distributed-Datasets"><a href="#Resilient-Distributed-Datasets" class="headerlink" title="Resilient Distributed Datasets"></a>Resilient Distributed Datasets</h1><p>RDD是每个spark程序的核心，本节我们来看看更多细节。</p>
 <h2 id="Creation"><a href="#Creation" class="headerlink" title="Creation"></a>Creation</h2><p>创建RDD有三种方式：从一个内存中的对象集合，被称为<em>并行化（parallelizing）</em> 一个集合；使用一个外部存储（比如HDFS）的数据集；转变（transform）已存在的RDD。在对少量的输入数据并行地进行CPU密集型运算时，第一种方式非常有用。例如，下面执行从1到10的独立运算：</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> params = sc.parallelize(<span class="number">1</span> to <span class="number">10</span>)</div><div class="line"><span class="keyword">val</span> result = params.map(performExpensiveComputation)</div></pre></td></tr></table></figure>
 <p>函数performExpensiveComputation并行处理输入数据。并行性的级别由属性spark.default.parallelism决定，该属性的默认值取决于Spark的运行方式。本地运行时，是本地机器的核心数量，集群运行时，是集群中所有执行（executor）节点的核心总数量。</p>
@@ -433,6 +434,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2016/07/19/hadoop-the-definitive-guide-spark-４/" rel="prev" title="翻译：Hadoop权威指南之Spark-４">
+                翻译：Hadoop权威指南之Spark-４ <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -506,7 +511,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
