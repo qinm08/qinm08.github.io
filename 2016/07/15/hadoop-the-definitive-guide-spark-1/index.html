@@ -90,7 +90,7 @@
 <meta property="og:url" content="https://qinm08.github.io/2016/07/15/hadoop-the-definitive-guide-spark-1/index.html">
 <meta property="og:site_name" content="Ming's Coding Life">
 <meta property="og:description" content="本文翻译自O’Reilly出版Tom White所著《Hadoop: The Definitive Guide》第4版第19章，向作者致敬。该书英文第4版已于2015年4月出版，至今已近15个月，而市面上中文第3版还在大行其道。Spark一章是第4版新增的内容，笔者在学习过程中顺便翻译记录。由于笔者也在学习，难免翻译不妥或出错，欢迎方家来信斧正。翻译纯属兴趣，不做商业用途。秦铭，Email地址qi">
-<meta property="og:updated_time" content="2016-07-23T04:15:52.138Z">
+<meta property="og:updated_time" content="2016-07-23T04:23:46.102Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="翻译：Hadoop权威指南之Spark-1">
 <meta name="twitter:description" content="本文翻译自O’Reilly出版Tom White所著《Hadoop: The Definitive Guide》第4版第19章，向作者致敬。该书英文第4版已于2015年4月出版，至今已近15个月，而市面上中文第3版还在大行其道。Spark一章是第4版新增的内容，笔者在学习过程中顺便翻译记录。由于笔者也在学习，难免翻译不妥或出错，欢迎方家来信斧正。翻译纯属兴趣，不做商业用途。秦铭，Email地址qi">
@@ -324,12 +324,12 @@
 <p>Spark的用户体验也是首屈一指的（second to none），它有丰富的API用来执行很多常见的数据处理任务，比如join。行文之时，Spark提供三种语言的API：Scala，Java和Python。本章中的大多数例子将采用Scala API，但翻译为别的语言也是容易的。Spark还带有一个基于Scala或Python的REPL（read-eval-print loop）环境，可以快速简便的查看数据集。</p>
 <p>Spark是个构建分析工具的好平台，为达此目的，Apache Spark项目包含了众多的模块：机器学习（MLlib），图形处理（GraphX），流式处理（Spark Streaming），还有SQL（Spark SQL）。本章内容不涉及这些模块，感兴趣的读者可以访问 <a href="http://spark.apache.org" target="_blank" rel="external">Apache Spark 网站</a> 。</p>
 <a id="more"></a>
-<h1 id="Installing-Spark"><a href="#Installing-Spark" class="headerlink" title="Installing Spark"></a>Installing Spark</h1><p>从 <a href="http://spark.apache.org/downloads.html" target="_blank" rel="external">下载页面</a> 下载Spark二进制分发包的稳定版本（选择和你正在使用的Hadoop版本相匹配的）。在合适的地方解压这个tar包。</p>
+<h1 id="安装Spark"><a href="#安装Spark" class="headerlink" title="安装Spark"></a>安装Spark</h1><p>从 <a href="http://spark.apache.org/downloads.html" target="_blank" rel="external">下载页面</a> 下载Spark二进制分发包的稳定版本（选择和你正在使用的Hadoop版本相匹配的）。在合适的地方解压这个tar包。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">% tar xzf spark-x.y.z-bin-distro.tgz</div></pre></td></tr></table></figure>
 <p>把Spark加入到PATH环境变量中</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">% export SPARK_HOME=~/sw/spark-x.y.z-bin-distro</div><div class="line">% export PATH=$PATH:$SPARK_HOME/bin</div></pre></td></tr></table></figure>
 <p>我们现在可以运行Spark的例子了。</p>
-<h1 id="An-Example"><a href="#An-Example" class="headerlink" title="An Example"></a>An Example</h1><p>为了介绍Spark，我们使用spark-shell来运行一个交互式会话，这是带有Spark附加组件的Scala REPL，用下面的命令启动shell：</p>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>为了介绍Spark，我们使用spark-shell来运行一个交互式会话，这是带有Spark附加组件的Scala REPL，用下面的命令启动shell：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">% spark-shell</div><div class="line">Spark context available as sc.</div><div class="line">scala&gt;</div></pre></td></tr></table></figure>
 <p>从控制台的输出，我们可以看到shell创建了一个Scala变量，sc，用来存储SparkContext实例。这是Spark的入口，我们可以这样加载一个文本文件：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">scala&gt; val lines = sc.textFile(&quot;input/ncdc/micro-tab/sample.txt&quot;)</div><div class="line">lines: org.apache.spark.rdd.RDD[String] = MappedRDD[1] at textFile at &lt;console&gt;:12</div></pre></td></tr></table></figure>
@@ -354,10 +354,10 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scala&gt; maxTemps.saveAsTextFile(&quot;output&quot;)</div></pre></td></tr></table></figure>
 <p>这样会创建一个output目录，包含分区文件：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">% cat output/part-*</div><div class="line">(1950,22)</div><div class="line">(1949,111)</div></pre></td></tr></table></figure>
-<p>这个saveAsTextFile()方法也会触发一个Spark job。主要的区别是没有返回值，而是把RDD的计算结果及其分区文件写入output目录中。</p>
-<h2 id="Spark-Applications-Jobs-Stages-Tasks"><a href="#Spark-Applications-Jobs-Stages-Tasks" class="headerlink" title="Spark Applications, Jobs, Stages, Tasks"></a>Spark Applications, Jobs, Stages, Tasks</h2><p>示例中我们看到，和MapReduce一样，Spark也有job的概念。然而，Spark的job比MapReduce的job更通用，因为它是由任意的stage的有向无环图（DAG）组成。每个stage大致等同于MapReduce中的map或者reduce阶段。</p>
-<p>Stages被Spark 运行时拆分为tasks，并行地运行在RDD的分区之上，就像MapReduce的task一样。</p>
-<p>一个Job总是运行于一个application的上下文中，由SparkContext实例表示，application的作用是分组RDD和共享变量。一个application可以运行多个job，串行或者并行，并且提供一种机制，使得一个job可以访问同一application中的前一个job缓存的RDD。一个交互式的Spark会话，比如spark-shell会话，就是一个application的实例。</p>
+<p>这个saveAsTextFile()方法也会触发一个Spark工作。主要的区别是没有返回值，而是把RDD的计算结果及其分区文件写入output目录中。</p>
+<h2 id="Spark应用、工作、阶段、任务"><a href="#Spark应用、工作、阶段、任务" class="headerlink" title="Spark应用、工作、阶段、任务"></a>Spark应用、工作、阶段、任务</h2><p>示例中我们看到，和MapReduce一样，Spark也有工作的概念。然而，Spark工作比MapReduce工作更通用，因为它是由任意的阶段组成的有向无环图（DAG）。每个阶段大致等同于MapReduce中的map或者reduce阶段。</p>
+<p>阶段被Spark运行时拆分为任务，并行地运行在RDD的分区之上，就像MapReduce的任务一样。</p>
+<p>一个工作总是运行于一个应用的上下文中，由SparkContext实例表示，应用的作用是分组RDD和共享变量。一个应用可以运行多个工作，串行或者并行，并且提供一种机制，使得一个工作可以访问同一应用中前一个工作缓存的RDD。一个交互式的Spark会话，比如spark-shell会话，就是一个应用的实例。</p>
 
       
     </div>
@@ -565,7 +565,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Installing-Spark"><span class="nav-number">1.</span> <span class="nav-text">Installing Spark</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#An-Example"><span class="nav-number">2.</span> <span class="nav-text">An Example</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spark-Applications-Jobs-Stages-Tasks"><span class="nav-number">2.1.</span> <span class="nav-text">Spark Applications, Jobs, Stages, Tasks</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Spark"><span class="nav-number">1.</span> <span class="nav-text">安装Spark</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#示例"><span class="nav-number">2.</span> <span class="nav-text">示例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spark应用、工作、阶段、任务"><span class="nav-number">2.1.</span> <span class="nav-text">Spark应用、工作、阶段、任务</span></a></li></ol></li></ol></div>
             
           </div>
         </section>

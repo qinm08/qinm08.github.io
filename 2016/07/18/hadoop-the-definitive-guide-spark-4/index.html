@@ -84,22 +84,22 @@
 
 
 
-<meta name="description" content="Persistence回到本章开头的例子，我们可以把“年度-气温”的中间数据集缓存在内存中：
+<meta name="description" content="持久化回到本章开头的例子，我们可以把“年度-气温”的中间数据集缓存在内存中：
 12scala&amp;gt; tuples.cache()res1: tuples.type = MappedRDD[4] at map at &amp;lt;console&amp;gt;:18
-调用cache()不会立刻把RDD缓存到内存中，只是对这个RDD做一个标记，当Spark job运行的时候，实际的缓存行为才会发生">
+调用cache()不会立刻把RDD缓存到内存中，只是对这个RDD做一个标记，当Spark job运行的时候，实际的缓存行为才会发生。因此我们首先强">
 <meta property="og:type" content="article">
 <meta property="og:title" content="翻译：Hadoop权威指南之Spark-4">
 <meta property="og:url" content="https://qinm08.github.io/2016/07/18/hadoop-the-definitive-guide-spark-4/index.html">
 <meta property="og:site_name" content="Ming's Coding Life">
-<meta property="og:description" content="Persistence回到本章开头的例子，我们可以把“年度-气温”的中间数据集缓存在内存中：
+<meta property="og:description" content="持久化回到本章开头的例子，我们可以把“年度-气温”的中间数据集缓存在内存中：
 12scala&amp;gt; tuples.cache()res1: tuples.type = MappedRDD[4] at map at &amp;lt;console&amp;gt;:18
-调用cache()不会立刻把RDD缓存到内存中，只是对这个RDD做一个标记，当Spark job运行的时候，实际的缓存行为才会发生">
-<meta property="og:updated_time" content="2016-07-19T19:54:38.240Z">
+调用cache()不会立刻把RDD缓存到内存中，只是对这个RDD做一个标记，当Spark job运行的时候，实际的缓存行为才会发生。因此我们首先强">
+<meta property="og:updated_time" content="2016-07-23T04:35:28.253Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="翻译：Hadoop权威指南之Spark-4">
-<meta name="twitter:description" content="Persistence回到本章开头的例子，我们可以把“年度-气温”的中间数据集缓存在内存中：
+<meta name="twitter:description" content="持久化回到本章开头的例子，我们可以把“年度-气温”的中间数据集缓存在内存中：
 12scala&amp;gt; tuples.cache()res1: tuples.type = MappedRDD[4] at map at &amp;lt;console&amp;gt;:18
-调用cache()不会立刻把RDD缓存到内存中，只是对这个RDD做一个标记，当Spark job运行的时候，实际的缓存行为才会发生">
+调用cache()不会立刻把RDD缓存到内存中，只是对这个RDD做一个标记，当Spark job运行的时候，实际的缓存行为才会发生。因此我们首先强">
 
 
 
@@ -322,7 +322,7 @@
       
 
       
-        <h2 id="Persistence"><a href="#Persistence" class="headerlink" title="Persistence"></a>Persistence</h2><p>回到本章开头的例子，我们可以把“年度-气温”的中间数据集缓存在内存中：</p>
+        <h2 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h2><p>回到本章开头的例子，我们可以把“年度-气温”的中间数据集缓存在内存中：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">scala&gt; tuples.cache()</div><div class="line">res1: tuples.type = MappedRDD[4] at map at &lt;console&gt;:18</div></pre></td></tr></table></figure>
 <p>调用cache()不会立刻把RDD缓存到内存中，只是对这个RDD做一个标记，当Spark job运行的时候，实际的缓存行为才会发生。因此我们首先强制运行一个job：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">scala&gt; tuples.reduceByKey((a, b) =&gt; Math.max(a, b)).foreach(println(_))</div><div class="line">INFO BlockManagerInfo: Added rdd_4_0 in memory on 192.168.1.90:64640</div><div class="line">INFO BlockManagerInfo: Added rdd_4_1 in memory on 192.168.1.90:64640</div><div class="line">(1950,22)</div><div class="line">(1949,111)</div></pre></td></tr></table></figure>
@@ -334,7 +334,7 @@
 <blockquote>
 <p>缓存的RDD只能被同一个application中的job获取。要在不同的application之间共享数据集，第一个application必须使用某个saveAs*()方法（saveAsTextFile()，saveAsHadoopFile()等等）来写到外部存储中，然后第二个application使用SparkContext中的对应方法（textFile()，hadoopFile()等等）再次加载。同样的，当一个application终止时，它缓存的所有RDD都被销毁，除非显式的保存下来，否则不能再次访问。</p>
 </blockquote>
-<h3 id="Persistence-levels"><a href="#Persistence-levels" class="headerlink" title="Persistence levels"></a>Persistence levels</h3><p>调用cache()会把RDD的每个分区持久化到执行器（executor）的内存中。如果执行器没有足够的内存来存储这个RDD分区，计算不会失败，相反该分区将会根据需要进行重算。对于带有很多trsansformation的复杂程序，这是很昂贵的。因此Spark提供了不同类型的持久化行为供用户选择，在调用persist()时指定StorageLevel参数即可。</p>
+<h3 id="持久化级别"><a href="#持久化级别" class="headerlink" title="持久化级别"></a>持久化级别</h3><p>调用cache()会把RDD的每个分区持久化到执行器（executor）的内存中。如果执行器没有足够的内存来存储这个RDD分区，计算不会失败，相反该分区将会根据需要进行重算。对于带有很多转换的复杂程序，这是很昂贵的。因此Spark提供了不同类型的持久化行为供用户选择，在调用persist()时指定StorageLevel参数即可。</p>
 <p>默认的持久化级别是MEMORY_ONLY，这种方式使用对象的常规内存表示。要使用更紧凑的表现形式，可以把分区中的元素序列化为字节数组（byte array）。这种级别是MEMORY_ONLY_SER，相比MEMORY_ONLY，这种级别会导致CPU的压力，如果序列化之后的RDD分区能够适应内存，而常规的内存表示不适合，那么这种压力就是值得的。MEMORY_ONLY_SER还会减轻垃圾回收的压力，因为每个RDD都以字节数组的形式存储，而不是很多的对象。</p>
 <blockquote>
 <p>在driver程序的日志文件中，检查BlockManager相关的信息，可以看到一个RDD分区是否不适合内存。另外，每个driver的SparkContext会在4040端口启动一个HTTP服务，提供关于运行环境以及正在运行的job的有用信息，包括缓存的RDD分区的信息。</p>
@@ -342,8 +342,8 @@
 <p>默认情况下，使用常规的Java序列化框架来序列化RDD分区，不过Kryo序列化框架（下节讨论）通常是更好的选择，在大小和速度两方面都更优秀。如果把序列化后的分区进行压缩，可以节省更多的空间（再一次付出CPU的代价），设置spark.rdd.compress属性为true来启用压缩，属性spark.io.compression.codec是可选设置。</p>
 <p>如果重算一个数据集非常昂贵，那么MEMORY_AND_DISK（如果数据集在内存中放不下，就写到磁盘上）或者MEMORY_AND_DISK_SER（如果序列化后的数据集在内存中放不下，就写到磁盘上）是合适的。</p>
 <p>还有一些更高级的和实验中的持久化级别，用来在集群中的多个节点上复制分区，或者使用off-heap内存——更多细节，查看Spark文档。</p>
-<h2 id="Serialization"><a href="#Serialization" class="headerlink" title="Serialization"></a>Serialization</h2><p>在Spark中需要考虑序列化的两个方面：序列化数据和序列化函数（或闭包）。</p>
-<h3 id="Data"><a href="#Data" class="headerlink" title="Data"></a>Data</h3><p>首先来看数据的序列化。默认情况下，Spark使用Java序列化框架在执行器之间的网络上传输数据，或者以序列化的形式来缓存数据。对程序员来说，Java的序列化很好理解，只需确定你使用的类实现了java.io.Serializable接口或者java.io.Externalizable接口，但从性能和大小的角度来看，这种方式的效率不高。</p>
+<h2 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h2><p>在Spark中需要考虑序列化的两个方面：序列化数据和序列化函数（或闭包）。</p>
+<h3 id="数据序列化"><a href="#数据序列化" class="headerlink" title="数据序列化"></a>数据序列化</h3><p>首先来看数据的序列化。默认情况下，Spark使用Java序列化框架在执行器之间的网络上传输数据，或者以序列化的形式来缓存数据。对程序员来说，Java的序列化很好理解，只需确定你使用的类实现了java.io.Serializable接口或者java.io.Externalizable接口，但从性能和大小的角度来看，这种方式的效率不高。</p>
 <p>对于大多数的Spark程序，更好的选择是Kryo序列化框架。Kryo是一个高效的通用的Java序列化库。要使用Kryo，在driver程序的SparkConf上设置spark.serializer属性如下：</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">conf.set(<span class="string">"spark.serializer"</span>,  <span class="string">"org.apache.spark.serializer.KryoSerializer"</span>)</div></pre></td></tr></table></figure>
 <p>Kryo不要求你的类实现特定接口，因此简单的Java对象不需要任何改动即可在RDD中使用。话虽如此，如果在使用一个类之前把它注册到Kryo会更加高效。这是因为Kryo会创建一个引用，指向那个序列化对象的类（一个对象对应一个引用），如果类已注册，该引用是个整数ID，如果类没有注册，该引用是类的全名。这个引导仅仅适用于你自己的类，Scala类和许多其他的框架类（比如Avro Generic或者Thrift类）已经由Spark注册了。</p>
@@ -351,18 +351,18 @@
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CustomKryoRegistrator</span> <span class="keyword">extends</span> <span class="title">KryoRegistrator</span> </span>&#123;</div><div class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">registerClasses</span></span>(kryo: <span class="type">Kryo</span>) &#123;</div><div class="line">    kryo.register(classOf[<span class="type">WeatherRecord</span>])</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>最后，在driver程序中，把属性spark.kryo.registrator设置为你的KryoRegistrator实现类的完整类名：</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">conf.set(<span class="string">"spark.kryo.registrator"</span>, <span class="string">"CustomKryoRegistrator"</span>)</div></pre></td></tr></table></figure>
-<h3 id="Functions"><a href="#Functions" class="headerlink" title="Functions"></a>Functions</h3><p>通常，函数的序列化将”刚好工作”：在Scala中，函数都是可序列化的，使用标准Java序列化机制。这也是Spark向远程执行器节点发送函数时使用的方式。即使在本地模式下运行，Spark也会序列化函数。如果你在无意中引入了不可序列化的函数（比如，从一个非序列化类的方法转换过来的函数），你会在开发过程的早期阶段发现它。</p>
-<h2 id="Shared-Variables"><a href="#Shared-Variables" class="headerlink" title="Shared Variables"></a>Shared Variables</h2><p>Spark程序经常需要访问一些数据，这些数据不是一个RDD的一部分。例如，下面的程序在一个map()操作中使用了一个查找表（lookup table）：</p>
+<h3 id="函数序列化"><a href="#函数序列化" class="headerlink" title="函数序列化"></a>函数序列化</h3><p>通常，函数的序列化将”刚好工作”：在Scala中，函数都是可序列化的，使用标准Java序列化机制。这也是Spark向远程执行器节点发送函数时使用的方式。即使在本地模式下运行，Spark也会序列化函数。如果你在无意中引入了不可序列化的函数（比如，从一个非序列化类的方法转换过来的函数），你会在开发过程的早期阶段发现它。</p>
+<h2 id="共享变量"><a href="#共享变量" class="headerlink" title="共享变量"></a>共享变量</h2><p>Spark程序经常需要访问一些数据，这些数据不是一个RDD的一部分。例如，下面的程序在一个map()操作中使用了一个查找表（lookup table）：</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> lookup = <span class="type">Map</span>(<span class="number">1</span> -&gt; <span class="string">"a"</span>, <span class="number">2</span> -&gt; <span class="string">"e"</span>, <span class="number">3</span> -&gt; <span class="string">"i"</span>, <span class="number">4</span> -&gt; <span class="string">"o"</span>, <span class="number">5</span> -&gt; <span class="string">"u"</span>)</div><div class="line"><span class="keyword">val</span> result = sc.parallelize(<span class="type">Array</span>(<span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>)).map(lookup(_))</div><div class="line">assert(result.collect().toSet === <span class="type">Set</span>(<span class="string">"a"</span>, <span class="string">"e"</span>, <span class="string">"i"</span>))</div></pre></td></tr></table></figure>
 <p>这段程序会正确工作（变量lookup被序列化为闭包的一部分，传递给map()），但是还有一个更高效的方式来达到同样的目的：使用广播变量。</p>
-<h3 id="Broadcast-Variables"><a href="#Broadcast-Variables" class="headerlink" title="Broadcast Variables"></a>Broadcast Variables</h3><p>广播变量在序列化之后发送给每一个执行器，在那里缓存起来，因此后续的任务可以在需要时访问。这与普通的变量不同。普通的变量会序列化为闭包的一部分，然后在网络上传输，一个任务一次传输。广播变量的角色，与MapReduce中的分布式缓存相似，不过Spark内部的实现是把数据存储在内存中，仅当内存被耗尽时才写到磁盘。</p>
+<h3 id="广播变量"><a href="#广播变量" class="headerlink" title="广播变量"></a>广播变量</h3><p>广播变量在序列化之后发送给每一个执行器，在那里缓存起来，因此后续的任务可以在需要时访问。这与普通的变量不同。普通的变量会序列化为闭包的一部分，然后在网络上传输，一个任务一次传输。广播变量的角色，与MapReduce中的分布式缓存相似，不过Spark内部的实现是把数据存储在内存中，仅当内存被耗尽时才写到磁盘。</p>
 <p>广播变量的创建方法是，把需要广播的变量传递给SparkContext的broadcast()方法。T类型的变量被包装进Broadcast[T]，然后返回：</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> lookup: <span class="type">Broadcast</span>[<span class="type">Map</span>[<span class="type">Int</span>, <span class="type">String</span>]] =</div><div class="line">    sc.broadcast(<span class="type">Map</span>(<span class="number">1</span> -&gt; <span class="string">"a"</span>, <span class="number">2</span> -&gt; <span class="string">"e"</span>, <span class="number">3</span> -&gt; <span class="string">"i"</span>, <span class="number">4</span> -&gt; <span class="string">"o"</span>, <span class="number">5</span> -&gt; <span class="string">"u"</span>))</div><div class="line"><span class="keyword">val</span> result = sc.parallelize(<span class="type">Array</span>(<span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>)).map(lookup.value(_))</div><div class="line">assert(result.collect().toSet === <span class="type">Set</span>(<span class="string">"a"</span>, <span class="string">"e"</span>, <span class="string">"i"</span>))</div></pre></td></tr></table></figure>
 <p>在RDD的map()操作中，调用这个广播变量的value来访问它。</p>
-<p>顾名思义，广播变量是单向传送的，从driver到task——没有办法更新一个广播变量，然后回传给driver。为此，我们需要一个累加器。</p>
-<h3 id="Accumulators"><a href="#Accumulators" class="headerlink" title="Accumulators"></a>Accumulators</h3><p>累加器是一个共享变量，和MapReduce中的计数器一样，任务只能对其增加。在job完成以后，累加器的最终值可以在driver程序中获取。下面的例子中，使用累加器计算一个整数RDD中的元素数量，同时使用reduce()操作对RDD中的值求和：</p>
+<p>顾名思义，广播变量是单向传送的，从驱动到任务——没有办法更新一个广播变量，然后回传给驱动。为此，我们需要一个累加器。</p>
+<h3 id="累加器"><a href="#累加器" class="headerlink" title="累加器"></a>累加器</h3><p>累加器是一个共享变量，和MapReduce中的计数器一样，任务只能对其增加。在工作完成以后，累加器的最终值可以在驱动程序中获取。下面的例子中，使用累加器计算一个整数RDD中的元素数量，同时使用reduce()操作对RDD中的值求和：</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> count: <span class="type">Accumulator</span>[<span class="type">Int</span>] = sc.accumulator(<span class="number">0</span>)</div><div class="line"><span class="keyword">val</span> result = sc.parallelize(<span class="type">Array</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>))</div><div class="line">  .map(i =&gt; &#123; count += <span class="number">1</span>; i &#125;)</div><div class="line">  .reduce((x, y) =&gt; x + y)</div><div class="line">assert(count.value === <span class="number">3</span>)</div><div class="line">assert(result === <span class="number">6</span>)</div></pre></td></tr></table></figure>
-<p>第一行代码使用SparkContext的accumulator()方法，创建了一个累加器变量count。map()操作是一个恒等函数，副作用是增加count。当Spark job的结果计算出来之后，累加器的值通过调用value来访问。</p>
+<p>第一行代码使用SparkContext的accumulator()方法，创建了一个累加器变量count。map()操作是一个恒等函数，副作用是增加count。当Spark工作的结果计算出来之后，累加器的值通过调用value来访问。</p>
 <p>在这个例子中，我们使用一个Int作为累加器，但任何的数值类型都是可以的。Spark还提供了两种方法，一是使用累加器的结果类型与“被增量”的类型不同（参见SparkContext的accumulable()方法），二是可以累加可变集合中的值（通过accumulableCollection()）。</p>
 
       
@@ -575,7 +575,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Persistence"><span class="nav-number">1.</span> <span class="nav-text">Persistence</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Persistence-levels"><span class="nav-number">1.1.</span> <span class="nav-text">Persistence levels</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Serialization"><span class="nav-number">2.</span> <span class="nav-text">Serialization</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Data"><span class="nav-number">2.1.</span> <span class="nav-text">Data</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Functions"><span class="nav-number">2.2.</span> <span class="nav-text">Functions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shared-Variables"><span class="nav-number">3.</span> <span class="nav-text">Shared Variables</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Broadcast-Variables"><span class="nav-number">3.1.</span> <span class="nav-text">Broadcast Variables</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Accumulators"><span class="nav-number">3.2.</span> <span class="nav-text">Accumulators</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#持久化"><span class="nav-number">1.</span> <span class="nav-text">持久化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#持久化级别"><span class="nav-number">1.1.</span> <span class="nav-text">持久化级别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#序列化"><span class="nav-number">2.</span> <span class="nav-text">序列化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据序列化"><span class="nav-number">2.1.</span> <span class="nav-text">数据序列化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数序列化"><span class="nav-number">2.2.</span> <span class="nav-text">函数序列化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#共享变量"><span class="nav-number">3.</span> <span class="nav-text">共享变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#广播变量"><span class="nav-number">3.1.</span> <span class="nav-text">广播变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#累加器"><span class="nav-number">3.2.</span> <span class="nav-text">累加器</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
