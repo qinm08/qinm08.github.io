@@ -84,20 +84,20 @@
 
 
 
-<meta name="description" content="剖析Spark工作的运行让我们看一下当我们运行一个Spark工作时，会发生什么。在最高级别上，有两个独立的实体：驱动（driver）和执行器（executors）。驱动持有（hosts）应用（SparkContext），为工作调度任务。执行器独立于应用，在应用的持续时间内运行，执行应用的任务。通常情况下，驱动作为客户端运行，不受集群管理器的管理，而执行器运行在集群中的多台机器上，但并非总是如此。在">
+<meta name="description" content="剖析Spark工作的运行我们来看一下当我们运行一个Spark工作时，会发生什么。在最高级别上，有两个独立的实体：驱动（driver）和执行器（executors）。驱动持有（hosts）应用（SparkContext），调度工作中的任务。执行器独立于应用，在应用的持续时间内运行，执行应用的任务。通常情况下，驱动作为客户端运行，不受集群管理器的管理，而执行器运行在集群中的多台机器上，但并非总是如此。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="翻译：Hadoop权威指南之Spark-5">
 <meta property="og:url" content="https://qinm08.github.io/2016/07/21/hadoop-the-definitive-guide-spark-5/index.html">
 <meta property="og:site_name" content="Ming's Coding Life">
-<meta property="og:description" content="剖析Spark工作的运行让我们看一下当我们运行一个Spark工作时，会发生什么。在最高级别上，有两个独立的实体：驱动（driver）和执行器（executors）。驱动持有（hosts）应用（SparkContext），为工作调度任务。执行器独立于应用，在应用的持续时间内运行，执行应用的任务。通常情况下，驱动作为客户端运行，不受集群管理器的管理，而执行器运行在集群中的多台机器上，但并非总是如此。在">
+<meta property="og:description" content="剖析Spark工作的运行我们来看一下当我们运行一个Spark工作时，会发生什么。在最高级别上，有两个独立的实体：驱动（driver）和执行器（executors）。驱动持有（hosts）应用（SparkContext），调度工作中的任务。执行器独立于应用，在应用的持续时间内运行，执行应用的任务。通常情况下，驱动作为客户端运行，不受集群管理器的管理，而执行器运行在集群中的多台机器上，但并非总是如此。">
 <meta property="og:image" content="https://qinm08.github.io/uploads/images/20160721/2145.png">
 <meta property="og:image" content="https://qinm08.github.io/uploads/images/20160721/2145.png">
 <meta property="og:image" content="https://qinm08.github.io/uploads/images/20160721/2340.png">
 <meta property="og:image" content="https://qinm08.github.io/uploads/images/20160721/2350.png">
-<meta property="og:updated_time" content="2016-07-23T05:54:06.190Z">
+<meta property="og:updated_time" content="2016-07-23T12:59:16.384Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="翻译：Hadoop权威指南之Spark-5">
-<meta name="twitter:description" content="剖析Spark工作的运行让我们看一下当我们运行一个Spark工作时，会发生什么。在最高级别上，有两个独立的实体：驱动（driver）和执行器（executors）。驱动持有（hosts）应用（SparkContext），为工作调度任务。执行器独立于应用，在应用的持续时间内运行，执行应用的任务。通常情况下，驱动作为客户端运行，不受集群管理器的管理，而执行器运行在集群中的多台机器上，但并非总是如此。在">
+<meta name="twitter:description" content="剖析Spark工作的运行我们来看一下当我们运行一个Spark工作时，会发生什么。在最高级别上，有两个独立的实体：驱动（driver）和执行器（executors）。驱动持有（hosts）应用（SparkContext），调度工作中的任务。执行器独立于应用，在应用的持续时间内运行，执行应用的任务。通常情况下，驱动作为客户端运行，不受集群管理器的管理，而执行器运行在集群中的多台机器上，但并非总是如此。">
 <meta name="twitter:image" content="https://qinm08.github.io/uploads/images/20160721/2145.png">
 
 
@@ -321,7 +321,7 @@
       
 
       
-        <h1 id="剖析Spark工作的运行"><a href="#剖析Spark工作的运行" class="headerlink" title="剖析Spark工作的运行"></a>剖析Spark工作的运行</h1><p>让我们看一下当我们运行一个Spark工作时，会发生什么。在最高级别上，有两个独立的实体：驱动（driver）和执行器（executors）。驱动持有（hosts）应用（SparkContext），为工作调度任务。执行器独立于应用，在应用的持续时间内运行，执行应用的任务。通常情况下，驱动作为客户端运行，不受集群管理器的管理，而执行器运行在集群中的多台机器上，但并非总是如此。在本节的其余部分，我们假定应用的执行器已经在运行。</p>
+        <h1 id="剖析Spark工作的运行"><a href="#剖析Spark工作的运行" class="headerlink" title="剖析Spark工作的运行"></a>剖析Spark工作的运行</h1><p>我们来看一下当我们运行一个Spark工作时，会发生什么。在最高级别上，有两个独立的实体：驱动（driver）和执行器（executors）。驱动持有（hosts）应用（SparkContext），调度工作中的任务。执行器独立于应用，在应用的持续时间内运行，执行应用的任务。通常情况下，驱动作为客户端运行，不受集群管理器的管理，而执行器运行在集群中的多台机器上，但并非总是如此。在本节的其余部分，我们假定应用的执行器已经在运行。</p>
 <h2 id="工作的提交"><a href="#工作的提交" class="headerlink" title="工作的提交"></a>工作的提交</h2><p>图19-1说明了Spark是怎样运行一个工作的。当在一个RDD上执行一个行动时（比如count()），会自动提交一个Spark工作。内部来看，这会导致SparkContext的runJob()方法被调用（图19-1步骤1），该方法将调用传递给调度器，调度器作为驱动的一部分运行（步骤2）。调度器由两部分组成：DAG调度器和任务调度器。DAG调度器会把工作拆解为多个阶段组成的DAG。任务调度器的责任是把每个阶段的任务提交到集群。</p>
 <p><img src="/uploads/images/20160721/2145.png" alt=""><br><em>图19-1. Spark怎样运行一个工作</em></p>
 <p>接下来，我们来看看DAG调度器是怎样构建一个DAG的。</p>
