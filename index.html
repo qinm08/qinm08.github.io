@@ -322,9 +322,9 @@
       
         
           <h1 id="剖析Spark工作的运行"><a href="#剖析Spark工作的运行" class="headerlink" title="剖析Spark工作的运行"></a>剖析Spark工作的运行</h1><p>让我们看一下当我们运行一个Spark工作时，会发生什么。在最高级别上，有两个独立的实体：驱动（driver）和执行器（executors）。驱动持有（hosts）应用（SparkContext），为工作调度任务。执行器独立于应用，在应用的持续时间内运行，执行应用的任务。通常情况下，驱动作为客户端运行，不受集群管理器的管理，而执行器运行在集群中的多台机器上，但并非总是如此。在本节的其余部分，我们假定应用的执行器已经在运行。</p>
-<h2 id="工作的提交"><a href="#工作的提交" class="headerlink" title="工作的提交"></a>工作的提交</h2><p>图19-1说明了Spark是怎样运行一个工作的。当在一个RDD上执行一个行动时（比如count()），会自动提交一个Spark工作。内部来看，这会导致SparkContext的runJob()方法被调用（图19-1步骤1），该方法将调用传递给调度器，调度器是作为驱动的一部分运行的（步骤2）。调度器由两部分组成：DAG调度器和任务调度器。DAG调度器会把工作拆解为多个阶段组成的DAG。任务调度器的责任是把每个阶段的任务提交到集群。</p>
+<h2 id="工作的提交"><a href="#工作的提交" class="headerlink" title="工作的提交"></a>工作的提交</h2><p>图19-1说明了Spark是怎样运行一个工作的。当在一个RDD上执行一个行动时（比如count()），会自动提交一个Spark工作。内部来看，这会导致SparkContext的runJob()方法被调用（图19-1步骤1），该方法将调用传递给调度器，调度器作为驱动的一部分运行（步骤2）。调度器由两部分组成：DAG调度器和任务调度器。DAG调度器会把工作拆解为多个阶段组成的DAG。任务调度器的责任是把每个阶段的任务提交到集群。</p>
 <p><img src="/uploads/images/20160721/2145.png" alt=""><br><em>图19-1. Spark怎样运行一个工作</em></p>
-<p>接下来，我们来看看DAG调度器是怎样构造一个DAG的。</p>
+<p>接下来，我们来看看DAG调度器是怎样构建一个DAG的。</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/07/21/hadoop-the-definitive-guide-spark-5/#more" rel="contents">
               阅读全文 &raquo;
@@ -429,9 +429,9 @@
         
           <h2 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h2><p>回到本章开头的例子，我们可以把“年度-气温”的中间数据集缓存在内存中：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">scala&gt; tuples.cache()</div><div class="line">res1: tuples.type = MappedRDD[4] at map at &lt;console&gt;:18</div></pre></td></tr></table></figure>
-<p>调用cache()不会立刻把RDD缓存到内存中，只是对这个RDD做一个标记，当Spark job运行的时候，实际的缓存行为才会发生。因此我们首先强制运行一个job：</p>
+<p>调用cache()不会立刻把RDD缓存到内存中，只是对这个RDD做一个标记，当Spark工作运行的时候，实际的缓存行为才会发生。因此我们首先强制运行一个工作：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">scala&gt; tuples.reduceByKey((a, b) =&gt; Math.max(a, b)).foreach(println(_))</div><div class="line">INFO BlockManagerInfo: Added rdd_4_0 in memory on 192.168.1.90:64640</div><div class="line">INFO BlockManagerInfo: Added rdd_4_1 in memory on 192.168.1.90:64640</div><div class="line">(1950,22)</div><div class="line">(1949,111)</div></pre></td></tr></table></figure>
-<p>关于BlockManagerInfo的日志显示，作为job运行的一部分，RDD的分区会被保持在内存中。日志显示这个RDD的编号是4（在调用cache()方法之后的控制台输出中，也能看到这个信息），它包含两个分区，标签分别是0和1。如果在这个缓存的数据集上运行另一个job，我们会看到这个RDD将从内存中加载。这次我们计算最低气温：</p>
+<p>关于BlockManagerInfo的日志显示，作为工作运行的一部分，RDD的分区会被保持在内存中。日志显示这个RDD的编号是4（在调用cache()方法之后的控制台输出中，也能看到这个信息），它包含两个分区，标签分别是0和1。如果在这个缓存的数据集上运行另一个工作，我们会看到这个RDD将从内存中加载。这次我们计算最低气温：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">scala&gt; tuples.reduceByKey((a, b) =&gt; Math.min(a, b)).foreach(println(_))</div><div class="line">INFO BlockManager: Found block rdd_4_0 locally</div><div class="line">INFO BlockManager: Found block rdd_4_1 locally</div><div class="line">(1949,78)</div><div class="line">(1950,-11)</div></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/07/18/hadoop-the-definitive-guide-spark-4/#more" rel="contents">
@@ -536,10 +536,10 @@
       
         
           <h1 id="弹性分布式数据集"><a href="#弹性分布式数据集" class="headerlink" title="弹性分布式数据集"></a>弹性分布式数据集</h1><p>RDD是每个spark程序的核心，本节我们来看看更多细节。</p>
-<h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><p>创建RDD有三种方式：从一个内存中的对象集合，被称为<em>并行化（parallelizing）</em> 一个集合；使用一个外部存储（比如HDFS）的数据集；转变（transform）已存在的RDD。在对少量的输入数据并行地进行CPU密集型运算时，第一种方式非常有用。例如，下面执行从1到10的独立运算：</p>
+<h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><p>创建RDD有三种方式：从一个内存中的对象集合，被称为<em>并行化（parallelizing）</em> 一个集合；使用一个外部存储（比如HDFS）的数据集；转换已存在的RDD。在对少量的输入数据并行地进行CPU密集型运算时，第一种方式非常有用。例如，下面执行从1到10的独立运算：</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> params = sc.parallelize(<span class="number">1</span> to <span class="number">10</span>)</div><div class="line"><span class="keyword">val</span> result = params.map(performExpensiveComputation)</div></pre></td></tr></table></figure>
-<p>函数performExpensiveComputation并行处理输入数据。并行性的级别由属性spark.default.parallelism决定，该属性的默认值取决于Spark的运行方式。本地运行时，是本地机器的核心数量，集群运行时，是集群中所有执行（executor）节点的核心总数量。</p>
-<p>可以为某特定运算设置并行性级别，指定parallelize()方法的第二个参数即可：</p>
+<p>函数performExpensiveComputation并行处理输入数据。并行性的级别由属性spark.default.parallelism决定，该属性的默认值取决于Spark的运行方式。本地运行时，是本地机器的核心数量，集群运行时，是集群中所有执行器（executor）节点的核心总数量。</p>
+<p>可以为某个特定运算设置并行性级别，指定parallelize()方法的第二个参数即可：</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sc.parallelize(<span class="number">1</span> to <span class="number">10</span>, <span class="number">10</span>)</div></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/07/17/hadoop-the-definitive-guide-spark-3/#more" rel="contents">
@@ -643,7 +643,7 @@
 
       
         
-          <h2 id="一个Scala独立应用"><a href="#一个Scala独立应用" class="headerlink" title="一个Scala独立应用"></a>一个Scala独立应用</h2><p>在Spark shell中运行了一个小程序之后，你可能想要把它打包成自包含应用，这样就可以多次运行了。</p>
+          <h2 id="Scala独立应用"><a href="#Scala独立应用" class="headerlink" title="Scala独立应用"></a>Scala独立应用</h2><p>在Spark shell中运行了一个小程序之后，你可能想要把它打包成自包含应用，这样就可以多次运行了。</p>
 <p>示例19-1. 使用Spark找出最高气温的Scala应用</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.apache.spark.<span class="type">SparkContext</span>._</div><div class="line"><span class="keyword">import</span> org.apache.spark.&#123;<span class="type">SparkConf</span>, <span class="type">SparkContext</span>&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">MaxTemperature</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]) &#123;</div><div class="line">        <span class="keyword">val</span> conf = <span class="keyword">new</span> <span class="type">SparkConf</span>().setAppName(<span class="string">"Max Temperature"</span>)</div><div class="line">        <span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(conf)</div><div class="line">        sc.textFile(args(<span class="number">0</span>))</div><div class="line">          .map(_.split(<span class="string">"\t"</span>))</div><div class="line">          .filter(rec =&gt; (rec(<span class="number">1</span>) != <span class="string">"9999"</span> &amp;&amp; rec(<span class="number">2</span>).matches(<span class="string">"[01459]"</span>)))</div><div class="line">          .map(rec =&gt; (rec(<span class="number">0</span>).toInt, rec(<span class="number">1</span>).toInt))</div><div class="line">          .reduceByKey((a, b) =&gt; <span class="type">Math</span>.max(a, b))</div><div class="line">          .saveAsTextFile(args(<span class="number">1</span>))</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>运行独立程序时，没有shell为我们提供SparkContext，我们需要自己创建。我们用一个SparkConf来创建这个实例。SparkConf可以用来向应用中传递多个Spark属性，这里我们仅仅设置应用的名字。</p>

@@ -90,7 +90,7 @@
 <meta property="og:url" content="https://qinm08.github.io/2016/07/15/hadoop-the-definitive-guide-spark-1/index.html">
 <meta property="og:site_name" content="Ming's Coding Life">
 <meta property="og:description" content="本文翻译自O’Reilly出版Tom White所著《Hadoop: The Definitive Guide》第4版第19章，向作者致敬。该书英文第4版已于2015年4月出版，至今已近15个月，而市面上中文第3版还在大行其道。Spark一章是第4版新增的内容，笔者在学习过程中顺便翻译记录。由于笔者也在学习，难免翻译不妥或出错，欢迎方家来信斧正。翻译纯属兴趣，不做商业用途。秦铭，Email地址qi">
-<meta property="og:updated_time" content="2016-07-23T04:50:22.799Z">
+<meta property="og:updated_time" content="2016-07-23T05:05:26.648Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="翻译：Hadoop权威指南之Spark-1">
 <meta name="twitter:description" content="本文翻译自O’Reilly出版Tom White所著《Hadoop: The Definitive Guide》第4版第19章，向作者致敬。该书英文第4版已于2015年4月出版，至今已近15个月，而市面上中文第3版还在大行其道。Spark一章是第4版新增的内容，笔者在学习过程中顺便翻译记录。由于笔者也在学习，难免翻译不妥或出错，欢迎方家来信斧正。翻译纯属兴趣，不做商业用途。秦铭，Email地址qi">
@@ -342,7 +342,7 @@
 <p>这里使用了RDD的map()方法，对RDD中的每一个元素，执行一个函数。本例中，我们把每一行（字符串String）拆分为 Scala 的字符串数组（Array of Strings）。</p>
 <p>接下来，我们使用过滤器（filter）来去掉可能存在的坏记录：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">scala&gt; val filtered = records.filter(rec =&gt; (rec(1) != &quot;9999&quot; &amp;&amp; rec(2).matches(&quot;[01459]&quot;)))</div><div class="line">filtered: org.apache.spark.rdd.RDD[Array[String]] = FilteredRDD[3] at filter at &lt;console&gt;:16</div></pre></td></tr></table></figure>
-<p>RDD的filter方法接收一个返回布尔值的函数作为参数。这个函数过滤掉那些温度缺失（由9999表示）或者质量不好的记录。</p>
+<p>RDD的filter方法接收一个返回布尔值的函数作为参数。这个函数过滤掉那些温度缺失的（由9999表示）或者质量不好的记录。</p>
 <p>为了找到每一年的最高气温，我们需要在year字段上执行分组操作，这样才能处理每一年的所有温度值。Spark提供reduceByKey()方法来做这件事情，但它需要一个键值对RDD，因此我们需要通过另一个map来把现有的RDD转变为正确的形式：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">scala&gt; val tuples = filtered.map(rec =&gt; (rec(0).toInt, rec(1).toInt))</div><div class="line">tuples: org.apache.spark.rdd.RDD[(Int, Int)] = MappedRDD[4] at map at &lt;console&gt;:18</div></pre></td></tr></table></figure>
 <p>现在可以执行聚合了。reduceByKey()方法的参数是一个函数，这个函数接受两个数值并联合为一个单独的数值。这里我们使用Java的Math.max函数：</p>

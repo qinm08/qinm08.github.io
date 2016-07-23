@@ -86,20 +86,20 @@
 
 <meta name="description" content="持久化回到本章开头的例子，我们可以把“年度-气温”的中间数据集缓存在内存中：
 12scala&amp;gt; tuples.cache()res1: tuples.type = MappedRDD[4] at map at &amp;lt;console&amp;gt;:18
-调用cache()不会立刻把RDD缓存到内存中，只是对这个RDD做一个标记，当Spark job运行的时候，实际的缓存行为才会发生。因此我们首先强">
+调用cache()不会立刻把RDD缓存到内存中，只是对这个RDD做一个标记，当Spark工作运行的时候，实际的缓存行为才会发生。因此我们首先强制运">
 <meta property="og:type" content="article">
 <meta property="og:title" content="翻译：Hadoop权威指南之Spark-4">
 <meta property="og:url" content="https://qinm08.github.io/2016/07/18/hadoop-the-definitive-guide-spark-4/index.html">
 <meta property="og:site_name" content="Ming's Coding Life">
 <meta property="og:description" content="持久化回到本章开头的例子，我们可以把“年度-气温”的中间数据集缓存在内存中：
 12scala&amp;gt; tuples.cache()res1: tuples.type = MappedRDD[4] at map at &amp;lt;console&amp;gt;:18
-调用cache()不会立刻把RDD缓存到内存中，只是对这个RDD做一个标记，当Spark job运行的时候，实际的缓存行为才会发生。因此我们首先强">
-<meta property="og:updated_time" content="2016-07-23T04:35:28.253Z">
+调用cache()不会立刻把RDD缓存到内存中，只是对这个RDD做一个标记，当Spark工作运行的时候，实际的缓存行为才会发生。因此我们首先强制运">
+<meta property="og:updated_time" content="2016-07-23T05:32:40.503Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="翻译：Hadoop权威指南之Spark-4">
 <meta name="twitter:description" content="持久化回到本章开头的例子，我们可以把“年度-气温”的中间数据集缓存在内存中：
 12scala&amp;gt; tuples.cache()res1: tuples.type = MappedRDD[4] at map at &amp;lt;console&amp;gt;:18
-调用cache()不会立刻把RDD缓存到内存中，只是对这个RDD做一个标记，当Spark job运行的时候，实际的缓存行为才会发生。因此我们首先强">
+调用cache()不会立刻把RDD缓存到内存中，只是对这个RDD做一个标记，当Spark工作运行的时候，实际的缓存行为才会发生。因此我们首先强制运">
 
 
 
@@ -324,32 +324,32 @@
       
         <h2 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h2><p>回到本章开头的例子，我们可以把“年度-气温”的中间数据集缓存在内存中：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">scala&gt; tuples.cache()</div><div class="line">res1: tuples.type = MappedRDD[4] at map at &lt;console&gt;:18</div></pre></td></tr></table></figure>
-<p>调用cache()不会立刻把RDD缓存到内存中，只是对这个RDD做一个标记，当Spark job运行的时候，实际的缓存行为才会发生。因此我们首先强制运行一个job：</p>
+<p>调用cache()不会立刻把RDD缓存到内存中，只是对这个RDD做一个标记，当Spark工作运行的时候，实际的缓存行为才会发生。因此我们首先强制运行一个工作：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">scala&gt; tuples.reduceByKey((a, b) =&gt; Math.max(a, b)).foreach(println(_))</div><div class="line">INFO BlockManagerInfo: Added rdd_4_0 in memory on 192.168.1.90:64640</div><div class="line">INFO BlockManagerInfo: Added rdd_4_1 in memory on 192.168.1.90:64640</div><div class="line">(1950,22)</div><div class="line">(1949,111)</div></pre></td></tr></table></figure>
-<p>关于BlockManagerInfo的日志显示，作为job运行的一部分，RDD的分区会被保持在内存中。日志显示这个RDD的编号是4（在调用cache()方法之后的控制台输出中，也能看到这个信息），它包含两个分区，标签分别是0和1。如果在这个缓存的数据集上运行另一个job，我们会看到这个RDD将从内存中加载。这次我们计算最低气温：</p>
+<p>关于BlockManagerInfo的日志显示，作为工作运行的一部分，RDD的分区会被保持在内存中。日志显示这个RDD的编号是4（在调用cache()方法之后的控制台输出中，也能看到这个信息），它包含两个分区，标签分别是0和1。如果在这个缓存的数据集上运行另一个工作，我们会看到这个RDD将从内存中加载。这次我们计算最低气温：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">scala&gt; tuples.reduceByKey((a, b) =&gt; Math.min(a, b)).foreach(println(_))</div><div class="line">INFO BlockManager: Found block rdd_4_0 locally</div><div class="line">INFO BlockManager: Found block rdd_4_1 locally</div><div class="line">(1949,78)</div><div class="line">(1950,-11)</div></pre></td></tr></table></figure>
 <a id="more"></a>
-<p>这是在微小数据集上的简单示例，但是对于更大的job，节省的时间将很可观。在MapReduce中，为了执行另一个计算，输入数据集必须再次从磁盘加载。即使中间数据可以作为输入（比如一个清洗后的数据集，无效行和不必要的字段都已移除），也不能改变“数据必须从磁盘加载”的事实，这是很慢的。Spark会把数据集缓存在一个跨集群的内存高速缓存中，这就意味着任何基于此数据集的计算都会执行的非常快。</p>
-<p>在对数据进行交互式探索时，这种效率是极其有用的。这也自然适合某些类型的算法，比如迭代算法，一次迭代计算的结果可以缓存在内存中，成为下次迭代计算的输入。这种算法也可以用MapReduce实现，每次迭代都是一个单独的MapReduce job，因此每次迭代的结果必须写入磁盘，然后在下次迭代时再读回来。</p>
+<p>这是在微小数据集上的简单示例，但是对于更大的工作，节省的时间将很可观。在MapReduce中，为了执行另一个计算，输入数据集必须再次从磁盘加载。即使中间数据可以作为输入（比如一个清洗后的数据集，无效行和不必要的字段都已移除），也不能改变“数据必须从磁盘加载”的事实，这是很慢的。Spark会把数据集缓存在一个遍布集群的内存高速缓存中，这就意味着任何基于此数据集的计算都会执行的非常快。</p>
+<p>在对数据进行交互式探索时，这种效率是极其有用的。这也自然适合某些类型的算法，比如迭代算法，一次迭代计算的结果可以缓存在内存中，成为下次迭代计算的输入。这种算法也可以用MapReduce实现，每次迭代都是一个单独的MapReduce工作，因此每次迭代的结果必须写入磁盘，然后在下次迭代时再读回来。</p>
 <blockquote>
-<p>缓存的RDD只能被同一个application中的job获取。要在不同的application之间共享数据集，第一个application必须使用某个saveAs*()方法（saveAsTextFile()，saveAsHadoopFile()等等）来写到外部存储中，然后第二个application使用SparkContext中的对应方法（textFile()，hadoopFile()等等）再次加载。同样的，当一个application终止时，它缓存的所有RDD都被销毁，除非显式的保存下来，否则不能再次访问。</p>
+<p>缓存的RDD只能被同一个应用中的工作获取。要在不同的应用之间共享数据集，第一个应用必须使用某个saveAs*()方法（saveAsTextFile()，saveAsHadoopFile()等等）来写到外部存储中，然后第二个应用使用SparkContext中的对应方法（textFile()，hadoopFile()等等）再次加载。同样的，当一个应用终止时，它缓存的所有RDD都被销毁，除非显式的保存下来，否则不能再次访问。</p>
 </blockquote>
-<h3 id="持久化级别"><a href="#持久化级别" class="headerlink" title="持久化级别"></a>持久化级别</h3><p>调用cache()会把RDD的每个分区持久化到执行器（executor）的内存中。如果执行器没有足够的内存来存储这个RDD分区，计算不会失败，相反该分区将会根据需要进行重算。对于带有很多转换的复杂程序，这是很昂贵的。因此Spark提供了不同类型的持久化行为供用户选择，在调用persist()时指定StorageLevel参数即可。</p>
-<p>默认的持久化级别是MEMORY_ONLY，这种方式使用对象的常规内存表示。要使用更紧凑的表现形式，可以把分区中的元素序列化为字节数组（byte array）。这种级别是MEMORY_ONLY_SER，相比MEMORY_ONLY，这种级别会导致CPU的压力，如果序列化之后的RDD分区能够适应内存，而常规的内存表示不适合，那么这种压力就是值得的。MEMORY_ONLY_SER还会减轻垃圾回收的压力，因为每个RDD都以字节数组的形式存储，而不是很多的对象。</p>
+<h3 id="持久化级别"><a href="#持久化级别" class="headerlink" title="持久化级别"></a>持久化级别</h3><p>调用cache()会把RDD的每个分区持久化到执行器（executor）的内存中。如果执行器没有足够的内存来存储这个RDD分区，计算不会失败，相反该分区将会根据需要进行重算。对于带有很多转换操作的复杂程序，这是很昂贵的。因此Spark提供了不同类型的持久化行为供用户选择，在调用persist()时指定StorageLevel参数即可。</p>
+<p>默认的持久化级别是MEMORY_ONLY，这种方式使用对象的常规内存表示。要使用更紧凑的表现形式，可以把分区中的元素序列化为字节数组（byte array）。这种级别是MEMORY_ONLY_SER，相比MEMORY_ONLY，这种级别会导致CPU的开销，如果序列化之后的RDD分区能够适应内存，而常规的内存表示不适合，那么这种开销就是值得的。MEMORY_ONLY_SER还会减轻垃圾回收的压力，因为每个RDD都以字节数组的形式存储，而不是很多的对象。</p>
 <blockquote>
-<p>在driver程序的日志文件中，检查BlockManager相关的信息，可以看到一个RDD分区是否不适合内存。另外，每个driver的SparkContext会在4040端口启动一个HTTP服务，提供关于运行环境以及正在运行的job的有用信息，包括缓存的RDD分区的信息。</p>
+<p>在驱动程序的日志文件中，检查BlockManager相关的信息，可以看到一个RDD分区是否不适合内存。另外，每个驱动程序的SparkContext会在4040端口启动一个HTTP服务，提供关于运行环境以及正在运行的工作的有用信息，包括缓存的RDD分区的信息。</p>
 </blockquote>
 <p>默认情况下，使用常规的Java序列化框架来序列化RDD分区，不过Kryo序列化框架（下节讨论）通常是更好的选择，在大小和速度两方面都更优秀。如果把序列化后的分区进行压缩，可以节省更多的空间（再一次付出CPU的代价），设置spark.rdd.compress属性为true来启用压缩，属性spark.io.compression.codec是可选设置。</p>
 <p>如果重算一个数据集非常昂贵，那么MEMORY_AND_DISK（如果数据集在内存中放不下，就写到磁盘上）或者MEMORY_AND_DISK_SER（如果序列化后的数据集在内存中放不下，就写到磁盘上）是合适的。</p>
 <p>还有一些更高级的和实验中的持久化级别，用来在集群中的多个节点上复制分区，或者使用off-heap内存——更多细节，查看Spark文档。</p>
 <h2 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h2><p>在Spark中需要考虑序列化的两个方面：序列化数据和序列化函数（或闭包）。</p>
 <h3 id="数据序列化"><a href="#数据序列化" class="headerlink" title="数据序列化"></a>数据序列化</h3><p>首先来看数据的序列化。默认情况下，Spark使用Java序列化框架在执行器之间的网络上传输数据，或者以序列化的形式来缓存数据。对程序员来说，Java的序列化很好理解，只需确定你使用的类实现了java.io.Serializable接口或者java.io.Externalizable接口，但从性能和大小的角度来看，这种方式的效率不高。</p>
-<p>对于大多数的Spark程序，更好的选择是Kryo序列化框架。Kryo是一个高效的通用的Java序列化库。要使用Kryo，在driver程序的SparkConf上设置spark.serializer属性如下：</p>
+<p>对于大多数的Spark程序，更好的选择是Kryo序列化框架。Kryo是一个高效的通用的Java序列化库。要使用Kryo，在驱动程序的SparkConf上设置spark.serializer属性如下：</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">conf.set(<span class="string">"spark.serializer"</span>,  <span class="string">"org.apache.spark.serializer.KryoSerializer"</span>)</div></pre></td></tr></table></figure>
 <p>Kryo不要求你的类实现特定接口，因此简单的Java对象不需要任何改动即可在RDD中使用。话虽如此，如果在使用一个类之前把它注册到Kryo会更加高效。这是因为Kryo会创建一个引用，指向那个序列化对象的类（一个对象对应一个引用），如果类已注册，该引用是个整数ID，如果类没有注册，该引用是类的全名。这个引导仅仅适用于你自己的类，Scala类和许多其他的框架类（比如Avro Generic或者Thrift类）已经由Spark注册了。</p>
 <p>向Kryo注册类也很简单。创建一个KryoRegistrator的子类，覆盖registerClasses()方法：</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CustomKryoRegistrator</span> <span class="keyword">extends</span> <span class="title">KryoRegistrator</span> </span>&#123;</div><div class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">registerClasses</span></span>(kryo: <span class="type">Kryo</span>) &#123;</div><div class="line">    kryo.register(classOf[<span class="type">WeatherRecord</span>])</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>最后，在driver程序中，把属性spark.kryo.registrator设置为你的KryoRegistrator实现类的完整类名：</p>
+<p>最后，在驱动程序中，把属性spark.kryo.registrator设置为你的KryoRegistrator实现类的完整类名：</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">conf.set(<span class="string">"spark.kryo.registrator"</span>, <span class="string">"CustomKryoRegistrator"</span>)</div></pre></td></tr></table></figure>
 <h3 id="函数序列化"><a href="#函数序列化" class="headerlink" title="函数序列化"></a>函数序列化</h3><p>通常，函数的序列化将”刚好工作”：在Scala中，函数都是可序列化的，使用标准Java序列化机制。这也是Spark向远程执行器节点发送函数时使用的方式。即使在本地模式下运行，Spark也会序列化函数。如果你在无意中引入了不可序列化的函数（比如，从一个非序列化类的方法转换过来的函数），你会在开发过程的早期阶段发现它。</p>
 <h2 id="共享变量"><a href="#共享变量" class="headerlink" title="共享变量"></a>共享变量</h2><p>Spark程序经常需要访问一些数据，这些数据不是一个RDD的一部分。例如，下面的程序在一个map()操作中使用了一个查找表（lookup table）：</p>
