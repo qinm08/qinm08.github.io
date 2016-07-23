@@ -90,7 +90,7 @@
 <meta property="og:url" content="https://qinm08.github.io/2016/07/15/hadoop-the-definitive-guide-spark-1/index.html">
 <meta property="og:site_name" content="Ming's Coding Life">
 <meta property="og:description" content="本文翻译自O’Reilly出版Tom White所著《Hadoop: The Definitive Guide》第4版第19章，向作者致敬。该书英文第4版已于2015年4月出版，至今已近15个月，而市面上中文第3版还在大行其道。Spark一章是第4版新增的内容，笔者在学习过程中顺便翻译记录。由于笔者也在学习，难免翻译不妥或出错，欢迎方家来信斧正。翻译纯属兴趣，不做商业用途。秦铭，Email地址qi">
-<meta property="og:updated_time" content="2016-07-23T04:23:46.102Z">
+<meta property="og:updated_time" content="2016-07-23T04:50:22.799Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="翻译：Hadoop权威指南之Spark-1">
 <meta name="twitter:description" content="本文翻译自O’Reilly出版Tom White所著《Hadoop: The Definitive Guide》第4版第19章，向作者致敬。该书英文第4版已于2015年4月出版，至今已近15个月，而市面上中文第3版还在大行其道。Spark一章是第4版新增的内容，笔者在学习过程中顺便翻译记录。由于笔者也在学习，难免翻译不妥或出错，欢迎方家来信斧正。翻译纯属兴趣，不做商业用途。秦铭，Email地址qi">
@@ -333,11 +333,11 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">% spark-shell</div><div class="line">Spark context available as sc.</div><div class="line">scala&gt;</div></pre></td></tr></table></figure>
 <p>从控制台的输出，我们可以看到shell创建了一个Scala变量，sc，用来存储SparkContext实例。这是Spark的入口，我们可以这样加载一个文本文件：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">scala&gt; val lines = sc.textFile(&quot;input/ncdc/micro-tab/sample.txt&quot;)</div><div class="line">lines: org.apache.spark.rdd.RDD[String] = MappedRDD[1] at textFile at &lt;console&gt;:12</div></pre></td></tr></table></figure>
-<p>lines变量是对一个弹性数据集（RDD）的引用，RDD是Spark的核心抽象：分区在集群中多台机器上的只读的对象集合。在典型的Spark程序中，一个或多个RDD被加载进来作为输入，经过一系列的转变（transformation），成为一组目标RDD，可以对其执行action（比如计算结果或者写入持久化存储） 。“弹性数据集”中的“弹性”是指，Spark会通过从源RDD中重新计算的方式，来自动重建一个丢失的分区。</p>
+<p>lines变量是对一个弹性数据集（RDD）的引用，RDD是Spark的核心抽象：分区在集群中多台机器上的只读的对象集合。在典型的Spark程序中，一个或多个RDD被加载进来作为输入，经过一系列的转换操作（transformation），成为一组目标RDD，可以对其执行行动（action）（比如计算结果或者写入持久化存储） 。“弹性数据集”中的“弹性”是指，Spark会通过从源RDD中重新计算的方式，来自动重建一个丢失的分区。</p>
 <blockquote>
-<p><em>加载RDD和执行transformation不会触发数据处理，仅仅是创建一个执行计算的计划。当action（比如 foreach()）执行的时候，才会触发计算。</em></p>
+<p><em>加载RDD和执行转换操作不会触发数据处理，仅仅是创建一个执行计算的计划。当行动（比如 foreach()）执行的时候，才会触发计算。</em></p>
 </blockquote>
-<p>我们要做的第一个transformation，是把lines拆分为fields：</p>
+<p>我们要做的第一个转换操作，是把lines拆分为fields：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">scala&gt; val records = lines.map(_.split(&quot;\t&quot;))</div><div class="line">records: org.apache.spark.rdd.RDD[Array[String]] = MappedRDD[2] at map at &lt;console&gt;:14</div></pre></td></tr></table></figure>
 <p>这里使用了RDD的map()方法，对RDD中的每一个元素，执行一个函数。本例中，我们把每一行（字符串String）拆分为 Scala 的字符串数组（Array of Strings）。</p>
 <p>接下来，我们使用过滤器（filter）来去掉可能存在的坏记录：</p>
@@ -349,7 +349,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">scala&gt; val maxTemps = tuples.reduceByKey((a, b) =&gt; Math.max(a, b))</div><div class="line">maxTemps: org.apache.spark.rdd.RDD[(Int, Int)] = MapPartitionsRDD[7] at reduceByKey at &lt;console&gt;:21</div></pre></td></tr></table></figure>
 <p>现在可以展示maxTemps的内容了，调用foreach()方法并传入println()，把每个元素打印到控制台：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">scala&gt; maxTemps.foreach(println(_))</div><div class="line">(1950,22)</div><div class="line">(1949,111)</div></pre></td></tr></table></figure>
-<p>这个foreach()方法，与标准Scala集合（比如List）中的等价物相同，对RDD中的每个元素应用一个函数（此函数具有副作用）。正是这个操作，促使Spark运行一个job来计算RDD中的数据，使之能够跑步通过println()方法:-)</p>
+<p>这个foreach()方法，与标准Scala集合（比如List）中的等价物相同，对RDD中的每个元素应用一个函数（此函数具有副作用）。正是这个操作，促使Spark运行一个工作来计算RDD中的数据，使之能够跑步通过println()方法:-)</p>
 <p>或者，也可以把RDD保存到文件系统：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scala&gt; maxTemps.saveAsTextFile(&quot;output&quot;)</div></pre></td></tr></table></figure>
 <p>这样会创建一个output目录，包含分区文件：</p>
