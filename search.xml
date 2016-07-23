@@ -66,6 +66,7 @@
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> preferredLocations = <span class="type">InputFormatInfo</span>.computePreferredLocations(</div><div class="line">  <span class="type">Seq</span>(<span class="keyword">new</span> <span class="type">InputFormatInfo</span>(<span class="keyword">new</span> <span class="type">Configuration</span>(), classOf[<span class="type">TextInputFormat</span>],</div><div class="line">  inputPath)))</div><div class="line"><span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(conf, preferredLocations)</div></pre></td></tr></table></figure>
 <p>“偏爱位置”被Application master用来向资源管理器请求分配资源（步骤4）。本文写作时，Spark的最新版本是1.2.0，关于偏爱位置的API还不稳定，后续版本中可能会改变。</p>
 <h1 id="Further-Reading"><a href="#Further-Reading" class="headerlink" title="Further Reading"></a>Further Reading</h1><p>本章仅仅覆盖了Spark的基础知识。更多细节请参阅《Learning Spark》。<a href="http://spark.apache.org" target="_blank" rel="external">Apache Spark</a>网站上也有关于Spark最新发行版的最新文档。</p>
+<p>花了一个星期，在宝贝女儿（2岁）持续不断的骚扰下，终于把这件事情完成了。</p>
 ]]></content>
     </entry>
     
