@@ -271,6 +271,112 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/21/hadoop-the-definitive-guide-spark-5/" itemprop="url">
+                  翻译：Hadoop权威指南之Spark-5
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-21T00:00:00+08:00" content="2016-07-21">
+              2016-07-21
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/21/hadoop-the-definitive-guide-spark-5/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/07/21/hadoop-the-definitive-guide-spark-5/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Anatomy-of-a-Spark-Job-Run"><a href="#Anatomy-of-a-Spark-Job-Run" class="headerlink" title="Anatomy of a Spark Job Run"></a>Anatomy of a Spark Job Run</h1><p>让我们看一下当我们运行一个Spark的job时，会发生什么。在最高级别上，有两个独立的实体：驱动（driver）和执行器（executors）。驱动持有（hosts）应用（SparkContext），为job调度任务。执行器独立于应用，在应用的持续时间内运行，执行应用的任务。通常情况下，驱动作为客户端运行，不受集群管理器的管理，而执行器运行在集群中的多台机器上，但并非总是如此。在本节的其余部分，我们假定应用的执行器已经在运行。</p>
+<h2 id="Job-Submission"><a href="#Job-Submission" class="headerlink" title="Job Submission"></a>Job Submission</h2><p>图19-1说明了Spark是怎样运行一个job的。当在一个RDD上执行一个action（比如count()）时，会自动提交一个Spark job。内部来看，这会导致SparkContext的runJob()方法被调用（图19-1步骤1），该方法将调用传递给调度器，调度器是作为驱动的一部分在运行的（步骤2）。调度器由两部分组成：DAG调度器和任务调度器。DAG调度器会把job拆解为多个stage组成的DAG。任务调度器的责任是把每个stage的任务提交到集群。</p>
+<p><img src="/uploads/images/20160721/2145.png" alt=""><br><em>图19-1. Spark怎样运行一个job</em></p>
+<p>接下来，我们来看看DAG调度器是怎样构造一个DAG的。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/07/21/hadoop-the-definitive-guide-spark-5/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/07/18/hadoop-the-definitive-guide-spark-4/" itemprop="url">
                   翻译：Hadoop权威指南之Spark-4
                 </a>
@@ -723,7 +829,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">5</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
