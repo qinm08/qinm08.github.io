@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="spark,kafka,oryx," />
 
 
 
@@ -84,15 +84,16 @@
 
 
 
-<meta name="description" content="不忘初心，方得始终">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Ming's Coding Life">
-<meta property="og:url" content="https://qinm08.github.io/archives/2016/07/index.html">
+<meta name="description" content="概览Lambda级实现ML级实现端到端应用实现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Oryx:基于Spark和Kafka的大型实时机器学习系统">
+<meta property="og:url" content="https://qinm08.github.io/2016/07/25/oryx-overview/index.html">
 <meta property="og:site_name" content="Ming's Coding Life">
-<meta property="og:description" content="不忘初心，方得始终">
+<meta property="og:description" content="概览Lambda级实现ML级实现端到端应用实现">
+<meta property="og:updated_time" content="2016-07-25T04:00:43.865Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ming's Coding Life">
-<meta name="twitter:description" content="不忘初心，方得始终">
+<meta name="twitter:title" content="Oryx:基于Spark和Kafka的大型实时机器学习系统">
+<meta name="twitter:description" content="概览Lambda级实现ML级实现端到端应用实现">
 
 
 
@@ -113,9 +114,9 @@
 
 
 
-  <link rel="canonical" href="https://qinm08.github.io/archives/2016/07/"/>
+  <link rel="canonical" href="https://qinm08.github.io/2016/07/25/oryx-overview/"/>
 
-  <title> 归档 | Ming's Coding Life </title>
+  <title> Oryx:基于Spark和Kafka的大型实时机器学习系统 | Ming's Coding Life </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -136,7 +137,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-right  page-archive  ">
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -247,218 +248,158 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
-
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      嗯..! 目前共计 6 篇日志。 继续努力。
-    </span>
-
+  <div id="posts" class="posts-expand">
     
 
-      
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Oryx:基于Spark和Kafka的大型实时机器学习系统
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-25T00:00:00+08:00" content="2016-07-25">
+              2016-07-25
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/25/oryx-overview/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/07/25/oryx-overview/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o">阅读</i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
       
       
 
       
+        <h1 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h1><h1 id="Lambda级实现"><a href="#Lambda级实现" class="headerlink" title="Lambda级实现"></a>Lambda级实现</h1><h1 id="ML级实现"><a href="#ML级实现" class="headerlink" title="ML级实现"></a>ML级实现</h1><h1 id="端到端应用实现"><a href="#端到端应用实现" class="headerlink" title="端到端应用实现"></a>端到端应用实现</h1>
+      
+    </div>
+
+    <div>
+      
         
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2016">2016</h2>
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>如果本文对您有用，请随意打赏。感谢鼓励！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/uploads/images/wechat.png" alt="Ming Qin WeChat Pay"/>
+          <p>微信打赏</p>
         </div>
       
       
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/uploads/images/alipay.png" alt="Ming Qin Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
 
       
+    </div>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/spark/" rel="tag">#spark</a>
+          
+            <a href="/tags/kafka/" rel="tag">#kafka</a>
+          
+            <a href="/tags/oryx/" rel="tag">#oryx</a>
+          
+        </div>
+      
 
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/07/25/oryx-overview/" itemprop="url">
-              
-                <span itemprop="name">Oryx:基于Spark和Kafka的大型实时机器学习系统</span>
-              
-            </a>
-        
-      </h1>
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/21/hadoop-the-definitive-guide-spark-5/" rel="next" title="翻译：Hadoop权威指南之Spark-5">
+                <i class="fa fa-chevron-left"></i> 翻译：Hadoop权威指南之Spark-5
+              </a>
+            
+          </div>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-25T00:00:00+08:00"
-              content="2016-07-25" >
-          07-25
-        </time>
-      </div>
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
 
-    </header>
+      
+      
+    </footer>
   </article>
 
 
 
-    
-
+    <div class="post-spread">
       
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/07/21/hadoop-the-definitive-guide-spark-5/" itemprop="url">
-              
-                <span itemprop="name">翻译：Hadoop权威指南之Spark-5</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-21T00:00:00+08:00"
-              content="2016-07-21" >
-          07-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/07/18/hadoop-the-definitive-guide-spark-4/" itemprop="url">
-              
-                <span itemprop="name">翻译：Hadoop权威指南之Spark-4</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-18T00:00:00+08:00"
-              content="2016-07-18" >
-          07-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/07/17/hadoop-the-definitive-guide-spark-3/" itemprop="url">
-              
-                <span itemprop="name">翻译：Hadoop权威指南之Spark-3</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-17T00:00:00+08:00"
-              content="2016-07-17" >
-          07-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/07/16/hadoop-the-definitive-guide-spark-2/" itemprop="url">
-              
-                <span itemprop="name">翻译：Hadoop权威指南之Spark-2</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-16T00:00:00+08:00"
-              content="2016-07-16" >
-          07-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-  </section>
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2016/07/page/2/">2</a><a class="extend next" rel="next" href="/archives/2016/07/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
-
+    </div>
+  </div>
 
 
           </div>
@@ -466,6 +407,17 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -485,8 +437,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https://avatars2.githubusercontent.com/u/20449740?v=3&s=460"
@@ -562,6 +523,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lambda级实现"><span class="nav-number">2.</span> <span class="nav-text">Lambda级实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ML级实现"><span class="nav-number">3.</span> <span class="nav-text">ML级实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#端到端应用实现"><span class="nav-number">4.</span> <span class="nav-text">端到端应用实现</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -672,11 +644,9 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
 
 
   
@@ -694,9 +664,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'qinm08';
-      var disqus_identifier = 'archives/2016/07/index.html';
-      var disqus_title = "";
-      var disqus_url = '';
+      var disqus_identifier = '2016/07/25/oryx-overview/';
+      var disqus_title = "Oryx:基于Spark和Kafka的大型实时机器学习系统";
+      var disqus_url = 'https://qinm08.github.io/2016/07/25/oryx-overview/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
@@ -707,6 +677,8 @@
       }
 
       run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
       
     </script>
   
