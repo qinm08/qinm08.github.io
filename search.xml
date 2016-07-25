@@ -4,11 +4,47 @@
   
     
     <entry>
+      <title><![CDATA[Oryx：基于Spark和Kafka的大型实时机器学习系统]]></title>
+      <url>https://qinm08.github.io/2016/07/25/oryx-overview/</url>
+      <content type="html"><![CDATA[<h1 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h1><p>Oryx 2 是一个 Lambda 架构的实现，基于 <a href="http://spark.apache.org" target="_blank" rel="external">Apache Spark</a> 和 <a href="http://kafka.apache.org" target="_blank" rel="external">Apache Kafka</a> 构建，专门用于实时的、大规模的机器学习。它是用于构建应用的一套框架，还包括一些打包好的、端到端的应用，用于协同过滤、分类、回归和聚类。</p>
+<p>Oryx 2 是对最初的 <a href="https://github.com/cloudera/oryx" target="_blank" rel="external">Oryx 1</a> 项目的重构和延续。它包含了以下三个级别（<em>tiers</em>）：</p>
+<ol>
+<li>通用的Lambda架构级别，提供了批处理层、速度层和服务层，这些并不是机器学习所特有的。</li>
+<li>专门的机器学习抽象级别，用于超参数选择等等。</li>
+<li>端到端的应用级别，是对标准的机器学习算法的实现。</li>
+</ol>
+<p>从另一个方面来看，它包含了Lambda架构的三个并行的协同操作层（<em>layers</em>），以及一个连接元素：</p>
+<ol>
+<li>批处理层，基于所有的历史数据以及之前的计算结果，计算出新的结果。这里的操作运行时间较长，可能需要数小时。</li>
+<li>速度层，基于新的数据流，产生和发布增量的模型更新。这些更新是秒级发生的。</li>
+<li>服务层，接收模型和更新，实现一个同步API，对结果进行查询操作。</li>
+<li>数据传输层，在层与层之间移动数据，从外部数据源接收输入。</li>
+</ol>
+<p><img src="/uploads/images/2016/0725/1245.png" alt=""></p>
+<p>这个项目可以一级一级地重用（<em>tier by tier</em>）：比如，可以忽略第3级“应用级别”，把它作为构建新的机器学习应用的框架。它还可以一层一层地重用（<em>layer by layer</em>）：比如，如果不需要增量更新，速度层可以省略。它还可以一片一片地修改（<em>piece by piece</em>）：协同过滤应用的建模批处理层，可以被替换为自定义的实现，使用Spark MLlib之外的新算法，同时保留服务层和速度层的实现。</p>
+<h1 id="Lambda级的实现"><a href="#Lambda级的实现" class="headerlink" title="Lambda级的实现"></a>Lambda级的实现</h1><h2 id="数据传输"><a href="#数据传输" class="headerlink" title="数据传输"></a>数据传输</h2><p>数据传输机制是一个Apache Kafka的topic。任何进程——包括但不限于服务层——都能够向topic发送数据，然后被速度层和批处理层接收。Kafka的topic还被用于发布 <em>模型</em> 和 <em>模型更新</em>，然后被速度层和服务层消费。</p>
+<h2 id="批处理层"><a href="#批处理层" class="headerlink" title="批处理层"></a>批处理层</h2><p>批处理层的实现是一个Hadoop集群上的Spark Streaming进程，它从输入的Kafka topic中读取数据。这个Streaming进程必然需要较长时间——数小时甚至一天。它使用Spark来把当前窗口的数据保存到HDFS，然后结合HDFS上的所有历史数据，启动新结果的构建过程。结果被写到HDFS，同时发布到一个Kafka的更新topic。</p>
+<h2 id="速度层"><a href="#速度层" class="headerlink" title="速度层"></a>速度层</h2><p>速度层的实现也是一个Spark Streaming进程，它也从输入的Kafka topic中读取数据。它的时间要短的多，大约几秒钟。它周期性的从更新topic中加载新的模型，然后不断地产生模型更新，这些更新也会被放回到更新topic中。</p>
+<h2 id="服务层"><a href="#服务层" class="headerlink" title="服务层"></a>服务层</h2><p>服务层监听更新topic上的模型和模型更新。它在内存中维护模型的状态。在对内存中的模型进行查询的方法之上，它暴露一个HTTP REST API。它们中的大多数都可以伸缩部署，每一个都可以接收新的数据并写到Kafka中，在那里被速度层和批处理层获取。</p>
+<h2 id="使用和部署"><a href="#使用和部署" class="headerlink" title="使用和部署"></a>使用和部署</h2><p>这个应用是用Java语言写的，使用了Spark、Hadoop、Tomcat、Kafka、ZooKeeper等等组件。采用一个单独的<a href="https://github.com/typesafehub/config" target="_blank" rel="external">Typesafe Config</a>配置文件来做配置管理，其中applications配置了整个系统的部署。这里包括了关键接口类（批处理层、速度层和服务层的逻辑）的实现。应用把这些实现与每一层的二进制实例打包和部署在一起。每一个实例都是一个可运行的Java .jar文件（oryx-batch-2.x.jar、oryx-speed-2.x.jar、oryx-serving-2.x.jar），它会启动所有必需的服务。</p>
+<h1 id="ML级的实现"><a href="#ML级的实现" class="headerlink" title="ML级的实现"></a>ML级的实现</h1><p>ML级是对上述通用接口的实例化和特殊化。这里实现了通常的机器学习需求，然后对上层应用暴露出机器学习特定的接口。</p>
+<p>例如，这里实现了一个批处理层的更新进程，用来自动地查询出一个test集合。它会调用一个由上层应用提供的函数，来对test集合上的模型进行计算。它可以自动的重复这种过程，每次使用不同的超参数值，最后选择出最好的结果。它通过 <a href="http://dmg.org/pmml/v4-2-1/GeneralStructure.html" target="_blank" rel="external">PMML</a> 对模型进行序列化。</p>
+<h1 id="端到端的应用实现"><a href="#端到端的应用实现" class="headerlink" title="端到端的应用实现"></a>端到端的应用实现</h1><p>除了是一个框架以外，对于机器学习的三种用例，Oryx 2 包含了批处理层、速度层和服务层的完整实现。这些都是开箱即用的，或者也可以做为自定义应用的基础部分：</p>
+<ul>
+<li>基于交替最小二乘法的协同过滤或推荐系统</li>
+<li>基于k-means算法的聚类</li>
+<li>基于“随机决策森林”的分类和回归</li>
+</ul>
+<p>本文翻译自<a href="http://oryx.io/" target="_blank" rel="external">Oryx 官方网站</a>。</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[翻译：Hadoop权威指南之Spark-5]]></title>
       <url>https://qinm08.github.io/2016/07/21/hadoop-the-definitive-guide-spark-5/</url>
       <content type="html"><![CDATA[<h1 id="剖析Spark工作的运行"><a href="#剖析Spark工作的运行" class="headerlink" title="剖析Spark工作的运行"></a>剖析Spark工作的运行</h1><p>我们来看一下当我们运行一个Spark工作时，会发生什么。在最高级别上，有两个独立的实体：驱动（driver）和执行器（executors）。驱动持有（hosts）应用（SparkContext），调度工作中的任务。执行器独立于应用，在应用的持续时间内运行，执行应用的任务。通常情况下，驱动作为客户端运行，不受集群管理器的管理，而执行器运行在集群中的多台机器上，但并非总是如此。在本节的其余部分，我们假定应用的执行器已经在运行。</p>
 <h2 id="工作的提交"><a href="#工作的提交" class="headerlink" title="工作的提交"></a>工作的提交</h2><p>图19-1说明了Spark是怎样运行一个工作的。当在一个RDD上执行一个行动时（比如count()），会自动提交一个Spark工作。内部来看，这会导致SparkContext的runJob()方法被调用（图19-1步骤1），该方法将调用传递给调度器，调度器作为驱动的一部分运行（步骤2）。调度器由两部分组成：DAG调度器和任务调度器。DAG调度器会把工作拆解为多个阶段组成的DAG。任务调度器的责任是把每个阶段的任务提交到集群。</p>
-<p><img src="/uploads/images/20160721/2145.png" alt=""><br><em>图19-1. Spark怎样运行一个工作</em></p>
+<p><img src="/uploads/images/2016/0721/2145.png" alt=""><br><em>图19-1. Spark怎样运行一个工作</em></p>
 <p>接下来，我们来看看DAG调度器是怎样构建一个DAG的。</p>
 <a id="more"></a>
 <h2 id="DAG的构建"><a href="#DAG的构建" class="headerlink" title="DAG的构建"></a>DAG的构建</h2><p>为了理解怎样把一个工作拆分为阶段，我们需要看看阶段中运行的任务的类型。有两种任务类型：混洗map任务 <em>shuffle map tasks</em> 和结果任务 <em>result tasks</em>。任务类型的名字指示出Spark如何处理任务的输出：</p>
@@ -22,7 +58,7 @@
 <blockquote>
 <p>注意countByKey()是在驱动程序的本地执行最终的聚合操作，而不是第二个混洗阶段。这里不同于示例18-3中的Crunch程序，该程序使用了第二个MapReduce工作来做计数。</p>
 </blockquote>
-<p><img src="/uploads/images/20160721/2145.png" alt=""><br><em>图19-2. 计算词数直方图的Spark工作中的阶段和RDD</em></p>
+<p><img src="/uploads/images/2016/0721/2145.png" alt=""><br><em>图19-2. 计算词数直方图的Spark工作中的阶段和RDD</em></p>
 <p>一般来说，每个阶段内的RDD也会整理到DAG中。上图显示了RDD的类型和创建该RDD的操作。例如，RDD[String]是由textFile()创建的。为了简化图示，这里省略了Spark内部生成的一些中间RDD。比如，textFile()返回的RDD实际上是MapRDD[String]，其父是HadoopRDD[LongWritable, Text]。</p>
 <p>注意到转换操作reduceByKey()跨越了两个阶段，这是因为它的实现是一个混洗过程，该reduce函数在map侧作为combiner运行，在reduce侧作为reducer运行，正如MapReduce一样。还是与MapReduce相同，Spark的混洗实现会把输出写到本地磁盘的分区文件（即使是内存RDD也一样），这些文件被下一阶段的RDD读取。</p>
 <blockquote>
@@ -51,7 +87,7 @@
 <p>对于具有交互组件的程序，比如spark-shell或者pyspark，YARN client模式是必须的。当你构建一个Spark程序时，client模式也会非常有帮助，因为任何的调试输出都是立即可见的。</p>
 <p>另一方面，YARN cluster模式适用于生产系统（production job），因为整个应用运行在集群上，这样能更容易的保留日志文件（包括驱动程序的日志）以备后查。另外，如果application master失败了，YARN会重试这个应用。</p>
 <h3 id="YARN-client模式"><a href="#YARN-client模式" class="headerlink" title="YARN client模式"></a>YARN client模式</h3><p>在YARN client模式中，与YARN的交互开始于驱动程序创建一个新的SparkContext实例的时候（图19-3步骤1）。SparkContext把一个YARN应用提交给YARN资源管理器（步骤2），YARN资源管理器会在集群中某个节点管理器上启动一个YARN容器，然后在容器中运行一个Spark ExecutorLauncher应用（步骤3）。这个ExecutorLauncher的工作是通过向资源管理器请求资源（步骤4），在YARN容器中启动执行器。当容器被分配过来以后，启动ExecutorBackend进程（步骤5）。</p>
-<p><img src="/uploads/images/20160721/2340.png" alt=""><br>图19-3. 在YARN client模式下，Spark执行器的启动过程</p>
+<p><img src="/uploads/images/2016/0721/2340.png" alt=""><br>图19-3. 在YARN client模式下，Spark执行器的启动过程</p>
 <p>执行器启动以后，会回连到SparkContext并注册自己。这样SparkContext中就有了关于可用执行器的数量及其位置的信息。在分配任务时可基于这些位置信息进行决策。</p>
 <p>在spark-shell，spark-submit和pyspark中，可以设置要启动的执行器的数量（如果不设置，默认是2），还有每个执行器使用的核心数量（默认是1）以及内存大小（默认是1024MB）。下面这个例子在YARN上运行spark-shell，配有4个执行器，每个执行器使用1个核心和2G内存：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">% spark-shell --master yarn-client \</div><div class="line">  --num-executors 4 \</div><div class="line">  --executor-cores 1 \</div><div class="line">  --executor-memory 2g</div></pre></td></tr></table></figure>
@@ -59,7 +95,7 @@
 <h3 id="YARN-cluster模式"><a href="#YARN-cluster模式" class="headerlink" title="YARN cluster模式"></a>YARN cluster模式</h3><p>在YARN cluster模式中，用户的驱动程序运行在YARN的application master进程中。命令spark-submit的master URL是yarn-cluster：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">% spark-submit --master yarn-cluster ...</div></pre></td></tr></table></figure>
 <p>其他的参数，比如num-executors以及应用的JAR文件（或者Python文件），与YARN client模式相同（使用spark-submit –help查看详细用法）。</p>
-<p><img src="/uploads/images/20160721/2350.png" alt=""><br>图19-4. 在YARN cluster模式下，Spark执行器的启动过程</p>
+<p><img src="/uploads/images/2016/0721/2350.png" alt=""><br>图19-4. 在YARN cluster模式下，Spark执行器的启动过程</p>
 <p>spark-submit客户端将会启动YARN应用（图19-4步骤1），但它不运行任何的用户代码。余下的流程与client模式相同，唯一的不同是，在为执行器分配资源之前（步骤4），驱动程序是由application master启动的（步骤3b）。</p>
 <p>在这两种YARN模式中，执行器启动之前没有任何的数据本地化信息可以使用，因此这些执行器很可能不在那些持有工作对应文件的数据节点上。对于交互式会话，这是可以接受的，因为在会话开始之前可能不知道哪些数据集会被访问。但是对于生产系统（production job），这就不能接受了。因此Spark提供了一种给出位置线索的方式，以使运行YARN集群模式时的数据本地化程度得到提高。</p>
 <p>SparkContext的构造函数可以接收第二个参数，用于指定偏爱的位置。此位置根据输入格式以及路径，使用InputFormatInfo帮助类计算而来。例如，对于文本文件，我们使用TextInputFormat：</p>

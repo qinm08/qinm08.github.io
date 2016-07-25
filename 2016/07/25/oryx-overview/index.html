@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="hadoop,spark," />
+  <meta name="keywords" content="spark,kafka,oryx," />
 
 
 
@@ -84,22 +84,27 @@
 
 
 
-<meta name="description" content="Scala独立应用在Spark shell中运行了一个小程序之后，你可能想要把它打包成自包含应用，这样就可以多次运行了。
-示例19-1. 使用Spark找出最高气温的Scala应用
-123456789101112131415import org.apache.spark.SparkContext._import org.apache.spark.&amp;#123;SparkConf, SparkCont">
+<meta name="description" content="概览Oryx 2 是一个 Lambda 架构的实现，基于 Apache Spark 和 Apache Kafka 构建，专门用于实时的、大规模的机器学习。它是用于构建应用的一套框架，还包括一些打包好的、端到端的应用，用于协同过滤、分类、回归和聚类。
+Oryx 2 是对最初的 Oryx 1 项目的重构和延续。它包含了以下三个级别（tiers）：
+
+通用的Lambda架构级别，提供了批处理层、速度层和">
 <meta property="og:type" content="article">
-<meta property="og:title" content="翻译：Hadoop权威指南之Spark-2">
-<meta property="og:url" content="https://qinm08.github.io/2016/07/16/hadoop-the-definitive-guide-spark-2/index.html">
+<meta property="og:title" content="Oryx：基于Spark和Kafka的大型实时机器学习系统">
+<meta property="og:url" content="https://qinm08.github.io/2016/07/25/oryx-overview/index.html">
 <meta property="og:site_name" content="Ming's Coding Life">
-<meta property="og:description" content="Scala独立应用在Spark shell中运行了一个小程序之后，你可能想要把它打包成自包含应用，这样就可以多次运行了。
-示例19-1. 使用Spark找出最高气温的Scala应用
-123456789101112131415import org.apache.spark.SparkContext._import org.apache.spark.&amp;#123;SparkConf, SparkCont">
-<meta property="og:updated_time" content="2016-07-23T05:10:52.801Z">
+<meta property="og:description" content="概览Oryx 2 是一个 Lambda 架构的实现，基于 Apache Spark 和 Apache Kafka 构建，专门用于实时的、大规模的机器学习。它是用于构建应用的一套框架，还包括一些打包好的、端到端的应用，用于协同过滤、分类、回归和聚类。
+Oryx 2 是对最初的 Oryx 1 项目的重构和延续。它包含了以下三个级别（tiers）：
+
+通用的Lambda架构级别，提供了批处理层、速度层和">
+<meta property="og:image" content="https://qinm08.github.io/uploads/images/2016/0725/1245.png">
+<meta property="og:updated_time" content="2016-07-25T08:22:36.210Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="翻译：Hadoop权威指南之Spark-2">
-<meta name="twitter:description" content="Scala独立应用在Spark shell中运行了一个小程序之后，你可能想要把它打包成自包含应用，这样就可以多次运行了。
-示例19-1. 使用Spark找出最高气温的Scala应用
-123456789101112131415import org.apache.spark.SparkContext._import org.apache.spark.&amp;#123;SparkConf, SparkCont">
+<meta name="twitter:title" content="Oryx：基于Spark和Kafka的大型实时机器学习系统">
+<meta name="twitter:description" content="概览Oryx 2 是一个 Lambda 架构的实现，基于 Apache Spark 和 Apache Kafka 构建，专门用于实时的、大规模的机器学习。它是用于构建应用的一套框架，还包括一些打包好的、端到端的应用，用于协同过滤、分类、回归和聚类。
+Oryx 2 是对最初的 Oryx 1 项目的重构和延续。它包含了以下三个级别（tiers）：
+
+通用的Lambda架构级别，提供了批处理层、速度层和">
+<meta name="twitter:image" content="https://qinm08.github.io/uploads/images/2016/0725/1245.png">
 
 
 
@@ -120,9 +125,9 @@
 
 
 
-  <link rel="canonical" href="https://qinm08.github.io/2016/07/16/hadoop-the-definitive-guide-spark-2/"/>
+  <link rel="canonical" href="https://qinm08.github.io/2016/07/25/oryx-overview/"/>
 
-  <title> 翻译：Hadoop权威指南之Spark-2 | Ming's Coding Life </title>
+  <title> Oryx：基于Spark和Kafka的大型实时机器学习系统 | Ming's Coding Life </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -275,7 +280,7 @@
             
             
               
-                翻译：Hadoop权威指南之Spark-2
+                Oryx：基于Spark和Kafka的大型实时机器学习系统
               
             
           </h1>
@@ -287,8 +292,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-16T00:00:00+08:00" content="2016-07-16">
-              2016-07-16
+            <time itemprop="dateCreated" datetime="2016-07-25T00:00:00+08:00" content="2016-07-25">
+              2016-07-25
             </time>
           </span>
 
@@ -298,8 +303,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/07/16/hadoop-the-definitive-guide-spark-2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/07/16/hadoop-the-definitive-guide-spark-2/" itemprop="commentsCount"></span>
+                <a href="/2016/07/25/oryx-overview/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/07/25/oryx-overview/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -327,29 +332,36 @@
       
 
       
-        <h2 id="Scala独立应用"><a href="#Scala独立应用" class="headerlink" title="Scala独立应用"></a>Scala独立应用</h2><p>在Spark shell中运行了一个小程序之后，你可能想要把它打包成自包含应用，这样就可以多次运行了。</p>
-<p>示例19-1. 使用Spark找出最高气温的Scala应用</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.apache.spark.<span class="type">SparkContext</span>._</div><div class="line"><span class="keyword">import</span> org.apache.spark.&#123;<span class="type">SparkConf</span>, <span class="type">SparkContext</span>&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">MaxTemperature</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]) &#123;</div><div class="line">        <span class="keyword">val</span> conf = <span class="keyword">new</span> <span class="type">SparkConf</span>().setAppName(<span class="string">"Max Temperature"</span>)</div><div class="line">        <span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(conf)</div><div class="line">        sc.textFile(args(<span class="number">0</span>))</div><div class="line">          .map(_.split(<span class="string">"\t"</span>))</div><div class="line">          .filter(rec =&gt; (rec(<span class="number">1</span>) != <span class="string">"9999"</span> &amp;&amp; rec(<span class="number">2</span>).matches(<span class="string">"[01459]"</span>)))</div><div class="line">          .map(rec =&gt; (rec(<span class="number">0</span>).toInt, rec(<span class="number">1</span>).toInt))</div><div class="line">          .reduceByKey((a, b) =&gt; <span class="type">Math</span>.max(a, b))</div><div class="line">          .saveAsTextFile(args(<span class="number">1</span>))</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>运行独立程序时，没有shell为我们提供SparkContext，我们需要自己创建。我们用一个SparkConf来创建这个实例。SparkConf可以用来向应用中传递多个Spark属性，这里我们仅仅设置应用的名字。</p>
-<p>还有一些别的微小变化。首先是我们使用命令行参数来指定输入和输出路径。另外还使用了方法链来避免为每一个RDD创建中间变量，这样程序更紧凑，如果需要的话，我们仍然可以在Scala IDE中查看每次转换操作的类型信息。</p>
-<a id="more"></a>
-<blockquote>
-<p>并非所有的Spark定义的转换操作都可用于RDD类本身。在本例中，reduceByKey()（仅仅在键值对的RDD上起作用）实际上定义在PairRDDFunctions类中，但我们能用下面的import来让Scala隐含地把RDD[(Int, Int)]转为PairRDDFunctions：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">import org.apache.spark.SparkContext._</div></pre></td></tr></table></figure></p>
-<p>这个import不同于Spark使用的隐式转型函数，因此理所当然地值得包含在程序中。</p>
-</blockquote>
-<p>这一次我们使用spark-submit来运行这个程序，把包含编译后的Scala程序的JAR包作为参数传入，接着传入命令行参数（输入和输出路径）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">% spark-submit --class MaxTemperature --master local \</div><div class="line">spark-examples.jar input/ncdc/micro-tab/sample.txt output</div><div class="line">% cat output/part-*</div><div class="line">(1950,22)</div><div class="line">(1949,111)</div></pre></td></tr></table></figure>
-<p>我们还指定了两个选项：–class 告诉Spark应用类的名字，–master 指定工作的运行方式，local值告诉Spark在本地机器的单个JVM中运行，在“执行器和集群管理器”一节我们将会学到一些在集群中运行的选项。接下来，我们看看怎样用Java语言来使用Spark。</p>
-<h2 id="Java示例"><a href="#Java示例" class="headerlink" title="Java示例"></a>Java示例</h2><p>Spark是使用Scala实现的，Scala是基于JVM的语言，可以和Java完美集成。同样的例子用Java来表达，很直接也很啰嗦（使用Java 8的lambda表达式可以使这个版本更紧凑）。</p>
-<p>示例19-2. 使用Spark找出最高气温的Java应用<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MaxTemperatureSpark</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="keyword">if</span> (args.length != <span class="number">2</span>) &#123;</div><div class="line">            System.err.println(<span class="string">"Usage: MaxTemperatureSpark &lt;input path&gt; &lt;output path&gt;"</span>);</div><div class="line">            System.exit(-<span class="number">1</span>);</div><div class="line">        &#125;</div><div class="line">        SparkConf conf = <span class="keyword">new</span> SparkConf();</div><div class="line">        JavaSparkContext sc = <span class="keyword">new</span> JavaSparkContext(<span class="string">"local"</span>, <span class="string">"MaxTemperatureSpark"</span>, conf);</div><div class="line">        JavaRDD&lt;String&gt; lines = sc.textFile(args[<span class="number">0</span>]);</div><div class="line">        JavaRDD&lt;String[]&gt; records = lines.map(<span class="keyword">new</span> Function&lt;String, String[]&gt;() &#123;</div><div class="line">            <span class="meta">@Override</span> <span class="keyword">public</span> String[] call(String s) &#123;</div><div class="line">                <span class="keyword">return</span> s.split(<span class="string">"\t"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        JavaRDD&lt;String[]&gt; filtered = records.filter(<span class="keyword">new</span> Function&lt;String[], Boolean&gt;() &#123;</div><div class="line">            <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> Boolean <span class="title">call</span><span class="params">(String[] rec)</span> </span>&#123;</div><div class="line">                <span class="keyword">return</span> rec[<span class="number">1</span>] != <span class="string">"9999"</span> &amp;&amp; rec[<span class="number">2</span>].matches(<span class="string">"[01459]"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        JavaPairRDD&lt;Integer, Integer&gt; tuples = filtered.mapToPair(</div><div class="line">            <span class="keyword">new</span> PairFunction&lt;String[], Integer, Integer&gt;() &#123;</div><div class="line">                <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> Tuple2&lt;Integer, Integer&gt; <span class="title">call</span><span class="params">(String[] rec)</span> </span>&#123;</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">new</span> Tuple2&lt;Integer, Integer&gt;(</div><div class="line">                        Integer.parseInt(rec[<span class="number">0</span>]), Integer.parseInt(rec[<span class="number">1</span>]));</div><div class="line">                &#125;</div><div class="line">        &#125;);</div><div class="line">        JavaPairRDD&lt;Integer, Integer&gt; maxTemps = tuples.reduceByKey(</div><div class="line">            <span class="keyword">new</span> Function2&lt;Integer, Integer, Integer&gt;() &#123;</div><div class="line">                <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> Integer <span class="title">call</span><span class="params">(Integer i1, Integer i2)</span> </span>&#123;</div><div class="line">                    <span class="keyword">return</span> Math.max(i1, i2);</div><div class="line">                &#125;</div><div class="line">        &#125;);</div><div class="line">        maxTemps.saveAsTextFile(args[<span class="number">1</span>]);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>在Spark的Java API中，一个RDD由JavaRDD的实例表示，在键值对RDD的特殊情况下是JavaPairRDD 。这两个类都实现了JavaRDDLike接口，该接口中可以找到操作RDD的大多数方法。</p>
-<p>运行这个程序和运行Scala版本一样，除了类名字是MaxTemperatureSpark 。</p>
-<h2 id="Python示例"><a href="#Python示例" class="headerlink" title="Python示例"></a>Python示例</h2><p>Spark也支持Python语言，API叫做PySpark。由于Python语言有lambda表达式，例子程序非常接近Scala的版本。</p>
-<p>示例19-3. 使用Spark找出最高气温的Python应用<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">form pyspark <span class="keyword">import</span> SparkContext</div><div class="line"><span class="keyword">import</span> re, sys</div><div class="line"></div><div class="line">sc = SparkContext(<span class="string">"local"</span>, <span class="string">"Max Temperature"</span>)</div><div class="line">sc.textFile(sys.argv[<span class="number">1</span>]) \</div><div class="line">  .map(<span class="keyword">lambda</span> s: s.split(<span class="string">"\t"</span>)) \</div><div class="line">  .filter(<span class="keyword">lambda</span> rec: (rec[<span class="number">1</span>] != <span class="string">"9999"</span> <span class="keyword">and</span> re.match(<span class="string">"[01459]"</span>, rec[<span class="number">2</span>]))) \</div><div class="line">  .map(<span class="keyword">lambda</span> rec: (int(rec[<span class="number">0</span>]), int(rec[<span class="number">1</span>]))) \</div><div class="line">  .reduceByKey(max) \</div><div class="line">  .saveAsTextFile(sys.argv[<span class="number">2</span>])</div></pre></td></tr></table></figure></p>
-<p>注意在reduceByKey()的转换操作中，我们可以使用Python语言内建的max函数。</p>
-<p>需要留意的一点是，这个程序是用CPython写的，Spark会创建一个Python子进程来执行用户的Python代码（在启动程序 <em>launcher</em> 和在集群上运行用户任务的执行器 <em>executor</em> 上）。两个进程间使用socket通讯来传递RDD分区数据。</p>
-<p>要运行这个程序，只需指定Python文件即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">% spark-submit --master local \</div><div class="line">  ch19-spark/src/main/python/MaxTemperature.py \</div><div class="line">  input/ncdc/micro-tab/sample.txt output</div></pre></td></tr></table></figure></p>
-<p>还可以使用pyspark命令，以交互模式运行Spark和Python。</p>
+        <h1 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h1><p>Oryx 2 是一个 Lambda 架构的实现，基于 <a href="http://spark.apache.org" target="_blank" rel="external">Apache Spark</a> 和 <a href="http://kafka.apache.org" target="_blank" rel="external">Apache Kafka</a> 构建，专门用于实时的、大规模的机器学习。它是用于构建应用的一套框架，还包括一些打包好的、端到端的应用，用于协同过滤、分类、回归和聚类。</p>
+<p>Oryx 2 是对最初的 <a href="https://github.com/cloudera/oryx" target="_blank" rel="external">Oryx 1</a> 项目的重构和延续。它包含了以下三个级别（<em>tiers</em>）：</p>
+<ol>
+<li>通用的Lambda架构级别，提供了批处理层、速度层和服务层，这些并不是机器学习所特有的。</li>
+<li>专门的机器学习抽象级别，用于超参数选择等等。</li>
+<li>端到端的应用级别，是对标准的机器学习算法的实现。</li>
+</ol>
+<p>从另一个方面来看，它包含了Lambda架构的三个并行的协同操作层（<em>layers</em>），以及一个连接元素：</p>
+<ol>
+<li>批处理层，基于所有的历史数据以及之前的计算结果，计算出新的结果。这里的操作运行时间较长，可能需要数小时。</li>
+<li>速度层，基于新的数据流，产生和发布增量的模型更新。这些更新是秒级发生的。</li>
+<li>服务层，接收模型和更新，实现一个同步API，对结果进行查询操作。</li>
+<li>数据传输层，在层与层之间移动数据，从外部数据源接收输入。</li>
+</ol>
+<p><img src="/uploads/images/2016/0725/1245.png" alt=""></p>
+<p>这个项目可以一级一级地重用（<em>tier by tier</em>）：比如，可以忽略第3级“应用级别”，把它作为构建新的机器学习应用的框架。它还可以一层一层地重用（<em>layer by layer</em>）：比如，如果不需要增量更新，速度层可以省略。它还可以一片一片地修改（<em>piece by piece</em>）：协同过滤应用的建模批处理层，可以被替换为自定义的实现，使用Spark MLlib之外的新算法，同时保留服务层和速度层的实现。</p>
+<h1 id="Lambda级的实现"><a href="#Lambda级的实现" class="headerlink" title="Lambda级的实现"></a>Lambda级的实现</h1><h2 id="数据传输"><a href="#数据传输" class="headerlink" title="数据传输"></a>数据传输</h2><p>数据传输机制是一个Apache Kafka的topic。任何进程——包括但不限于服务层——都能够向topic发送数据，然后被速度层和批处理层接收。Kafka的topic还被用于发布 <em>模型</em> 和 <em>模型更新</em>，然后被速度层和服务层消费。</p>
+<h2 id="批处理层"><a href="#批处理层" class="headerlink" title="批处理层"></a>批处理层</h2><p>批处理层的实现是一个Hadoop集群上的Spark Streaming进程，它从输入的Kafka topic中读取数据。这个Streaming进程必然需要较长时间——数小时甚至一天。它使用Spark来把当前窗口的数据保存到HDFS，然后结合HDFS上的所有历史数据，启动新结果的构建过程。结果被写到HDFS，同时发布到一个Kafka的更新topic。</p>
+<h2 id="速度层"><a href="#速度层" class="headerlink" title="速度层"></a>速度层</h2><p>速度层的实现也是一个Spark Streaming进程，它也从输入的Kafka topic中读取数据。它的时间要短的多，大约几秒钟。它周期性的从更新topic中加载新的模型，然后不断地产生模型更新，这些更新也会被放回到更新topic中。</p>
+<h2 id="服务层"><a href="#服务层" class="headerlink" title="服务层"></a>服务层</h2><p>服务层监听更新topic上的模型和模型更新。它在内存中维护模型的状态。在对内存中的模型进行查询的方法之上，它暴露一个HTTP REST API。它们中的大多数都可以伸缩部署，每一个都可以接收新的数据并写到Kafka中，在那里被速度层和批处理层获取。</p>
+<h2 id="使用和部署"><a href="#使用和部署" class="headerlink" title="使用和部署"></a>使用和部署</h2><p>这个应用是用Java语言写的，使用了Spark、Hadoop、Tomcat、Kafka、ZooKeeper等等组件。采用一个单独的<a href="https://github.com/typesafehub/config" target="_blank" rel="external">Typesafe Config</a>配置文件来做配置管理，其中applications配置了整个系统的部署。这里包括了关键接口类（批处理层、速度层和服务层的逻辑）的实现。应用把这些实现与每一层的二进制实例打包和部署在一起。每一个实例都是一个可运行的Java .jar文件（oryx-batch-2.x.jar、oryx-speed-2.x.jar、oryx-serving-2.x.jar），它会启动所有必需的服务。</p>
+<h1 id="ML级的实现"><a href="#ML级的实现" class="headerlink" title="ML级的实现"></a>ML级的实现</h1><p>ML级是对上述通用接口的实例化和特殊化。这里实现了通常的机器学习需求，然后对上层应用暴露出机器学习特定的接口。</p>
+<p>例如，这里实现了一个批处理层的更新进程，用来自动地查询出一个test集合。它会调用一个由上层应用提供的函数，来对test集合上的模型进行计算。它可以自动的重复这种过程，每次使用不同的超参数值，最后选择出最好的结果。它通过 <a href="http://dmg.org/pmml/v4-2-1/GeneralStructure.html" target="_blank" rel="external">PMML</a> 对模型进行序列化。</p>
+<h1 id="端到端的应用实现"><a href="#端到端的应用实现" class="headerlink" title="端到端的应用实现"></a>端到端的应用实现</h1><p>除了是一个框架以外，对于机器学习的三种用例，Oryx 2 包含了批处理层、速度层和服务层的完整实现。这些都是开箱即用的，或者也可以做为自定义应用的基础部分：</p>
+<ul>
+<li>基于交替最小二乘法的协同过滤或推荐系统</li>
+<li>基于k-means算法的聚类</li>
+<li>基于“随机决策森林”的分类和回归</li>
+</ul>
+<p>本文翻译自<a href="http://oryx.io/" target="_blank" rel="external">Oryx 官方网站</a>。</p>
 
       
     </div>
@@ -393,9 +405,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/hadoop/" rel="tag">#hadoop</a>
-          
             <a href="/tags/spark/" rel="tag">#spark</a>
+          
+            <a href="/tags/kafka/" rel="tag">#kafka</a>
+          
+            <a href="/tags/oryx/" rel="tag">#oryx</a>
           
         </div>
       
@@ -404,17 +418,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/07/15/hadoop-the-definitive-guide-spark-1/" rel="next" title="翻译：Hadoop权威指南之Spark-1">
-                <i class="fa fa-chevron-left"></i> 翻译：Hadoop权威指南之Spark-1
+              <a href="/2016/07/21/hadoop-the-definitive-guide-spark-5/" rel="next" title="翻译：Hadoop权威指南之Spark-5">
+                <i class="fa fa-chevron-left"></i> 翻译：Hadoop权威指南之Spark-5
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/07/17/hadoop-the-definitive-guide-spark-3/" rel="prev" title="翻译：Hadoop权威指南之Spark-3">
-                翻译：Hadoop权威指南之Spark-3 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -561,7 +571,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Scala独立应用"><span class="nav-number">1.</span> <span class="nav-text">Scala独立应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java示例"><span class="nav-number">2.</span> <span class="nav-text">Java示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python示例"><span class="nav-number">3.</span> <span class="nav-text">Python示例</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lambda级的实现"><span class="nav-number">2.</span> <span class="nav-text">Lambda级的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据传输"><span class="nav-number">2.1.</span> <span class="nav-text">数据传输</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#批处理层"><span class="nav-number">2.2.</span> <span class="nav-text">批处理层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#速度层"><span class="nav-number">2.3.</span> <span class="nav-text">速度层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务层"><span class="nav-number">2.4.</span> <span class="nav-text">服务层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用和部署"><span class="nav-number">2.5.</span> <span class="nav-text">使用和部署</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ML级的实现"><span class="nav-number">3.</span> <span class="nav-text">ML级的实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#端到端的应用实现"><span class="nav-number">4.</span> <span class="nav-text">端到端的应用实现</span></a></li></ol></div>
             
           </div>
         </section>
@@ -695,9 +705,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'qinm08';
-      var disqus_identifier = '2016/07/16/hadoop-the-definitive-guide-spark-2/';
-      var disqus_title = "翻译：Hadoop权威指南之Spark-2";
-      var disqus_url = 'https://qinm08.github.io/2016/07/16/hadoop-the-definitive-guide-spark-2/';
+      var disqus_identifier = '2016/07/25/oryx-overview/';
+      var disqus_title = "Oryx：基于Spark和Kafka的大型实时机器学习系统";
+      var disqus_url = 'https://qinm08.github.io/2016/07/25/oryx-overview/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
