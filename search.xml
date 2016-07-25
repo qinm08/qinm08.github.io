@@ -4,12 +4,6 @@
   
     
     <entry>
-      <title><![CDATA[Oryx:基于Spark和Kafka的大型实时机器学习系统]]></title>
-      <url>https://qinm08.github.io/2016/07/25/oryx-overview/</url>
-      <content type="html"><![CDATA[<h1 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h1><h1 id="Lambda级实现"><a href="#Lambda级实现" class="headerlink" title="Lambda级实现"></a>Lambda级实现</h1><h1 id="ML级实现"><a href="#ML级实现" class="headerlink" title="ML级实现"></a>ML级实现</h1><h1 id="端到端应用实现"><a href="#端到端应用实现" class="headerlink" title="端到端应用实现"></a>端到端应用实现</h1>]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[翻译：Hadoop权威指南之Spark-5]]></title>
       <url>https://qinm08.github.io/2016/07/21/hadoop-the-definitive-guide-spark-5/</url>
       <content type="html"><![CDATA[<h1 id="剖析Spark工作的运行"><a href="#剖析Spark工作的运行" class="headerlink" title="剖析Spark工作的运行"></a>剖析Spark工作的运行</h1><p>我们来看一下当我们运行一个Spark工作时，会发生什么。在最高级别上，有两个独立的实体：驱动（driver）和执行器（executors）。驱动持有（hosts）应用（SparkContext），调度工作中的任务。执行器独立于应用，在应用的持续时间内运行，执行应用的任务。通常情况下，驱动作为客户端运行，不受集群管理器的管理，而执行器运行在集群中的多台机器上，但并非总是如此。在本节的其余部分，我们假定应用的执行器已经在运行。</p>
