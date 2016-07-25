@@ -20,6 +20,7 @@
 <li>服务层，接收模型和更新，实现一个同步API，对结果进行查询操作。</li>
 <li>数据传输层，在层与层之间移动数据，从外部数据源接收输入。</li>
 </ol>
+<a id="more"></a>
 <p><img src="/uploads/images/2016/0725/1245.png" alt=""></p>
 <p>这个项目可以一级一级地重用（<em>tier by tier</em>）：比如，可以忽略第3级“应用级别”，把它作为构建新的机器学习应用的框架。它还可以一层一层地重用（<em>layer by layer</em>）：比如，如果不需要增量更新，速度层可以省略。它还可以一片一片地修改（<em>piece by piece</em>）：协同过滤应用的建模批处理层，可以被替换为自定义的实现，使用Spark MLlib之外的新算法，同时保留服务层和速度层的实现。</p>
 <h1 id="Lambda级的实现"><a href="#Lambda级的实现" class="headerlink" title="Lambda级的实现"></a>Lambda级的实现</h1><h2 id="数据传输"><a href="#数据传输" class="headerlink" title="数据传输"></a>数据传输</h2><p>数据传输机制是一个Apache Kafka的topic。任何进程——包括但不限于服务层——都能够向topic发送数据，然后被速度层和批处理层接收。Kafka的topic还被用于发布 <em>模型</em> 和 <em>模型更新</em>，然后被速度层和服务层消费。</p>
