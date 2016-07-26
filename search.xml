@@ -245,7 +245,7 @@
     
     <entry>
       <title><![CDATA[翻译：Hadoop权威指南之Spark-1]]></title>
-      <url>https://qinm08.github.io/2016/06/15/hadoop-the-definitive-guide-spark-1/</url>
+      <url>https://qinm08.github.io/2016/07/15/hadoop-the-definitive-guide-spark-1/</url>
       <content type="html"><![CDATA[<p>本文翻译自O’Reilly出版Tom White所著《Hadoop: The Definitive Guide》第4版第19章，向作者致敬。该书英文第4版已于2015年4月出版，至今已近15个月，而市面上中文第3版还在大行其道。Spark一章是第4版新增的内容，笔者在学习过程中顺便翻译记录。由于笔者也在学习，难免翻译不妥或出错，欢迎方家来信斧正。翻译纯属兴趣，不做商业用途。秦铭，Email地址<a href="mailto:qinm08@gmail.com" target="_blank" rel="external">qinm08@gmail.com</a>。</p>
 <hr>
 <p><a href="http://spark.apache.org" target="_blank" rel="external">Apache Spark</a> 是一个大规模数据处理的集群计算框架。和本书中讨论的大多数其他处理框架不同，Spark不使用MapReduce作为执行引擎，作为替代，Spark使用自己的分布式运行环境（distributed runtime）来执行集群上的工作。然而，Spark与MapReduce在API和runtime方面有许多相似，本章中我们将会看到。Spark和Hadoop紧密集成：它可以运行在YARN上，处理Hadoop的文件格式，后端存储采用HDFS。</p>
