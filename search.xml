@@ -4,12 +4,6 @@
   
     
     <entry>
-      <title></title>
-      <url>https://qinm08.github.io/2016/07/26/reading-notes-mastering-apache-spark/</url>
-      <content type="html"></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[Oryx：基于Spark和Kafka的机器学习框架]]></title>
       <url>https://qinm08.github.io/2016/07/25/oryx-overview/</url>
       <content type="html"><![CDATA[<h1 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h1><p>Oryx 2 是一个 Lambda 架构的实现，基于 <a href="http://spark.apache.org" target="_blank" rel="external">Apache Spark</a> 和 <a href="http://kafka.apache.org" target="_blank" rel="external">Apache Kafka</a> 构建，专门用于实时的、大规模的机器学习。它是用于构建应用的一套框架，还包括一些打包好的、端到端的应用，用于协同过滤、分类、回归和聚类。</p>
