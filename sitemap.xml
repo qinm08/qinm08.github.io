@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://qinm08.github.io/2016/07/21/hadoop-the-definitive-guide-spark-5/</loc>
+    
+    <lastmod>2016-07-27T13:01:35.180Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://qinm08.github.io/2016/07/18/hadoop-the-definitive-guide-spark-4/</loc>
+    
+    <lastmod>2016-07-27T13:01:26.032Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://qinm08.github.io/2016/07/16/hadoop-the-definitive-guide-spark-2/</loc>
+    
+    <lastmod>2016-07-27T13:00:52.981Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://qinm08.github.io/2016/07/15/hadoop-the-definitive-guide-spark-1/</loc>
     
     <lastmod>2016-07-26T13:46:38.822Z</lastmod>
@@ -30,30 +51,9 @@
   </url>
   
   <url>
-    <loc>https://qinm08.github.io/2016/07/21/hadoop-the-definitive-guide-spark-5/</loc>
-    
-    <lastmod>2016-07-25T04:50:02.879Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://qinm08.github.io/2016/07/18/hadoop-the-definitive-guide-spark-4/</loc>
-    
-    <lastmod>2016-07-23T05:32:40.503Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://qinm08.github.io/2016/07/17/hadoop-the-definitive-guide-spark-3/</loc>
     
     <lastmod>2016-07-23T05:23:06.304Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://qinm08.github.io/2016/07/16/hadoop-the-definitive-guide-spark-2/</loc>
-    
-    <lastmod>2016-07-23T05:10:52.801Z</lastmod>
     
   </url>
   

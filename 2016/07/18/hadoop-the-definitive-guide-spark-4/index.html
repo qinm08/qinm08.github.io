@@ -94,7 +94,7 @@
 <meta property="og:description" content="持久化回到本章开头的例子，我们可以把“年度-气温”的中间数据集缓存在内存中：
 12scala&amp;gt; tuples.cache()res1: tuples.type = MappedRDD[4] at map at &amp;lt;console&amp;gt;:18
 调用cache()不会立刻把RDD缓存到内存中，只是对这个RDD做一个标记，当Spark工作运行的时候，实际的缓存行为才会发生。因此我们首先强制运">
-<meta property="og:updated_time" content="2016-07-23T05:32:40.503Z">
+<meta property="og:updated_time" content="2016-07-27T13:01:26.032Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="翻译：Hadoop权威指南之Spark-4">
 <meta name="twitter:description" content="持久化回到本章开头的例子，我们可以把“年度-气温”的中间数据集缓存在内存中：
@@ -324,9 +324,9 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">scala&gt; tuples.cache()</div><div class="line">res1: tuples.type = MappedRDD[4] at map at &lt;console&gt;:18</div></pre></td></tr></table></figure>
 <p>调用cache()不会立刻把RDD缓存到内存中，只是对这个RDD做一个标记，当Spark工作运行的时候，实际的缓存行为才会发生。因此我们首先强制运行一个工作：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">scala&gt; tuples.reduceByKey((a, b) =&gt; Math.max(a, b)).foreach(println(_))</div><div class="line">INFO BlockManagerInfo: Added rdd_4_0 in memory on 192.168.1.90:64640</div><div class="line">INFO BlockManagerInfo: Added rdd_4_1 in memory on 192.168.1.90:64640</div><div class="line">(1950,22)</div><div class="line">(1949,111)</div></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>关于BlockManagerInfo的日志显示，作为工作运行的一部分，RDD的分区会被保持在内存中。日志显示这个RDD的编号是4（在调用cache()方法之后的控制台输出中，也能看到这个信息），它包含两个分区，标签分别是0和1。如果在这个缓存的数据集上运行另一个工作，我们会看到这个RDD将从内存中加载。这次我们计算最低气温：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">scala&gt; tuples.reduceByKey((a, b) =&gt; Math.min(a, b)).foreach(println(_))</div><div class="line">INFO BlockManager: Found block rdd_4_0 locally</div><div class="line">INFO BlockManager: Found block rdd_4_1 locally</div><div class="line">(1949,78)</div><div class="line">(1950,-11)</div></pre></td></tr></table></figure>
-<a id="more"></a>
 <p>这是在微小数据集上的简单示例，但是对于更大的工作，节省的时间将很可观。在MapReduce中，为了执行另一个计算，输入数据集必须再次从磁盘加载。即使中间数据可以作为输入（比如一个清洗后的数据集，无效行和不必要的字段都已移除），也不能改变“数据必须从磁盘加载”的事实，这是很慢的。Spark会把数据集缓存在一个遍布集群的内存高速缓存中，这就意味着任何基于此数据集的计算都会执行的非常快。</p>
 <p>在对数据进行交互式探索时，这种效率是极其有用的。这也自然适合某些类型的算法，比如迭代算法，一次迭代计算的结果可以缓存在内存中，成为下次迭代计算的输入。这种算法也可以用MapReduce实现，每次迭代都是一个单独的MapReduce工作，因此每次迭代的结果必须写入磁盘，然后在下次迭代时再读回来。</p>
 <blockquote>
