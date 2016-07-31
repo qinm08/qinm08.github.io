@@ -29,7 +29,7 @@
 <h2 id="服务层"><a href="#服务层" class="headerlink" title="服务层"></a>服务层</h2><p>服务层监听更新topic上的模型和模型更新。它在内存中维护模型的状态。在对内存中的模型进行查询的方法之上，它暴露一个HTTP REST API。它们中的大多数都可以伸缩部署，每一个都可以接收新的数据并写到Kafka中，在那里被速度层和批处理层获取。</p>
 <h2 id="使用和部署"><a href="#使用和部署" class="headerlink" title="使用和部署"></a>使用和部署</h2><p>这个应用是用Java语言写的，使用了Spark、Hadoop、Tomcat、Kafka、ZooKeeper等等组件。采用一个单独的<a href="https://github.com/typesafehub/config" target="_blank" rel="external">Typesafe Config</a>配置文件来做配置管理，其中applications配置了整个系统的部署。这里包括了关键接口类（批处理层、速度层和服务层的逻辑）的实现。应用把这些实现与每一层的二进制实例打包和部署在一起。每一个实例都是一个可运行的Java .jar文件（oryx-batch-2.x.jar、oryx-speed-2.x.jar、oryx-serving-2.x.jar），它会启动所有必需的服务。</p>
 <h1 id="ML级的实现"><a href="#ML级的实现" class="headerlink" title="ML级的实现"></a>ML级的实现</h1><p>ML级是对上述通用接口的实例化和特殊化。这里实现了通常的机器学习需求，然后对上层应用暴露出机器学习特定的接口。</p>
-<p>例如，这里实现了一个批处理层的更新进程，用来自动地查询出一个test集合。它会调用一个由上层应用提供的函数，来对test集合上的模型进行计算。它可以自动的重复这种过程，每次使用不同的超参数值，最后选择出最好的结果。它通过 <a href="http://dmg.org/pmml/v4-2-1/GeneralStructure.html" target="_blank" rel="external">PMML</a> 对模型进行序列化。</p>
+<p>例如，这里实现了一个批处理层的更新进程，用来自动地查询出一个test和training集合。它会调用一个由上层应用提供的函数，来对test集合上的模型进行计算。它可以自动的重复这种过程，每次使用不同的超参数值，最后选择出最好的结果。它通过 <a href="http://dmg.org/pmml/v4-2-1/GeneralStructure.html" target="_blank" rel="external">PMML</a> 对模型进行序列化。</p>
 <h1 id="端到端的应用实现"><a href="#端到端的应用实现" class="headerlink" title="端到端的应用实现"></a>端到端的应用实现</h1><p>除了是一个框架以外，对于机器学习的三种用例，Oryx 2 包含了批处理层、速度层和服务层的完整实现。这些都是开箱即用的，或者也可以做为自定义应用的基础部分：</p>
 <ul>
 <li>基于交替最小二乘法的协同过滤或推荐系统</li>
