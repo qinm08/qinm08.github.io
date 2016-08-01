@@ -1,0 +1,970 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="spark,machine learning,naive bayes," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/blacktocat.png?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="分类每个人每天都会进行很多次的分类操作。比如，当你看到一个陌生人，你的大脑中的分类器就会根据TA的体貌特征、衣着举止，判断出TA是男是女，是穷是富等等。这就是分类操作。
+其中，男人、女人、穷人、富人，这些是类别；那个陌生人，是个待分类项；把一个待分类项映射到一个类别的映射规则，就是一个分类器。
+分类算法的任务就是构造出分类器。
+贝叶斯定理贝叶斯定理解决的是这样一个问题：已知在事件B发生的条件下，事">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark机器学习1：朴素贝叶斯分类">
+<meta property="og:url" content="https://qinm08.github.io/2016/08/01/spark-machine-learning-1-naive-bayes/index.html">
+<meta property="og:site_name" content="Ming's Coding Life">
+<meta property="og:description" content="分类每个人每天都会进行很多次的分类操作。比如，当你看到一个陌生人，你的大脑中的分类器就会根据TA的体貌特征、衣着举止，判断出TA是男是女，是穷是富等等。这就是分类操作。
+其中，男人、女人、穷人、富人，这些是类别；那个陌生人，是个待分类项；把一个待分类项映射到一个类别的映射规则，就是一个分类器。
+分类算法的任务就是构造出分类器。
+贝叶斯定理贝叶斯定理解决的是这样一个问题：已知在事件B发生的条件下，事">
+<meta property="og:updated_time" content="2016-08-01T12:47:40.770Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spark机器学习1：朴素贝叶斯分类">
+<meta name="twitter:description" content="分类每个人每天都会进行很多次的分类操作。比如，当你看到一个陌生人，你的大脑中的分类器就会根据TA的体貌特征、衣着举止，判断出TA是男是女，是穷是富等等。这就是分类操作。
+其中，男人、女人、穷人、富人，这些是类别；那个陌生人，是个待分类项；把一个待分类项映射到一个类别的映射规则，就是一个分类器。
+分类算法的任务就是构造出分类器。
+贝叶斯定理贝叶斯定理解决的是这样一个问题：已知在事件B发生的条件下，事">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://qinm08.github.io/2016/08/01/spark-machine-learning-1-naive-bayes/"/>
+
+  <title> Spark机器学习1：朴素贝叶斯分类 | Ming's Coding Life </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ming's Coding Life</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Be a Professional Programer</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Spark机器学习1：朴素贝叶斯分类
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-01T00:00:00+08:00" content="2016-08-01">
+              2016-08-01
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv">阅读次数
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><p>每个人每天都会进行很多次的分类操作。比如，当你看到一个陌生人，你的大脑中的分类器就会根据TA的体貌特征、衣着举止，判断出TA是男是女，是穷是富等等。这就是分类操作。</p>
+<p>其中，男人、女人、穷人、富人，这些是类别；那个陌生人，是个待分类项；把一个待分类项映射到一个类别的映射规则，就是一个分类器。</p>
+<p>分类算法的任务就是构造出分类器。</p>
+<h1 id="贝叶斯定理"><a href="#贝叶斯定理" class="headerlink" title="贝叶斯定理"></a>贝叶斯定理</h1><p>贝叶斯定理解决的是这样一个问题：已知在事件B发生的条件下，事件A的发生概率P(A|B)，怎样得到事件A发生的条件下，事件B的发生概率 P(B|A)？贝叶斯定理为我们打通了从 P(A|B) 到 P(B|A) 的道路。</p>
+<p>P(B|A) = P(A|B) × P(B) / P(A)</p>
+<a id="more"></a>
+<p>举例说明，假设已经有了100个 email，其中：</p>
+<ol>
+<li>垃圾邮件占比60%，即 P(Spam) = 0.6<ul>
+<li>80%的垃圾邮件包含关键字“buy”，即 P(Buy|Spam) = 0.8</li>
+<li>20%的垃圾邮件不包含关键字“buy”</li>
+</ul>
+</li>
+<li>正常邮件占比40%，即 P(NotSpam) = 0.4<ul>
+<li>10%的正常邮件包含关键字“buy”，即 P(Buy|NotSpam) = 0.1</li>
+<li>90%的正常邮件不包含关键字“buy”</li>
+</ul>
+</li>
+</ol>
+<p>现在，第101个 email 进来了，它包含关键字“buy”，那么它是垃圾邮件的概率 P(Spam|Buy) 是多少？</p>
+<p>P(Spam|Buy) = P(Buy|Spam) × P(Spam) / P(Buy)</p>
+<p>P(Buy) = P(Buy|Spam) × P(Spam) + P(Buy|NotSpam) × P(NotSpam)</p>
+<p>P(Spam|Buy) = (0.8 × 0.6) / (0.8 × 0.6 + 0.1 × 0.4) = 0.48 / 0.52 = 0.923</p>
+<p>由此得出，这个 email 有92.3%的可能是一个垃圾邮件。</p>
+<h1 id="朴素贝叶斯分类"><a href="#朴素贝叶斯分类" class="headerlink" title="朴素贝叶斯分类"></a>朴素贝叶斯分类</h1><p>朴素贝叶斯分类之所以朴素，是因为它背后的分类思想真的很朴素：对于某个待分类项，它属于哪个类别的概率较高，就把它分到哪个类别。</p>
+<p>上面的例子中，包含关键字“buy”的 email 也可能是正常邮件，但是概率只有7.7%，因此就把它分到垃圾邮件类别了。</p>
+<h1 id="Spark分类示例"><a href="#Spark分类示例" class="headerlink" title="Spark分类示例"></a>Spark分类示例</h1><p>首先明确任务，下面是一组人类身体特征的统计资料，数据来自维基百科。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">性别（0女1男）</th>
+<th style="text-align:right">身高（英尺）</th>
+<th style="text-align:right">体重（磅）</th>
+<th style="text-align:right">脚掌（英寸）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">180</td>
+<td style="text-align:right">12</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">5.92</td>
+<td style="text-align:right">190</td>
+<td style="text-align:right">11</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">5.58</td>
+<td style="text-align:right">170</td>
+<td style="text-align:right">12</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">5.92</td>
+<td style="text-align:right">165</td>
+<td style="text-align:right">10</td>
+</tr>
+<tr>
+<td style="text-align:right">0</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">100</td>
+<td style="text-align:right">6</td>
+</tr>
+<tr>
+<td style="text-align:right">0</td>
+<td style="text-align:right">5.5</td>
+<td style="text-align:right">150</td>
+<td style="text-align:right">8</td>
+</tr>
+<tr>
+<td style="text-align:right">0</td>
+<td style="text-align:right">5.42</td>
+<td style="text-align:right">130</td>
+<td style="text-align:right">7</td>
+</tr>
+<tr>
+<td style="text-align:right">0</td>
+<td style="text-align:right">5.75</td>
+<td style="text-align:right">150</td>
+<td style="text-align:right">9</td>
+</tr>
+</tbody>
+</table>
+<p>已知某人身高6英尺，体重130磅，脚掌8英寸，请问此人是男是女？</p>
+<p>Spark的 MLlib 中有一种特殊的数据结构，LabeledPoint，它由 label 和 features 两部分组成，其中 label 是 Double 类型，features 是由 Double 类型的数据组成的集合 Vector。具体到我们要做的分类操作，label 是类别，features 是特征集合。由于数据结构的要求，我们把性别（男，女）转为（1，0）。</p>
+<p>将上面表格中的数据存储在 human-body-features.txt 文件中，格式为“性别，身高 体重 脚掌”，即 label 和 features 用逗号分割，feature 和 feature 之间用空格分割。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> nbayes</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.spark.<span class="type">SparkConf</span></div><div class="line"><span class="keyword">import</span> org.apache.spark.<span class="type">SparkContext</span></div><div class="line"><span class="keyword">import</span> org.apache.spark.mllib.linalg.<span class="type">Vectors</span></div><div class="line"><span class="keyword">import</span> org.apache.spark.mllib.regression.<span class="type">LabeledPoint</span></div><div class="line"><span class="keyword">import</span> org.apache.spark.mllib.classification.<span class="type">NaiveBayes</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">bayes1</span> <span class="keyword">extends</span> <span class="title">App</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">val</span> conf = <span class="keyword">new</span> <span class="type">SparkConf</span>()</div><div class="line">    conf.setAppName(<span class="string">"nbayes 1"</span>)</div><div class="line"></div><div class="line">    <span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(conf)</div><div class="line"></div><div class="line">    <span class="keyword">val</span> rawtxt = sc.textFile(<span class="string">"human-body-features.txt"</span>)</div><div class="line"></div><div class="line">    <span class="keyword">val</span> allData = rawtxt.map &#123;</div><div class="line">        line =&gt;</div><div class="line">            <span class="keyword">val</span> colData = line.split(',')</div><div class="line">            <span class="type">LabeledPoint</span>(colData(<span class="number">0</span>).toDouble,</div><div class="line">                    <span class="type">Vectors</span>.dense(colData(<span class="number">1</span>).split(' ').map(_.toDouble)))</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 训练</span></div><div class="line">    <span class="keyword">val</span> nbTrained = <span class="type">NaiveBayes</span>.train(allData)</div><div class="line"></div><div class="line">    <span class="keyword">val</span> txt = <span class="string">"6 130 8"</span>;</div><div class="line">    <span class="keyword">val</span> vec = <span class="type">Vectors</span>.dense(txt.split(' ').map(_.toDouble))</div><div class="line"></div><div class="line">    <span class="comment">// 预测</span></div><div class="line">    <span class="keyword">val</span> nbPredict = nbTrained.predict(vec)</div><div class="line"></div><div class="line">    println(<span class="string">"预测此人性别是："</span> + (<span class="keyword">if</span>(nbPredict == <span class="number">0</span>) <span class="string">"女"</span> <span class="keyword">else</span> <span class="string">"男"</span>))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我用的IDE是 <a href="http://scala-ide.org/download/sdk.html" target="_blank" rel="external">Scala IDE</a>（基于 eclipse），使用 maven 管理依赖，下面是 pom.xml 文件中的依赖部分：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.spark<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spark-core_2.10<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.6.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.spark<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spark-mllib_2.10<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.6.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>这里依赖了 spark-core 和 spark-mllib 两个组件，版本都是1.6.2，与我 <a href="http://mirror.bit.edu.cn/apache/spark/spark-1.6.2/spark-1.6.2-bin-hadoop2.6.tgz" target="_blank" rel="external">安装的 Spark</a> 版本相同。另外还要注意一个细节，这两个组件，以及它们所依赖的很多其他组件，使用的 Scala 版本都是 2.10，目前版本的 Scale IDE（4.4.1）默认的 Scala 版本是 2.11，编译时需要调整 Build Path。</p>
+<p>接下来把工程导出为jar文件（例如 spark-ml.jar），执行下面的命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ spark-submit --class nbayes.bayes1 --master <span class="built_in">local</span> spark-ml.jar</div></pre></td></tr></table></figure>
+<p>参数 class 指定完整类名，参数 master 指定 Spark 的运行模式，由于本例比较简单，数据量较小，且存储在本地（没有存储在 HDFS 上），因此使用 local 模式运行 Spark。</p>
+<p>运行的结果是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">预测此人性别是：女</div></pre></td></tr></table></figure>
+<p>与维基百科以及阮一峰的推演结果相同，对算法细节和推演过程感兴趣的朋友，请参阅文后的参考链接。</p>
+<h1 id="分类器的质量评价"><a href="#分类器的质量评价" class="headerlink" title="分类器的质量评价"></a>分类器的质量评价</h1><p>可以根据一个分类器的准确率来评价它的质量好坏。分类器的准确率是指，分类器正确分类的项目占所有被分类项目的比率。</p>
+<p>通常的做法是，在构造初期，将训练数据一分为二（trainDataSet 和 testDataSet），用 trainDataSet 来构造分类器，用 testDataSet 来检测分类器的准确率。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 把全部数据按照一定比例分成两份</span></div><div class="line"><span class="keyword">val</span> divData = allData.randomSplit(<span class="type">Array</span>(<span class="number">0.7</span>, <span class="number">0.3</span>), seed = <span class="number">13</span>L)</div><div class="line"><span class="comment">// 一份用来构造分类器</span></div><div class="line"><span class="keyword">val</span> trainDataSet = divData(<span class="number">0</span>)</div><div class="line"><span class="comment">// 一份用来检测分类器质量</span></div><div class="line"><span class="keyword">val</span> testDataSet = divData(<span class="number">1</span>)</div><div class="line"></div><div class="line"><span class="keyword">val</span> nbTrained = <span class="type">NaiveBayes</span>.train(trainDataSet)</div><div class="line"><span class="comment">// 根据 features 预测 label</span></div><div class="line"><span class="keyword">val</span> nbPredict = nbTrained.predict(testDataSet.map(_.features))</div><div class="line"></div><div class="line"><span class="comment">// 把预测得到的 label 和实际的 label 做对比</span></div><div class="line"><span class="keyword">val</span> predictionAndLabel = nbPredict.zip(testDataSet.map(_.label))</div><div class="line"><span class="comment">// 预测正确的项目，占所有项目的比率</span></div><div class="line"><span class="keyword">val</span> accuracy = <span class="number">100.0</span> * predictionAndLabel.filter(x =&gt; x._1 == x._2).count() / testDataSet.count()</div><div class="line"></div><div class="line">println(<span class="string">"准确率："</span> + accuracy)</div></pre></td></tr></table></figure>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
+<li><a href="https://www.amazon.com/Mastering-Apache-Spark-Mike-Frampton/dp/1783987146" target="_blank" rel="external">Mike Frampton《Mastering Apache Spark》</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%88%86%E7%B1%BB%E5%99%A8" target="_blank" rel="external">维基百科——朴素贝叶斯分类器</a></li>
+<li><a href="http://www.cnblogs.com/leoo2sk/archive/2010/09/17/naive-bayesian-classifier.html" target="_blank" rel="external">张洋《算法杂货铺——分类算法之朴素贝叶斯分类》</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2013/12/naive_bayes_classifier.html" target="_blank" rel="external">阮一峰《朴素贝叶斯分类器的应用》</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>如果本文对您有用，请随意打赏，感谢鼓励！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/uploads/images/wechat.png" alt="Ming Qin WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/uploads/images/alipay.png" alt="Ming Qin Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/spark/" rel="tag">#spark</a>
+          
+            <a href="/tags/machine-learning/" rel="tag">#machine learning</a>
+          
+            <a href="/tags/naive-bayes/" rel="tag">#naive bayes</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/25/oryx-overview/" rel="next" title="Oryx：基于Spark和Kafka的机器学习系统">
+                <i class="fa fa-chevron-left"></i> Oryx：基于Spark和Kafka的机器学习系统
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars2.githubusercontent.com/u/20449740?v=3&s=460"
+               alt="Ming Qin" />
+          <p class="site-author-name" itemprop="name">Ming Qin</p>
+          <p class="site-description motion-element" itemprop="description">不忘初心，方得始终</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/qinm08" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/qinm08" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://facebook.com/qinm08" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://cn.linkedin.com/in/qinm08" target="_blank" title="LinkedIn">
+                  
+                    <i class="fa fa-fw fa-linkedin"></i>
+                  
+                  LinkedIn
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://plus.google.com/u/0/104573102268356010262?hl=zh-CN" target="_blank" title="Google+">
+                  
+                    <i class="fa fa-fw fa-google-plus"></i>
+                  
+                  Google+
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="stormzhang" target="_blank">stormzhang</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://selfboot.cn/" title="selfboot" target="_blank">selfboot</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com/" title="theme-next" target="_blank">theme-next</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://notes.iissnan.com/" title="iissnan" target="_blank">iissnan</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://shiyanjun.cn/" title="shiyanjun" target="_blank">shiyanjun</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.iteblog.com/" title="iteblog" target="_blank">iteblog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cnblogs.com/jerrylead/" title="jerrylead" target="_blank">jerrylead</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#分类"><span class="nav-number">1.</span> <span class="nav-text">分类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#贝叶斯定理"><span class="nav-number">2.</span> <span class="nav-text">贝叶斯定理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#朴素贝叶斯分类"><span class="nav-number">3.</span> <span class="nav-text">朴素贝叶斯分类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spark分类示例"><span class="nav-number">4.</span> <span class="nav-text">Spark分类示例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分类器的质量评价"><span class="nav-number">5.</span> <span class="nav-text">分类器的质量评价</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考链接"><span class="nav-number">6.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ming Qin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">访客数量<span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

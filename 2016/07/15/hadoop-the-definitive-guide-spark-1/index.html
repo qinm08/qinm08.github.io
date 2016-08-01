@@ -90,7 +90,7 @@
 <meta property="og:url" content="https://qinm08.github.io/2016/07/15/hadoop-the-definitive-guide-spark-1/index.html">
 <meta property="og:site_name" content="Ming's Coding Life">
 <meta property="og:description" content="本文翻译自O’Reilly出版Tom White所著《Hadoop: The Definitive Guide》第4版第19章，向作者致敬。该书英文第4版已于2015年4月出版，至今已近15个月，而市面上中文第3版还在大行其道。Spark一章是第4版新增的内容，笔者在学习过程中顺便翻译记录。由于笔者也在学习，难免翻译不妥或出错，欢迎方家来信斧正。翻译纯属兴趣，不做商业用途。秦铭，Email地址qi">
-<meta property="og:updated_time" content="2016-07-26T13:46:38.822Z">
+<meta property="og:updated_time" content="2016-08-01T12:27:34.102Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="翻译：Hadoop权威指南之Spark-1">
 <meta name="twitter:description" content="本文翻译自O’Reilly出版Tom White所著《Hadoop: The Definitive Guide》第4版第19章，向作者致敬。该书英文第4版已于2015年4月出版，至今已近15个月，而市面上中文第3版还在大行其道。Spark一章是第4版新增的内容，笔者在学习过程中顺便翻译记录。由于笔者也在学习，难免翻译不妥或出错，欢迎方家来信斧正。翻译纯属兴趣，不做商业用途。秦铭，Email地址qi">
@@ -299,7 +299,7 @@
 
           
               &nbsp; | &nbsp;
-              <span class="page-pv"><i class="fa fa-file-o">阅读</i>
+              <span class="page-pv">阅读次数
               <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
               </span>
           
@@ -325,7 +325,7 @@
 <h1 id="安装Spark"><a href="#安装Spark" class="headerlink" title="安装Spark"></a>安装Spark</h1><p>从 <a href="http://spark.apache.org/downloads.html" target="_blank" rel="external">下载页面</a> 下载Spark二进制分发包的稳定版本（选择和你正在使用的Hadoop版本相匹配的）。在合适的地方解压这个tar包。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">% tar xzf spark-x.y.z-bin-distro.tgz</div></pre></td></tr></table></figure>
 <p>把Spark加入到PATH环境变量中</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">% export SPARK_HOME=~/sw/spark-x.y.z-bin-distro</div><div class="line">% export PATH=$PATH:$SPARK_HOME/bin</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">% <span class="built_in">export</span> SPARK_HOME=~/sw/spark-x.y.z-bin-distro</div><div class="line">% <span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$SPARK_HOME</span>/bin</div></pre></td></tr></table></figure>
 <p>我们现在可以运行Spark的例子了。</p>
 <h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>为了介绍Spark，我们使用spark-shell来运行一个交互式会话，这是带有Spark附加组件的Scala REPL，用下面的命令启动shell：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">% spark-shell</div><div class="line">Spark context available as sc.</div><div class="line">scala&gt;</div></pre></td></tr></table></figure>
@@ -484,7 +484,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -652,7 +652,7 @@
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
   
-    <span class="site-uv"><i class="fa fa-user">本站访客</i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+    <span class="site-uv">访客数量<span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
   
 
   

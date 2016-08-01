@@ -4,6 +4,121 @@
   
     
     <entry>
+      <title><![CDATA[Spark机器学习1：朴素贝叶斯分类]]></title>
+      <url>https://qinm08.github.io/2016/08/01/spark-machine-learning-1-naive-bayes/</url>
+      <content type="html"><![CDATA[<h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><p>每个人每天都会进行很多次的分类操作。比如，当你看到一个陌生人，你的大脑中的分类器就会根据TA的体貌特征、衣着举止，判断出TA是男是女，是穷是富等等。这就是分类操作。</p>
+<p>其中，男人、女人、穷人、富人，这些是类别；那个陌生人，是个待分类项；把一个待分类项映射到一个类别的映射规则，就是一个分类器。</p>
+<p>分类算法的任务就是构造出分类器。</p>
+<h1 id="贝叶斯定理"><a href="#贝叶斯定理" class="headerlink" title="贝叶斯定理"></a>贝叶斯定理</h1><p>贝叶斯定理解决的是这样一个问题：已知在事件B发生的条件下，事件A的发生概率P(A|B)，怎样得到事件A发生的条件下，事件B的发生概率 P(B|A)？贝叶斯定理为我们打通了从 P(A|B) 到 P(B|A) 的道路。</p>
+<p>P(B|A) = P(A|B) × P(B) / P(A)</p>
+<a id="more"></a>
+<p>举例说明，假设已经有了100个 email，其中：</p>
+<ol>
+<li>垃圾邮件占比60%，即 P(Spam) = 0.6<ul>
+<li>80%的垃圾邮件包含关键字“buy”，即 P(Buy|Spam) = 0.8</li>
+<li>20%的垃圾邮件不包含关键字“buy”</li>
+</ul>
+</li>
+<li>正常邮件占比40%，即 P(NotSpam) = 0.4<ul>
+<li>10%的正常邮件包含关键字“buy”，即 P(Buy|NotSpam) = 0.1</li>
+<li>90%的正常邮件不包含关键字“buy”</li>
+</ul>
+</li>
+</ol>
+<p>现在，第101个 email 进来了，它包含关键字“buy”，那么它是垃圾邮件的概率 P(Spam|Buy) 是多少？</p>
+<p>P(Spam|Buy) = P(Buy|Spam) × P(Spam) / P(Buy)</p>
+<p>P(Buy) = P(Buy|Spam) × P(Spam) + P(Buy|NotSpam) × P(NotSpam)</p>
+<p>P(Spam|Buy) = (0.8 × 0.6) / (0.8 × 0.6 + 0.1 × 0.4) = 0.48 / 0.52 = 0.923</p>
+<p>由此得出，这个 email 有92.3%的可能是一个垃圾邮件。</p>
+<h1 id="朴素贝叶斯分类"><a href="#朴素贝叶斯分类" class="headerlink" title="朴素贝叶斯分类"></a>朴素贝叶斯分类</h1><p>朴素贝叶斯分类之所以朴素，是因为它背后的分类思想真的很朴素：对于某个待分类项，它属于哪个类别的概率较高，就把它分到哪个类别。</p>
+<p>上面的例子中，包含关键字“buy”的 email 也可能是正常邮件，但是概率只有7.7%，因此就把它分到垃圾邮件类别了。</p>
+<h1 id="Spark分类示例"><a href="#Spark分类示例" class="headerlink" title="Spark分类示例"></a>Spark分类示例</h1><p>首先明确任务，下面是一组人类身体特征的统计资料，数据来自维基百科。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">性别（0女1男）</th>
+<th style="text-align:right">身高（英尺）</th>
+<th style="text-align:right">体重（磅）</th>
+<th style="text-align:right">脚掌（英寸）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">180</td>
+<td style="text-align:right">12</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">5.92</td>
+<td style="text-align:right">190</td>
+<td style="text-align:right">11</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">5.58</td>
+<td style="text-align:right">170</td>
+<td style="text-align:right">12</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">5.92</td>
+<td style="text-align:right">165</td>
+<td style="text-align:right">10</td>
+</tr>
+<tr>
+<td style="text-align:right">0</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">100</td>
+<td style="text-align:right">6</td>
+</tr>
+<tr>
+<td style="text-align:right">0</td>
+<td style="text-align:right">5.5</td>
+<td style="text-align:right">150</td>
+<td style="text-align:right">8</td>
+</tr>
+<tr>
+<td style="text-align:right">0</td>
+<td style="text-align:right">5.42</td>
+<td style="text-align:right">130</td>
+<td style="text-align:right">7</td>
+</tr>
+<tr>
+<td style="text-align:right">0</td>
+<td style="text-align:right">5.75</td>
+<td style="text-align:right">150</td>
+<td style="text-align:right">9</td>
+</tr>
+</tbody>
+</table>
+<p>已知某人身高6英尺，体重130磅，脚掌8英寸，请问此人是男是女？</p>
+<p>Spark的 MLlib 中有一种特殊的数据结构，LabeledPoint，它由 label 和 features 两部分组成，其中 label 是 Double 类型，features 是由 Double 类型的数据组成的集合 Vector。具体到我们要做的分类操作，label 是类别，features 是特征集合。由于数据结构的要求，我们把性别（男，女）转为（1，0）。</p>
+<p>将上面表格中的数据存储在 human-body-features.txt 文件中，格式为“性别，身高 体重 脚掌”，即 label 和 features 用逗号分割，feature 和 feature 之间用空格分割。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> nbayes</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.spark.<span class="type">SparkConf</span></div><div class="line"><span class="keyword">import</span> org.apache.spark.<span class="type">SparkContext</span></div><div class="line"><span class="keyword">import</span> org.apache.spark.mllib.linalg.<span class="type">Vectors</span></div><div class="line"><span class="keyword">import</span> org.apache.spark.mllib.regression.<span class="type">LabeledPoint</span></div><div class="line"><span class="keyword">import</span> org.apache.spark.mllib.classification.<span class="type">NaiveBayes</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">bayes1</span> <span class="keyword">extends</span> <span class="title">App</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">val</span> conf = <span class="keyword">new</span> <span class="type">SparkConf</span>()</div><div class="line">    conf.setAppName(<span class="string">"nbayes 1"</span>)</div><div class="line"></div><div class="line">    <span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(conf)</div><div class="line"></div><div class="line">    <span class="keyword">val</span> rawtxt = sc.textFile(<span class="string">"human-body-features.txt"</span>)</div><div class="line"></div><div class="line">    <span class="keyword">val</span> allData = rawtxt.map &#123;</div><div class="line">        line =&gt;</div><div class="line">            <span class="keyword">val</span> colData = line.split(',')</div><div class="line">            <span class="type">LabeledPoint</span>(colData(<span class="number">0</span>).toDouble,</div><div class="line">                    <span class="type">Vectors</span>.dense(colData(<span class="number">1</span>).split(' ').map(_.toDouble)))</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 训练</span></div><div class="line">    <span class="keyword">val</span> nbTrained = <span class="type">NaiveBayes</span>.train(allData)</div><div class="line"></div><div class="line">    <span class="keyword">val</span> txt = <span class="string">"6 130 8"</span>;</div><div class="line">    <span class="keyword">val</span> vec = <span class="type">Vectors</span>.dense(txt.split(' ').map(_.toDouble))</div><div class="line"></div><div class="line">    <span class="comment">// 预测</span></div><div class="line">    <span class="keyword">val</span> nbPredict = nbTrained.predict(vec)</div><div class="line"></div><div class="line">    println(<span class="string">"预测此人性别是："</span> + (<span class="keyword">if</span>(nbPredict == <span class="number">0</span>) <span class="string">"女"</span> <span class="keyword">else</span> <span class="string">"男"</span>))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我用的IDE是 <a href="http://scala-ide.org/download/sdk.html" target="_blank" rel="external">Scala IDE</a>（基于 eclipse），使用 maven 管理依赖，下面是 pom.xml 文件中的依赖部分：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.spark<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spark-core_2.10<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.6.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.spark<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spark-mllib_2.10<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.6.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>这里依赖了 spark-core 和 spark-mllib 两个组件，版本都是1.6.2，与我 <a href="http://mirror.bit.edu.cn/apache/spark/spark-1.6.2/spark-1.6.2-bin-hadoop2.6.tgz" target="_blank" rel="external">安装的 Spark</a> 版本相同。另外还要注意一个细节，这两个组件，以及它们所依赖的很多其他组件，使用的 Scala 版本都是 2.10，目前版本的 Scale IDE（4.4.1）默认的 Scala 版本是 2.11，编译时需要调整 Build Path。</p>
+<p>接下来把工程导出为jar文件（例如 spark-ml.jar），执行下面的命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ spark-submit --class nbayes.bayes1 --master <span class="built_in">local</span> spark-ml.jar</div></pre></td></tr></table></figure>
+<p>参数 class 指定完整类名，参数 master 指定 Spark 的运行模式，由于本例比较简单，数据量较小，且存储在本地（没有存储在 HDFS 上），因此使用 local 模式运行 Spark。</p>
+<p>运行的结果是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">预测此人性别是：女</div></pre></td></tr></table></figure>
+<p>与维基百科以及阮一峰的推演结果相同，对算法细节和推演过程感兴趣的朋友，请参阅文后的参考链接。</p>
+<h1 id="分类器的质量评价"><a href="#分类器的质量评价" class="headerlink" title="分类器的质量评价"></a>分类器的质量评价</h1><p>可以根据一个分类器的准确率来评价它的质量好坏。分类器的准确率是指，分类器正确分类的项目占所有被分类项目的比率。</p>
+<p>通常的做法是，在构造初期，将训练数据一分为二（trainDataSet 和 testDataSet），用 trainDataSet 来构造分类器，用 testDataSet 来检测分类器的准确率。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 把全部数据按照一定比例分成两份</span></div><div class="line"><span class="keyword">val</span> divData = allData.randomSplit(<span class="type">Array</span>(<span class="number">0.7</span>, <span class="number">0.3</span>), seed = <span class="number">13</span>L)</div><div class="line"><span class="comment">// 一份用来构造分类器</span></div><div class="line"><span class="keyword">val</span> trainDataSet = divData(<span class="number">0</span>)</div><div class="line"><span class="comment">// 一份用来检测分类器质量</span></div><div class="line"><span class="keyword">val</span> testDataSet = divData(<span class="number">1</span>)</div><div class="line"></div><div class="line"><span class="keyword">val</span> nbTrained = <span class="type">NaiveBayes</span>.train(trainDataSet)</div><div class="line"><span class="comment">// 根据 features 预测 label</span></div><div class="line"><span class="keyword">val</span> nbPredict = nbTrained.predict(testDataSet.map(_.features))</div><div class="line"></div><div class="line"><span class="comment">// 把预测得到的 label 和实际的 label 做对比</span></div><div class="line"><span class="keyword">val</span> predictionAndLabel = nbPredict.zip(testDataSet.map(_.label))</div><div class="line"><span class="comment">// 预测正确的项目，占所有项目的比率</span></div><div class="line"><span class="keyword">val</span> accuracy = <span class="number">100.0</span> * predictionAndLabel.filter(x =&gt; x._1 == x._2).count() / testDataSet.count()</div><div class="line"></div><div class="line">println(<span class="string">"准确率："</span> + accuracy)</div></pre></td></tr></table></figure>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
+<li><a href="https://www.amazon.com/Mastering-Apache-Spark-Mike-Frampton/dp/1783987146" target="_blank" rel="external">Mike Frampton《Mastering Apache Spark》</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%88%86%E7%B1%BB%E5%99%A8" target="_blank" rel="external">维基百科——朴素贝叶斯分类器</a></li>
+<li><a href="http://www.cnblogs.com/leoo2sk/archive/2010/09/17/naive-bayesian-classifier.html" target="_blank" rel="external">张洋《算法杂货铺——分类算法之朴素贝叶斯分类》</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2013/12/naive_bayes_classifier.html" target="_blank" rel="external">阮一峰《朴素贝叶斯分类器的应用》</a></li>
+</ul>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Oryx：基于Spark和Kafka的机器学习系统]]></title>
       <url>https://qinm08.github.io/2016/07/25/oryx-overview/</url>
       <content type="html"><![CDATA[<h1 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h1><p>Oryx 2 是一个 Lambda 架构的实现，基于 <a href="http://spark.apache.org" target="_blank" rel="external">Apache Spark</a> 和 <a href="http://kafka.apache.org" target="_blank" rel="external">Apache Kafka</a> 构建，专门用于实时的、大规模的机器学习。它是用于构建应用的一套框架，还包括一些打包好的、端到端的应用，用于协同过滤、分类、回归和聚类。</p>
@@ -257,7 +372,7 @@
 <h1 id="安装Spark"><a href="#安装Spark" class="headerlink" title="安装Spark"></a>安装Spark</h1><p>从 <a href="http://spark.apache.org/downloads.html" target="_blank" rel="external">下载页面</a> 下载Spark二进制分发包的稳定版本（选择和你正在使用的Hadoop版本相匹配的）。在合适的地方解压这个tar包。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">% tar xzf spark-x.y.z-bin-distro.tgz</div></pre></td></tr></table></figure>
 <p>把Spark加入到PATH环境变量中</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">% export SPARK_HOME=~/sw/spark-x.y.z-bin-distro</div><div class="line">% export PATH=$PATH:$SPARK_HOME/bin</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">% <span class="built_in">export</span> SPARK_HOME=~/sw/spark-x.y.z-bin-distro</div><div class="line">% <span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$SPARK_HOME</span>/bin</div></pre></td></tr></table></figure>
 <p>我们现在可以运行Spark的例子了。</p>
 <h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>为了介绍Spark，我们使用spark-shell来运行一个交互式会话，这是带有Spark附加组件的Scala REPL，用下面的命令启动shell：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">% spark-shell</div><div class="line">Spark context available as sc.</div><div class="line">scala&gt;</div></pre></td></tr></table></figure>
