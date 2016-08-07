@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="spark,machine learning,k-means," />
 
 
 
@@ -84,15 +84,16 @@
 
 
 
-<meta name="description" content="不忘初心，方得始终">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Ming's Coding Life">
-<meta property="og:url" content="https://qinm08.github.io/tags/oryx/index.html">
+<meta name="description" content="[40.0,37.33333333333333,10.333333333333332][50.0,47.5,7.5][24.5,26.0,3.5]K-Means Cost: 1217.33333333333331: [50.0,50.0,9.0]2: [28.0,9.0,4.0]2: [17.0,15.0,3.0]2: [25.0,40.0,5.0]2: [28.0,40.0,2.0]1: [50">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark机器学习2：k-means聚类算法">
+<meta property="og:url" content="https://qinm08.github.io/2016/08/02/spark-machine-learning-2-kmeans/index.html">
 <meta property="og:site_name" content="Ming's Coding Life">
-<meta property="og:description" content="不忘初心，方得始终">
+<meta property="og:description" content="[40.0,37.33333333333333,10.333333333333332][50.0,47.5,7.5][24.5,26.0,3.5]K-Means Cost: 1217.33333333333331: [50.0,50.0,9.0]2: [28.0,9.0,4.0]2: [17.0,15.0,3.0]2: [25.0,40.0,5.0]2: [28.0,40.0,2.0]1: [50">
+<meta property="og:updated_time" content="2016-08-03T13:22:08.139Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ming's Coding Life">
-<meta name="twitter:description" content="不忘初心，方得始终">
+<meta name="twitter:title" content="Spark机器学习2：k-means聚类算法">
+<meta name="twitter:description" content="[40.0,37.33333333333333,10.333333333333332][50.0,47.5,7.5][24.5,26.0,3.5]K-Means Cost: 1217.33333333333331: [50.0,50.0,9.0]2: [28.0,9.0,4.0]2: [17.0,15.0,3.0]2: [25.0,40.0,5.0]2: [28.0,40.0,2.0]1: [50">
 
 
 
@@ -113,9 +114,9 @@
 
 
 
-  <link rel="canonical" href="https://qinm08.github.io/tags/oryx/"/>
+  <link rel="canonical" href="https://qinm08.github.io/2016/08/02/spark-machine-learning-2-kmeans/"/>
 
-  <title> 标签: oryx | Ming's Coding Life </title>
+  <title> Spark机器学习2：k-means聚类算法 | Ming's Coding Life </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -136,7 +137,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -247,46 +248,139 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        oryx
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Spark机器学习2：k-means聚类算法
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-02T00:00:00+08:00" content="2016-08-02">
+              2016-08-02
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv">阅读次数
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <p>[40.0,37.33333333333333,10.333333333333332]<br>[50.0,47.5,7.5]<br>[24.5,26.0,3.5]<br>K-Means Cost: 1217.3333333333333<br>1: [50.0,50.0,9.0]<br>2: [28.0,9.0,4.0]<br>2: [17.0,15.0,3.0]<br>2: [25.0,40.0,5.0]<br>2: [28.0,40.0,2.0]<br>1: [50.0,50.0,1.0]<br>1: [50.0,40.0,9.0]<br>1: [50.0,40.0,9.0]<br>0: [40.0,40.0,5.0]<br>1: [50.0,50.0,9.0]<br>1: [50.0,50.0,5.0]<br>1: [50.0,50.0,9.0]<br>0: [40.0,40.0,9.0]<br>0: [40.0,32.0,17.0]<br>1: [50.0,50.0,9.0]<br>(0,3)<br>(1,8)<br>(2,4)</p>
+<p>[22.5,12.0,3.5]<br>[50.0,47.5,7.5]<br>[34.6,38.400000000000006,7.6000000000000005]<br>K-Means Cost: 700.5999999999995<br>1: [50.0,50.0,9.0]<br>0: [28.0,9.0,4.0]<br>0: [17.0,15.0,3.0]<br>2: [25.0,40.0,5.0]<br>2: [28.0,40.0,2.0]<br>1: [50.0,50.0,1.0]<br>1: [50.0,40.0,9.0]<br>1: [50.0,40.0,9.0]<br>2: [40.0,40.0,5.0]<br>1: [50.0,50.0,9.0]<br>1: [50.0,50.0,5.0]<br>1: [50.0,50.0,9.0]<br>2: [40.0,40.0,9.0]<br>2: [40.0,32.0,17.0]<br>1: [50.0,50.0,9.0]<br>(0,2)<br>(1,8)<br>(2,5)</p>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
+<li><a href="https://en.wikipedia.org/wiki/K-means_clustering" target="_blank" rel="external">https://en.wikipedia.org/wiki/K-means_clustering</a></li>
+<li><a href="http://www.cnblogs.com/jerrylead/archive/2011/04/06/2006910.html" target="_blank" rel="external">http://www.cnblogs.com/jerrylead/archive/2011/04/06/2006910.html</a></li>
+<li><a href="http://www.cnblogs.com/leoo2sk/archive/2010/09/20/k-means.html" target="_blank" rel="external">http://www.cnblogs.com/leoo2sk/archive/2010/09/20/k-means.html</a></li>
+<li><a href="http://blog.selfup.cn/728.html" target="_blank" rel="external">http://blog.selfup.cn/728.html</a></li>
+<li><a href="http://blog.csdn.net/cyh_24/article/details/50444111" target="_blank" rel="external">http://blog.csdn.net/cyh_24/article/details/50444111</a></li>
+</ul>
 
-      <h1 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2016/07/25/oryx-overview/" itemprop="url">
-              
-                <span itemprop="name">Oryx：基于Spark和Kafka的机器学习系统</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-25T00:00:00+08:00"
-              content="2016-07-25" >
-          07-25
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/spark/" rel="tag">#spark</a>
+          
+            <a href="/tags/machine-learning/" rel="tag">#machine learning</a>
+          
+            <a href="/tags/k-means/" rel="tag">#k-means</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/01/spark-machine-learning-1-naive-bayes/" rel="next" title="Spark机器学习1：朴素贝叶斯分类">
+                <i class="fa fa-chevron-left"></i> Spark机器学习1：朴素贝叶斯分类
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -294,6 +388,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -313,8 +411,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https://avatars2.githubusercontent.com/u/20449740?v=3&s=460"
@@ -451,6 +558,17 @@
       </section>
 
       
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#参考链接"><span class="nav-number">1.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
 
     </div>
   </aside>
@@ -567,6 +685,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 

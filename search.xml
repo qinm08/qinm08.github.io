@@ -4,6 +4,21 @@
   
     
     <entry>
+      <title><![CDATA[Spark机器学习2：k-means聚类算法]]></title>
+      <url>https://qinm08.github.io/2016/08/02/spark-machine-learning-2-kmeans/</url>
+      <content type="html"><![CDATA[<p>[40.0,37.33333333333333,10.333333333333332]<br>[50.0,47.5,7.5]<br>[24.5,26.0,3.5]<br>K-Means Cost: 1217.3333333333333<br>1: [50.0,50.0,9.0]<br>2: [28.0,9.0,4.0]<br>2: [17.0,15.0,3.0]<br>2: [25.0,40.0,5.0]<br>2: [28.0,40.0,2.0]<br>1: [50.0,50.0,1.0]<br>1: [50.0,40.0,9.0]<br>1: [50.0,40.0,9.0]<br>0: [40.0,40.0,5.0]<br>1: [50.0,50.0,9.0]<br>1: [50.0,50.0,5.0]<br>1: [50.0,50.0,9.0]<br>0: [40.0,40.0,9.0]<br>0: [40.0,32.0,17.0]<br>1: [50.0,50.0,9.0]<br>(0,3)<br>(1,8)<br>(2,4)</p>
+<p>[22.5,12.0,3.5]<br>[50.0,47.5,7.5]<br>[34.6,38.400000000000006,7.6000000000000005]<br>K-Means Cost: 700.5999999999995<br>1: [50.0,50.0,9.0]<br>0: [28.0,9.0,4.0]<br>0: [17.0,15.0,3.0]<br>2: [25.0,40.0,5.0]<br>2: [28.0,40.0,2.0]<br>1: [50.0,50.0,1.0]<br>1: [50.0,40.0,9.0]<br>1: [50.0,40.0,9.0]<br>2: [40.0,40.0,5.0]<br>1: [50.0,50.0,9.0]<br>1: [50.0,50.0,5.0]<br>1: [50.0,50.0,9.0]<br>2: [40.0,40.0,9.0]<br>2: [40.0,32.0,17.0]<br>1: [50.0,50.0,9.0]<br>(0,2)<br>(1,8)<br>(2,5)</p>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
+<li><a href="https://en.wikipedia.org/wiki/K-means_clustering" target="_blank" rel="external">https://en.wikipedia.org/wiki/K-means_clustering</a></li>
+<li><a href="http://www.cnblogs.com/jerrylead/archive/2011/04/06/2006910.html" target="_blank" rel="external">http://www.cnblogs.com/jerrylead/archive/2011/04/06/2006910.html</a></li>
+<li><a href="http://www.cnblogs.com/leoo2sk/archive/2010/09/20/k-means.html" target="_blank" rel="external">http://www.cnblogs.com/leoo2sk/archive/2010/09/20/k-means.html</a></li>
+<li><a href="http://blog.selfup.cn/728.html" target="_blank" rel="external">http://blog.selfup.cn/728.html</a></li>
+<li><a href="http://blog.csdn.net/cyh_24/article/details/50444111" target="_blank" rel="external">http://blog.csdn.net/cyh_24/article/details/50444111</a></li>
+</ul>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Spark机器学习1：朴素贝叶斯分类]]></title>
       <url>https://qinm08.github.io/2016/08/01/spark-machine-learning-1-naive-bayes/</url>
       <content type="html"><![CDATA[<h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><p>每个人每天都会进行很多次的分类操作。比如，当你看到一个陌生人，你的大脑中的分类器就会根据TA的体貌特征、衣着举止，判断出TA是男是女，是穷是富等等。这就是分类操作。</p>
