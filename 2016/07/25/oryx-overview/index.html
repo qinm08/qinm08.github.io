@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="spark,hadoop," />
+  <meta name="keywords" content="spark,kafka,oryx," />
 
 
 
@@ -84,16 +84,27 @@
 
 
 
-<meta name="description" content="本文翻译自O’Reilly出版Tom White所著《Hadoop: The Definitive Guide》第4版第19章，向作者致敬。该书英文第4版已于2015年4月出版，至今已近15个月，而市面上中文第3版还在大行其道。Spark一章是第4版新增的内容，笔者在学习过程中顺便翻译记录。由于笔者也在学习，难免翻译不妥或出错，欢迎方家来信斧正。翻译纯属兴趣，不做商业用途。秦铭，Email地址qi">
+<meta name="description" content="概览Oryx 2 是一个 Lambda 架构的实现，基于 Apache Spark 和 Apache Kafka 构建，专门用于实时的、大规模的机器学习。它是用于构建应用的一套框架，还包括一些打包好的、端到端的应用，用于协同过滤、分类、回归和聚类。
+Oryx 2 是对最初的 Oryx 1 项目的重构和延续。它包含了以下三个级别（tiers）：
+
+通用的Lambda架构级别，提供了批处理层、速度层和">
 <meta property="og:type" content="article">
-<meta property="og:title" content="翻译：Hadoop权威指南之Spark-1">
-<meta property="og:url" content="https://qinm08.github.io/2016/07/hadoop-the-definitive-guide-spark-1/index.html">
+<meta property="og:title" content="Oryx：基于Spark和Kafka的机器学习系统">
+<meta property="og:url" content="https://qinm08.github.io/2016/07/25/oryx-overview/index.html">
 <meta property="og:site_name" content="Ming's Coding Life">
-<meta property="og:description" content="本文翻译自O’Reilly出版Tom White所著《Hadoop: The Definitive Guide》第4版第19章，向作者致敬。该书英文第4版已于2015年4月出版，至今已近15个月，而市面上中文第3版还在大行其道。Spark一章是第4版新增的内容，笔者在学习过程中顺便翻译记录。由于笔者也在学习，难免翻译不妥或出错，欢迎方家来信斧正。翻译纯属兴趣，不做商业用途。秦铭，Email地址qi">
-<meta property="og:updated_time" content="2016-08-01T12:27:34.102Z">
+<meta property="og:description" content="概览Oryx 2 是一个 Lambda 架构的实现，基于 Apache Spark 和 Apache Kafka 构建，专门用于实时的、大规模的机器学习。它是用于构建应用的一套框架，还包括一些打包好的、端到端的应用，用于协同过滤、分类、回归和聚类。
+Oryx 2 是对最初的 Oryx 1 项目的重构和延续。它包含了以下三个级别（tiers）：
+
+通用的Lambda架构级别，提供了批处理层、速度层和">
+<meta property="og:image" content="https://qinm08.github.io/uploads/images/2016/0725/1245.png">
+<meta property="og:updated_time" content="2016-07-31T04:47:18.993Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="翻译：Hadoop权威指南之Spark-1">
-<meta name="twitter:description" content="本文翻译自O’Reilly出版Tom White所著《Hadoop: The Definitive Guide》第4版第19章，向作者致敬。该书英文第4版已于2015年4月出版，至今已近15个月，而市面上中文第3版还在大行其道。Spark一章是第4版新增的内容，笔者在学习过程中顺便翻译记录。由于笔者也在学习，难免翻译不妥或出错，欢迎方家来信斧正。翻译纯属兴趣，不做商业用途。秦铭，Email地址qi">
+<meta name="twitter:title" content="Oryx：基于Spark和Kafka的机器学习系统">
+<meta name="twitter:description" content="概览Oryx 2 是一个 Lambda 架构的实现，基于 Apache Spark 和 Apache Kafka 构建，专门用于实时的、大规模的机器学习。它是用于构建应用的一套框架，还包括一些打包好的、端到端的应用，用于协同过滤、分类、回归和聚类。
+Oryx 2 是对最初的 Oryx 1 项目的重构和延续。它包含了以下三个级别（tiers）：
+
+通用的Lambda架构级别，提供了批处理层、速度层和">
+<meta name="twitter:image" content="https://qinm08.github.io/uploads/images/2016/0725/1245.png">
 
 
 
@@ -114,9 +125,9 @@
 
 
 
-  <link rel="canonical" href="https://qinm08.github.io/2016/07/hadoop-the-definitive-guide-spark-1/"/>
+  <link rel="canonical" href="https://qinm08.github.io/2016/07/25/oryx-overview/"/>
 
-  <title> 翻译：Hadoop权威指南之Spark-1 | Ming's Coding Life </title>
+  <title> Oryx：基于Spark和Kafka的机器学习系统 | Ming's Coding Life </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -269,7 +280,7 @@
             
             
               
-                翻译：Hadoop权威指南之Spark-1
+                Oryx：基于Spark和Kafka的机器学习系统
               
             
           </h1>
@@ -281,8 +292,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-15T00:00:00+08:00" content="2016-07-15">
-              2016-07-15
+            <time itemprop="dateCreated" datetime="2016-07-25T00:00:00+08:00" content="2016-07-25">
+              2016-07-25
             </time>
           </span>
 
@@ -314,48 +325,37 @@
       
 
       
-        <p>本文翻译自O’Reilly出版Tom White所著《Hadoop: The Definitive Guide》第4版第19章，向作者致敬。该书英文第4版已于2015年4月出版，至今已近15个月，而市面上中文第3版还在大行其道。Spark一章是第4版新增的内容，笔者在学习过程中顺便翻译记录。由于笔者也在学习，难免翻译不妥或出错，欢迎方家来信斧正。翻译纯属兴趣，不做商业用途。秦铭，Email地址<a href="mailto:qinm08@gmail.com" target="_blank" rel="external">qinm08@gmail.com</a>。</p>
-<hr>
-<p><a href="http://spark.apache.org" target="_blank" rel="external">Apache Spark</a> 是一个大规模数据处理的集群计算框架。和本书中讨论的大多数其他处理框架不同，Spark不使用MapReduce作为执行引擎，作为替代，Spark使用自己的分布式运行环境（distributed runtime）来执行集群上的工作。然而，Spark与MapReduce在API和runtime方面有许多相似，本章中我们将会看到。Spark和Hadoop紧密集成：它可以运行在YARN上，处理Hadoop的文件格式，后端存储采用HDFS。</p>
-<p>Spark最著名的是它拥有把大量的工作数据集保持在内存中的能力。这种能力使得Spark胜过对应的MapReduce工作流（某些情况下差别显著），在MapReduce中数据集总是要从磁盘加载。两种类型的应用从Spark这种处理模型中受益巨大：1）迭代算法，一个函数在某数据集上反复执行直到满足退出条件。2）交互式分析，用户在某数据集上执行一系列的特定查询。</p>
-<p>即使你不需要内存缓存，Spark依然有充满魅力的理由：它的DAG引擎和用户体验。与MapReduce不同，Spark的DAG引擎能够处理任意的多个操作组成的管道（pipelines of operators）并翻译为单个Job。</p>
-<p>Spark的用户体验也是首屈一指的（second to none），它有丰富的API用来执行很多常见的数据处理任务，比如join。行文之时，Spark提供三种语言的API：Scala，Java和Python。本章中的大多数例子将采用Scala API，但翻译为别的语言也是容易的。Spark还带有一个基于Scala或Python的REPL（read-eval-print loop）环境，可以快速简便的查看数据集。</p>
-<p>Spark是个构建分析工具的好平台，为达此目的，Apache Spark项目包含了众多的模块：机器学习（MLlib），图形处理（GraphX），流式处理（Spark Streaming），还有SQL（Spark SQL）。本章内容不涉及这些模块，感兴趣的读者可以访问 <a href="http://spark.apache.org" target="_blank" rel="external">Apache Spark 网站</a> 。</p>
+        <h1 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h1><p>Oryx 2 是一个 Lambda 架构的实现，基于 <a href="http://spark.apache.org" target="_blank" rel="external">Apache Spark</a> 和 <a href="http://kafka.apache.org" target="_blank" rel="external">Apache Kafka</a> 构建，专门用于实时的、大规模的机器学习。它是用于构建应用的一套框架，还包括一些打包好的、端到端的应用，用于协同过滤、分类、回归和聚类。</p>
+<p>Oryx 2 是对最初的 <a href="https://github.com/cloudera/oryx" target="_blank" rel="external">Oryx 1</a> 项目的重构和延续。它包含了以下三个级别（<em>tiers</em>）：</p>
+<ol>
+<li>通用的Lambda架构级别，提供了批处理层、速度层和服务层，这些并不是机器学习所特有的。</li>
+<li>专门的机器学习抽象级别，用于超参数选择等等。</li>
+<li>端到端的应用级别，是对标准的机器学习算法的实现。</li>
+</ol>
+<p>从另一个方面来看，它包含了Lambda架构的三个并行的协同操作层（<em>layers</em>），以及一个连接元素：</p>
+<ol>
+<li>批处理层，基于所有的历史数据以及之前的计算结果，计算出新的结果。这里的操作运行时间较长，可能需要数小时。</li>
+<li>速度层，基于新的数据流，产生和发布增量的模型更新。这些更新是秒级发生的。</li>
+<li>服务层，接收模型和更新，实现一个同步API，对结果进行查询操作。</li>
+<li>数据传输层，在层与层之间移动数据，从外部数据源接收输入。</li>
+</ol>
 <a id="more"></a>
-<h1 id="安装Spark"><a href="#安装Spark" class="headerlink" title="安装Spark"></a>安装Spark</h1><p>从 <a href="http://spark.apache.org/downloads.html" target="_blank" rel="external">下载页面</a> 下载Spark二进制分发包的稳定版本（选择和你正在使用的Hadoop版本相匹配的）。在合适的地方解压这个tar包。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">% tar xzf spark-x.y.z-bin-distro.tgz</div></pre></td></tr></table></figure>
-<p>把Spark加入到PATH环境变量中</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">% <span class="built_in">export</span> SPARK_HOME=~/sw/spark-x.y.z-bin-distro</div><div class="line">% <span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$SPARK_HOME</span>/bin</div></pre></td></tr></table></figure>
-<p>我们现在可以运行Spark的例子了。</p>
-<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>为了介绍Spark，我们使用spark-shell来运行一个交互式会话，这是带有Spark附加组件的Scala REPL，用下面的命令启动shell：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">% spark-shell</div><div class="line">Spark context available as sc.</div><div class="line">scala&gt;</div></pre></td></tr></table></figure>
-<p>从控制台的输出，我们可以看到shell创建了一个Scala变量，sc，用来存储SparkContext实例。这是Spark的入口，我们可以这样加载一个文本文件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">scala&gt; val lines = sc.textFile(&quot;input/ncdc/micro-tab/sample.txt&quot;)</div><div class="line">lines: org.apache.spark.rdd.RDD[String] = MappedRDD[1] at textFile at &lt;console&gt;:12</div></pre></td></tr></table></figure>
-<p>lines变量是对一个弹性数据集（RDD）的引用，RDD是Spark的核心抽象：分区在集群中多台机器上的只读的对象集合。在典型的Spark程序中，一个或多个RDD被加载进来作为输入，经过一系列的转换操作（transformation），成为一组目标RDD，可以对其执行行动（action）（比如计算结果或者写入持久化存储） 。“弹性数据集”中的“弹性”是指，Spark会通过从源RDD中重新计算的方式，来自动重建一个丢失的分区。</p>
-<blockquote>
-<p><em>加载RDD和执行转换操作不会触发数据处理，仅仅是创建一个执行计算的计划。当行动（比如 foreach()）执行的时候，才会触发计算。</em></p>
-</blockquote>
-<p>我们要做的第一个转换操作，是把lines拆分为fields：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">scala&gt; val records = lines.map(_.split(&quot;\t&quot;))</div><div class="line">records: org.apache.spark.rdd.RDD[Array[String]] = MappedRDD[2] at map at &lt;console&gt;:14</div></pre></td></tr></table></figure>
-<p>这里使用了RDD的map()方法，对RDD中的每一个元素，执行一个函数。本例中，我们把每一行（字符串String）拆分为 Scala 的字符串数组（Array of Strings）。</p>
-<p>接下来，我们使用过滤器（filter）来去掉可能存在的坏记录：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">scala&gt; val filtered = records.filter(rec =&gt; (rec(1) != &quot;9999&quot; &amp;&amp; rec(2).matches(&quot;[01459]&quot;)))</div><div class="line">filtered: org.apache.spark.rdd.RDD[Array[String]] = FilteredRDD[3] at filter at &lt;console&gt;:16</div></pre></td></tr></table></figure>
-<p>RDD的filter方法接收一个返回布尔值的函数作为参数。这个函数过滤掉那些温度缺失的（由9999表示）或者质量不好的记录。</p>
-<p>为了找到每一年的最高气温，我们需要在year字段上执行分组操作，这样才能处理每一年的所有温度值。Spark提供reduceByKey()方法来做这件事情，但它需要一个键值对RDD，因此我们需要通过另一个map来把现有的RDD转变为正确的形式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">scala&gt; val tuples = filtered.map(rec =&gt; (rec(0).toInt, rec(1).toInt))</div><div class="line">tuples: org.apache.spark.rdd.RDD[(Int, Int)] = MappedRDD[4] at map at &lt;console&gt;:18</div></pre></td></tr></table></figure>
-<p>现在可以执行聚合了。reduceByKey()方法的参数是一个函数，这个函数接受两个数值并联合为一个单独的数值。这里我们使用Java的Math.max函数：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">scala&gt; val maxTemps = tuples.reduceByKey((a, b) =&gt; Math.max(a, b))</div><div class="line">maxTemps: org.apache.spark.rdd.RDD[(Int, Int)] = MapPartitionsRDD[7] at reduceByKey at &lt;console&gt;:21</div></pre></td></tr></table></figure>
-<p>现在可以展示maxTemps的内容了，调用foreach()方法并传入println()，把每个元素打印到控制台：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">scala&gt; maxTemps.foreach(println(_))</div><div class="line">(1950,22)</div><div class="line">(1949,111)</div></pre></td></tr></table></figure>
-<p>这个foreach()方法，与标准Scala集合（比如List）中的等价物相同，对RDD中的每个元素应用一个函数（此函数具有副作用）。正是这个操作，促使Spark运行一个工作来计算RDD中的数据，使之能够跑步通过println()方法:-)</p>
-<p>或者，也可以把RDD保存到文件系统：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scala&gt; maxTemps.saveAsTextFile(&quot;output&quot;)</div></pre></td></tr></table></figure>
-<p>这样会创建一个output目录，包含分区文件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">% cat output/part-*</div><div class="line">(1950,22)</div><div class="line">(1949,111)</div></pre></td></tr></table></figure>
-<p>这个saveAsTextFile()方法也会触发一个Spark工作。主要的区别是没有返回值，而是把RDD的计算结果及其分区文件写入output目录中。</p>
-<h2 id="Spark应用、工作、阶段、任务"><a href="#Spark应用、工作、阶段、任务" class="headerlink" title="Spark应用、工作、阶段、任务"></a>Spark应用、工作、阶段、任务</h2><p>示例中我们看到，和MapReduce一样，Spark也有工作的概念。然而，Spark工作比MapReduce工作更通用，因为它是由任意的阶段组成的有向无环图（DAG）。每个阶段大致等同于MapReduce中的map或者reduce阶段。</p>
-<p>阶段被Spark运行时拆分为任务，并行地运行在RDD的分区之上，就像MapReduce的任务一样。</p>
-<p>一个工作总是运行于一个应用的上下文中，由SparkContext实例表示，应用的作用是分组RDD和共享变量。一个应用可以运行多个工作，串行或者并行，并且提供一种机制，使得一个工作可以访问同一应用中前一个工作缓存的RDD。一个交互式的Spark会话，比如spark-shell会话，就是一个应用的实例。</p>
+<p><img src="/uploads/images/2016/0725/1245.png" alt=""></p>
+<p>这个项目可以一级一级地重用（<em>tier by tier</em>）：比如，可以忽略第3级“应用级别”，把它作为构建新的机器学习应用的框架。它还可以一层一层地重用（<em>layer by layer</em>）：比如，如果不需要增量更新，速度层可以省略。它还可以一片一片地修改（<em>piece by piece</em>）：协同过滤应用的建模批处理层，可以被替换为自定义的实现，使用Spark MLlib之外的新算法，同时保留服务层和速度层的实现。</p>
+<h1 id="Lambda级的实现"><a href="#Lambda级的实现" class="headerlink" title="Lambda级的实现"></a>Lambda级的实现</h1><h2 id="数据传输"><a href="#数据传输" class="headerlink" title="数据传输"></a>数据传输</h2><p>数据传输机制是一个Apache Kafka的topic。任何进程——包括但不限于服务层——都能够向topic发送数据，然后被速度层和批处理层接收。Kafka的topic还被用于发布 <em>模型</em> 和 <em>模型更新</em>，然后被速度层和服务层消费。</p>
+<h2 id="批处理层"><a href="#批处理层" class="headerlink" title="批处理层"></a>批处理层</h2><p>批处理层的实现是一个Hadoop集群上的Spark Streaming进程，它从输入的Kafka topic中读取数据。这个Streaming进程必然需要较长时间——数小时甚至一天。它使用Spark来把当前窗口的数据保存到HDFS，然后结合HDFS上的所有历史数据，启动新结果的构建过程。结果被写到HDFS，同时发布到一个Kafka的更新topic。</p>
+<h2 id="速度层"><a href="#速度层" class="headerlink" title="速度层"></a>速度层</h2><p>速度层的实现也是一个Spark Streaming进程，它也从输入的Kafka topic中读取数据。它的时间要短的多，大约几秒钟。它周期性的从更新topic中加载新的模型，然后不断地产生模型更新，这些更新也会被放回到更新topic中。</p>
+<h2 id="服务层"><a href="#服务层" class="headerlink" title="服务层"></a>服务层</h2><p>服务层监听更新topic上的模型和模型更新。它在内存中维护模型的状态。在对内存中的模型进行查询的方法之上，它暴露一个HTTP REST API。它们中的大多数都可以伸缩部署，每一个都可以接收新的数据并写到Kafka中，在那里被速度层和批处理层获取。</p>
+<h2 id="使用和部署"><a href="#使用和部署" class="headerlink" title="使用和部署"></a>使用和部署</h2><p>这个应用是用Java语言写的，使用了Spark、Hadoop、Tomcat、Kafka、ZooKeeper等等组件。采用一个单独的<a href="https://github.com/typesafehub/config" target="_blank" rel="external">Typesafe Config</a>配置文件来做配置管理，其中applications配置了整个系统的部署。这里包括了关键接口类（批处理层、速度层和服务层的逻辑）的实现。应用把这些实现与每一层的二进制实例打包和部署在一起。每一个实例都是一个可运行的Java .jar文件（oryx-batch-2.x.jar、oryx-speed-2.x.jar、oryx-serving-2.x.jar），它会启动所有必需的服务。</p>
+<h1 id="ML级的实现"><a href="#ML级的实现" class="headerlink" title="ML级的实现"></a>ML级的实现</h1><p>ML级是对上述通用接口的实例化和特殊化。这里实现了通常的机器学习需求，然后对上层应用暴露出机器学习特定的接口。</p>
+<p>例如，这里实现了一个批处理层的更新进程，用来自动地查询出一个test和training集合。它会调用一个由上层应用提供的函数，来对test集合上的模型进行计算。它可以自动的重复这种过程，每次使用不同的超参数值，最后选择出最好的结果。它通过 <a href="http://dmg.org/pmml/v4-2-1/GeneralStructure.html" target="_blank" rel="external">PMML</a> 对模型进行序列化。</p>
+<h1 id="端到端的应用实现"><a href="#端到端的应用实现" class="headerlink" title="端到端的应用实现"></a>端到端的应用实现</h1><p>除了是一个框架以外，对于机器学习的三种用例，Oryx 2 包含了批处理层、速度层和服务层的完整实现。这些都是开箱即用的，或者也可以做为自定义应用的基础部分：</p>
+<ul>
+<li>基于交替最小二乘法的协同过滤或推荐系统</li>
+<li>基于k-means算法的聚类</li>
+<li>基于“随机决策森林”的分类和回归</li>
+</ul>
+<p>本文翻译自<a href="http://oryx.io/" target="_blank" rel="external">Oryx 官方网站</a>。</p>
 
       
     </div>
@@ -380,7 +380,9 @@
           
             <a href="/tags/spark/" rel="tag">#spark</a>
           
-            <a href="/tags/hadoop/" rel="tag">#hadoop</a>
+            <a href="/tags/kafka/" rel="tag">#kafka</a>
+          
+            <a href="/tags/oryx/" rel="tag">#oryx</a>
           
         </div>
       
@@ -389,12 +391,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/07/21/hadoop-the-definitive-guide-spark-5/" rel="next" title="翻译：Hadoop权威指南之Spark-5">
+                <i class="fa fa-chevron-left"></i> 翻译：Hadoop权威指南之Spark-5
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/07/hadoop-the-definitive-guide-spark-2/" rel="prev" title="翻译：Hadoop权威指南之Spark-2">
-                翻译：Hadoop权威指南之Spark-2 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/08/01/spark-machine-learning-1-naive-bayes/" rel="prev" title="Spark机器学习1：朴素贝叶斯分类">
+                Spark机器学习1：朴素贝叶斯分类 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -595,7 +601,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Spark"><span class="nav-number">1.</span> <span class="nav-text">安装Spark</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#示例"><span class="nav-number">2.</span> <span class="nav-text">示例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spark应用、工作、阶段、任务"><span class="nav-number">2.1.</span> <span class="nav-text">Spark应用、工作、阶段、任务</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lambda级的实现"><span class="nav-number">2.</span> <span class="nav-text">Lambda级的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据传输"><span class="nav-number">2.1.</span> <span class="nav-text">数据传输</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#批处理层"><span class="nav-number">2.2.</span> <span class="nav-text">批处理层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#速度层"><span class="nav-number">2.3.</span> <span class="nav-text">速度层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务层"><span class="nav-number">2.4.</span> <span class="nav-text">服务层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用和部署"><span class="nav-number">2.5.</span> <span class="nav-text">使用和部署</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ML级的实现"><span class="nav-number">3.</span> <span class="nav-text">ML级的实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#端到端的应用实现"><span class="nav-number">4.</span> <span class="nav-text">端到端的应用实现</span></a></li></ol></div>
             
           </div>
         </section>
