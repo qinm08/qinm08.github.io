@@ -271,7 +271,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/08/09/spark-machine-learning-2-k-means/" itemprop="url">
+                <a class="post-title-link" href="/2016/08/spark-machine-learning-2-k-means/" itemprop="url">
                   Spark机器学习2：K-Means聚类算法
                 </a>
               
@@ -320,7 +320,7 @@
 <p>乍一看，这不还是在做分类操作吗？聚类（clustering）与分类（classification）的不同之处在于：分类是一种示例式的有监督学习算法，它要求必须事先明确知道各个类别的信息，并且断言所有待分类项都有一个类别与之对应，很多时候这个条件是不成立的，尤其是面对海量数据的时候；而聚类是一种观察式的无监督学习算法，在聚类之前可以不知道类别甚至不给定类别数量，由算法通过对样本数据的特征进行观察，然后进行相似度或相异度的分析，从而达到“物以类聚”的目的。</p>
 <p>K-Means算法是最简单的一种聚类算法。</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/09/spark-machine-learning-2-k-means/#more" rel="contents">
+            <a class="btn" href="/2016/08/spark-machine-learning-2-k-means/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -371,7 +371,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/08/01/spark-machine-learning-1-naive-bayes/" itemprop="url">
+                <a class="post-title-link" href="/2016/08/spark-machine-learning-1-naive-bayes/" itemprop="url">
                   Spark机器学习1：朴素贝叶斯分类
                 </a>
               
@@ -438,7 +438,7 @@
 <p>P(Spam|Buy) = (0.8 × 0.6) / (0.8 × 0.6 + 0.1 × 0.4) = 0.48 / 0.52 = 0.923</p>
 <p>由此得出，这个 email 有92.3%的可能是一个垃圾邮件。</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/01/spark-machine-learning-1-naive-bayes/#more" rel="contents">
+            <a class="btn" href="/2016/08/spark-machine-learning-1-naive-bayes/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -489,7 +489,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/07/25/oryx-overview/" itemprop="url">
+                <a class="post-title-link" href="/2016/07/oryx-overview/" itemprop="url">
                   Oryx：基于Spark和Kafka的机器学习系统
                 </a>
               
@@ -547,7 +547,7 @@
 <li>数据传输层，在层与层之间移动数据，从外部数据源接收输入。</li>
 </ol>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/25/oryx-overview/#more" rel="contents">
+            <a class="btn" href="/2016/07/oryx-overview/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -598,7 +598,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/07/21/hadoop-the-definitive-guide-spark-5/" itemprop="url">
+                <a class="post-title-link" href="/2016/07/hadoop-the-definitive-guide-spark-5/" itemprop="url">
                   翻译：Hadoop权威指南之Spark-5
                 </a>
               
@@ -646,7 +646,7 @@
 <p><img src="/uploads/images/2016/0721/2145.png" alt=""><br><em>图19-1. Spark怎样运行一个工作</em></p>
 <p>接下来，我们来看看DAG调度器是怎样构建一个DAG的。</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/21/hadoop-the-definitive-guide-spark-5/#more" rel="contents">
+            <a class="btn" href="/2016/07/hadoop-the-definitive-guide-spark-5/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -697,7 +697,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/07/18/hadoop-the-definitive-guide-spark-4/" itemprop="url">
+                <a class="post-title-link" href="/2016/07/hadoop-the-definitive-guide-spark-4/" itemprop="url">
                   翻译：Hadoop权威指南之Spark-4
                 </a>
               
@@ -747,7 +747,7 @@
 <p>关于BlockManagerInfo的日志显示，作为工作运行的一部分，RDD的分区会被保持在内存中。日志显示这个RDD的编号是4（在调用cache()方法之后的控制台输出中，也能看到这个信息），它包含两个分区，标签分别是0和1。如果在这个缓存的数据集上运行另一个工作，我们会看到这个RDD将从内存中加载。这次我们计算最低气温：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">scala&gt; tuples.reduceByKey((a, b) =&gt; Math.min(a, b)).foreach(println(_))</div><div class="line">INFO BlockManager: Found block rdd_4_0 locally</div><div class="line">INFO BlockManager: Found block rdd_4_1 locally</div><div class="line">(1949,78)</div><div class="line">(1950,-11)</div></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/18/hadoop-the-definitive-guide-spark-4/#more" rel="contents">
+            <a class="btn" href="/2016/07/hadoop-the-definitive-guide-spark-4/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -798,7 +798,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/07/17/hadoop-the-definitive-guide-spark-3/" itemprop="url">
+                <a class="post-title-link" href="/2016/07/hadoop-the-definitive-guide-spark-3/" itemprop="url">
                   翻译：Hadoop权威指南之Spark-3
                 </a>
               
@@ -848,7 +848,7 @@
 <p>可以为某个特定运算设置并行性级别，指定parallelize()方法的第二个参数即可：</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sc.parallelize(<span class="number">1</span> to <span class="number">10</span>, <span class="number">10</span>)</div></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/17/hadoop-the-definitive-guide-spark-3/#more" rel="contents">
+            <a class="btn" href="/2016/07/hadoop-the-definitive-guide-spark-3/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -899,7 +899,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/07/16/hadoop-the-definitive-guide-spark-2/" itemprop="url">
+                <a class="post-title-link" href="/2016/07/hadoop-the-definitive-guide-spark-2/" itemprop="url">
                   翻译：Hadoop权威指南之Spark-2
                 </a>
               
@@ -946,7 +946,7 @@
 <p>示例19-1. 使用Spark找出最高气温的Scala应用</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.apache.spark.<span class="type">SparkContext</span>._</div><div class="line"><span class="keyword">import</span> org.apache.spark.&#123;<span class="type">SparkConf</span>, <span class="type">SparkContext</span>&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">MaxTemperature</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]) &#123;</div><div class="line">        <span class="keyword">val</span> conf = <span class="keyword">new</span> <span class="type">SparkConf</span>().setAppName(<span class="string">"Max Temperature"</span>)</div><div class="line">        <span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(conf)</div><div class="line">        sc.textFile(args(<span class="number">0</span>))</div><div class="line">          .map(_.split(<span class="string">"\t"</span>))</div><div class="line">          .filter(rec =&gt; (rec(<span class="number">1</span>) != <span class="string">"9999"</span> &amp;&amp; rec(<span class="number">2</span>).matches(<span class="string">"[01459]"</span>)))</div><div class="line">          .map(rec =&gt; (rec(<span class="number">0</span>).toInt, rec(<span class="number">1</span>).toInt))</div><div class="line">          .reduceByKey((a, b) =&gt; <span class="type">Math</span>.max(a, b))</div><div class="line">          .saveAsTextFile(args(<span class="number">1</span>))</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/16/hadoop-the-definitive-guide-spark-2/#more" rel="contents">
+            <a class="btn" href="/2016/07/hadoop-the-definitive-guide-spark-2/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -997,7 +997,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/07/15/hadoop-the-definitive-guide-spark-1/" itemprop="url">
+                <a class="post-title-link" href="/2016/07/hadoop-the-definitive-guide-spark-1/" itemprop="url">
                   翻译：Hadoop权威指南之Spark-1
                 </a>
               
@@ -1048,7 +1048,7 @@
 <p>Spark的用户体验也是首屈一指的（second to none），它有丰富的API用来执行很多常见的数据处理任务，比如join。行文之时，Spark提供三种语言的API：Scala，Java和Python。本章中的大多数例子将采用Scala API，但翻译为别的语言也是容易的。Spark还带有一个基于Scala或Python的REPL（read-eval-print loop）环境，可以快速简便的查看数据集。</p>
 <p>Spark是个构建分析工具的好平台，为达此目的，Apache Spark项目包含了众多的模块：机器学习（MLlib），图形处理（GraphX），流式处理（Spark Streaming），还有SQL（Spark SQL）。本章内容不涉及这些模块，感兴趣的读者可以访问 <a href="http://spark.apache.org">Apache Spark 网站</a> 。</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/15/hadoop-the-definitive-guide-spark-1/#more" rel="contents">
+            <a class="btn" href="/2016/07/hadoop-the-definitive-guide-spark-1/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
