@@ -314,159 +314,16 @@
 
       
         
-          
-            <p>今天是七夕，看到一则关于“京东”名字来源的八卦，什么东哥的前女友、奶茶妹妹一个排的前男友balabala的，忽然想到能不能用算法对那一个排的前男友聚聚类，看看奶茶妹妹的喜好啊品味啊什么的，然后再看看东哥属于哪一类，一定很有（e）趣（su）。可惜手头没有那一排人的资料，只好作罢。不过由此可以看出聚类算法还是挺有应用价值的，比如研究下非诚勿扰、世纪佳缘之类的……</p>
+          <p>今天是七夕，看到一则关于“京东”名字来源的八卦，什么东哥的前女友、奶茶妹妹一个排的前男友balabala的，忽然想到能不能用算法对那一个排的前男友聚聚类，看看奶茶妹妹的喜好啊品味啊什么的，然后再看看东哥属于哪一类，一定很有（e）趣（su）。可惜手头没有那一排人的资料，只好作罢。不过由此可以看出聚类算法还是挺有应用价值的，比如研究下非诚勿扰、世纪佳缘之类的……</p>
 <h1 id="聚类问题"><a href="#聚类问题" class="headerlink" title="聚类问题"></a>聚类问题</h1><p>言归正传，所谓聚类问题，就是给定一个元素集合D，其中每个元素具有n个可观察属性，使用某种算法将D划分成k个子集，要求每个子集内部的元素之间相异度尽可能低，而不同子集的元素相异度尽可能高。其中每个子集叫做一个簇（cluster）。</p>
 <p>上面这段话翻译为人类语言是这样的：有一堆人，每个人的胸牌上都写着“性别：男/女；年龄：XX”，我们可以根据性别把这堆人分为男、女两个子集，或者根据年龄把他们分为老、中、青、少四个子集。</p>
 <p>乍一看，这不还是在做分类操作吗？聚类（clustering）与分类（classification）的不同之处在于：分类是一种示例式的有监督学习算法，它要求必须事先明确知道各个类别的信息，并且断言所有待分类项都有一个类别与之对应，很多时候这个条件是不成立的，尤其是面对海量数据的时候；而聚类是一种观察式的无监督学习算法，在聚类之前可以不知道类别甚至不给定类别数量，由算法通过对样本数据的特征进行观察，然后进行相似度或相异度的分析，从而达到“物以类聚”的目的。</p>
 <p>K-Means算法是最简单的一种聚类算法。</p>
-<h1 id="K-Means聚类算法"><a href="#K-Means聚类算法" class="headerlink" title="K-Means聚类算法"></a>K-Means聚类算法</h1><p><img src="/uploads/images/2016/0808/1105.png" alt=""></p>
-<p>使用K-Means算法进行聚类，过程非常直观：<br>(a) 给定集合D，有n个样本点<br>(b) 随机指定两个点，作为两个子集的质心<br>(c) 根据样本点与两个质心的距离远近，将每个样本点划归最近质心所在的子集<br>(d) 对两个子集重新计算质心<br>(e) 根据新的质心，重复操作(c)<br>(f) 重复操作(d)和(e)，直至结果足够收敛或者不再变化</p>
-<h1 id="Spark聚类示例"><a href="#Spark聚类示例" class="headerlink" title="Spark聚类示例"></a>Spark聚类示例</h1><p>首先还是明确任务，我们要对下面这组数据进行聚类，看看中国足球在亚洲处于什么水平，数据来源于<a href="http://www.cnblogs.com/leoo2sk/archive/2010/09/20/k-means.html" target="_blank" rel="external">张洋的算法杂货铺</a>。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:right">序号</th>
-<th>国别</th>
-<th style="text-align:right">2006年世界杯</th>
-<th style="text-align:right">2010年世界杯</th>
-<th style="text-align:right">2007年亚洲杯</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:right">1</td>
-<td>中国</td>
-<td style="text-align:right">50</td>
-<td style="text-align:right">50</td>
-<td style="text-align:right">9</td>
-</tr>
-<tr>
-<td style="text-align:right">2</td>
-<td>日本</td>
-<td style="text-align:right">28</td>
-<td style="text-align:right">9</td>
-<td style="text-align:right">4</td>
-</tr>
-<tr>
-<td style="text-align:right">3</td>
-<td>韩国</td>
-<td style="text-align:right">17</td>
-<td style="text-align:right">15</td>
-<td style="text-align:right">3</td>
-</tr>
-<tr>
-<td style="text-align:right">4</td>
-<td>伊朗</td>
-<td style="text-align:right">25</td>
-<td style="text-align:right">40</td>
-<td style="text-align:right">5</td>
-</tr>
-<tr>
-<td style="text-align:right">5</td>
-<td>沙特</td>
-<td style="text-align:right">28</td>
-<td style="text-align:right">40</td>
-<td style="text-align:right">2</td>
-</tr>
-<tr>
-<td style="text-align:right">6</td>
-<td>伊拉克</td>
-<td style="text-align:right">50</td>
-<td style="text-align:right">50</td>
-<td style="text-align:right">1</td>
-</tr>
-<tr>
-<td style="text-align:right">7</td>
-<td>卡塔尔</td>
-<td style="text-align:right">50</td>
-<td style="text-align:right">40</td>
-<td style="text-align:right">9</td>
-</tr>
-<tr>
-<td style="text-align:right">8</td>
-<td>阿联酋</td>
-<td style="text-align:right">50</td>
-<td style="text-align:right">40</td>
-<td style="text-align:right">9</td>
-</tr>
-<tr>
-<td style="text-align:right">9</td>
-<td>乌兹别克斯坦</td>
-<td style="text-align:right">40</td>
-<td style="text-align:right">40</td>
-<td style="text-align:right">5</td>
-</tr>
-<tr>
-<td style="text-align:right">10</td>
-<td>泰国</td>
-<td style="text-align:right">50</td>
-<td style="text-align:right">50</td>
-<td style="text-align:right">9</td>
-</tr>
-<tr>
-<td style="text-align:right">11</td>
-<td>越南</td>
-<td style="text-align:right">50</td>
-<td style="text-align:right">50</td>
-<td style="text-align:right">5</td>
-</tr>
-<tr>
-<td style="text-align:right">12</td>
-<td>阿曼</td>
-<td style="text-align:right">50</td>
-<td style="text-align:right">50</td>
-<td style="text-align:right">9</td>
-</tr>
-<tr>
-<td style="text-align:right">13</td>
-<td>巴林</td>
-<td style="text-align:right">40</td>
-<td style="text-align:right">40</td>
-<td style="text-align:right">9</td>
-</tr>
-<tr>
-<td style="text-align:right">14</td>
-<td>朝鲜</td>
-<td style="text-align:right">40</td>
-<td style="text-align:right">32</td>
-<td style="text-align:right">17</td>
-</tr>
-<tr>
-<td style="text-align:right">15</td>
-<td>印尼</td>
-<td style="text-align:right">50</td>
-<td style="text-align:right">50</td>
-<td style="text-align:right">9</td>
-</tr>
-</tbody>
-</table>
-<p>根据数据来源的描述，提前对数据做了如下预处理：对于世界杯，进入决赛圈则取其最终排名，没有进入决赛圈的，打入预选赛十强赛赋予40，预选赛小组未出线的赋予50。对于亚洲杯，前四名取其排名，八强赋予5，十六强赋予9，预选赛没出现的赋予17。这样做是为了使得所有数据变为标量，便于后续聚类。</p>
-<p>接下来我们把上面表格中的数据存储在 input/soccer.txt 文件中，属性之间用空格分割：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$ cat input/soccer.txt</div><div class="line">50 50 9</div><div class="line">28 09 4</div><div class="line">17 15 3</div><div class="line">25 40 5</div><div class="line">28 40 2</div><div class="line">50 50 1</div><div class="line">50 40 9</div><div class="line">50 40 9</div><div class="line">40 40 5</div><div class="line">50 50 9</div><div class="line">50 50 5</div><div class="line">50 50 9</div><div class="line">40 40 9</div><div class="line">40 32 17</div><div class="line">50 50 9</div></pre></td></tr></table></figure>
-<p>下面是使用Spark来对这组数据进行聚类的Scala代码：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> kmeans</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.spark.<span class="type">SparkConf</span></div><div class="line"><span class="keyword">import</span> org.apache.spark.<span class="type">SparkContext</span></div><div class="line"><span class="keyword">import</span> org.apache.spark.mllib.linalg.<span class="type">Vectors</span></div><div class="line"><span class="keyword">import</span> org.apache.spark.mllib.clustering.<span class="type">KMeans</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">kmeans1</span> <span class="keyword">extends</span> <span class="title">App</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">val</span> conf = <span class="keyword">new</span> <span class="type">SparkConf</span>()</div><div class="line">    conf.setAppName(<span class="string">"K-Means 1"</span>)</div><div class="line"></div><div class="line">    <span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(conf)</div><div class="line">    <span class="keyword">val</span> rawtxt = sc.textFile(<span class="string">"input/soccer.txt"</span>)</div><div class="line"></div><div class="line">    <span class="comment">// 将文本文件的内容转化为 Double 类型的 Vector 集合</span></div><div class="line">    <span class="keyword">val</span> allData = rawtxt.map &#123;</div><div class="line">        line =&gt;</div><div class="line">            <span class="type">Vectors</span>.dense(line.split(' ').map(_.toDouble))</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 由于 K-Means 算法是迭代计算，这里把数据缓存起来（广播变量）</span></div><div class="line">    allData.cache()</div><div class="line">    <span class="comment">// 分为 3 个子集，最多50次迭代</span></div><div class="line">    <span class="keyword">val</span> kMeansModel = <span class="type">KMeans</span>.train(allData, <span class="number">3</span>, <span class="number">50</span>)</div><div class="line">    <span class="comment">// 输出每个子集的质心</span></div><div class="line">    kMeansModel.clusterCenters.foreach &#123; println &#125;</div><div class="line"></div><div class="line">    <span class="keyword">val</span> kMeansCost = kMeansModel.computeCost(allData)</div><div class="line">    <span class="comment">// 输出本次聚类操作的收敛性，此值越低越好</span></div><div class="line">    println(<span class="string">"K-Means Cost: "</span> + kMeansCost)</div><div class="line"></div><div class="line">    <span class="comment">// 输出每组数据及其所属的子集索引</span></div><div class="line">    allData.foreach &#123;</div><div class="line">        vec =&gt;</div><div class="line">            println(kMeansModel.predict(vec) + <span class="string">": "</span> + vec)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>开发环境与上篇文章相同，不再赘述。接下来把工程导出为jar文件（例如 spark-ml.jar），执行下面的命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ spark-submit --class kmeans.kmeans1 --master <span class="built_in">local</span> spark-ml.jar</div></pre></td></tr></table></figure>
-<p>运行的结果可能是下面这样的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">[40.0,37.33333333333333,10.333333333333332]</div><div class="line">[50.0,47.5,7.5]</div><div class="line">[24.5,26.0,3.5]</div><div class="line">K-Means Cost: 1217.3333333333333</div><div class="line">1: [50.0,50.0,9.0]</div><div class="line">2: [28.0,9.0,4.0]</div><div class="line">2: [17.0,15.0,3.0]</div><div class="line">2: [25.0,40.0,5.0]</div><div class="line">2: [28.0,40.0,2.0]</div><div class="line">1: [50.0,50.0,1.0]</div><div class="line">1: [50.0,40.0,9.0]</div><div class="line">1: [50.0,40.0,9.0]</div><div class="line">0: [40.0,40.0,5.0]</div><div class="line">1: [50.0,50.0,9.0]</div><div class="line">1: [50.0,50.0,5.0]</div><div class="line">1: [50.0,50.0,9.0]</div><div class="line">0: [40.0,40.0,9.0]</div><div class="line">0: [40.0,32.0,17.0]</div><div class="line">1: [50.0,50.0,9.0]</div></pre></td></tr></table></figure>
-<p>前面三行是 3 个子集的质心，这 3 个子集的索引分别是0、1、2，如果对数据排序，应该是2、0、1。第 4 行 K-Means Cost是各个样本点与质心的距离的平方和，也就是本次聚类的收敛性。后面是 15 个国家的分数及其对应的子集索引，可以看到第一集团（子集2）有日本、韩国、伊朗、沙特，第二集团（子集0）有乌兹别克斯坦、巴林、朝鲜，中国等 8 个国家属于第三集团（好吧，三流就三流吧，还第三集团……）。这个结果与张洋的算法杂货铺中结果相同。</p>
-<p>如果多次运行这个程序，下面的结果可能出现的次数最多：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">[22.5,12.0,3.5]</div><div class="line">[50.0,47.5,7.5]</div><div class="line">[34.6,38.400000000000006,7.6000000000000005]</div><div class="line">K-Means Cost: 700.5999999999995</div><div class="line">1: [50.0,50.0,9.0]</div><div class="line">0: [28.0,9.0,4.0]</div><div class="line">0: [17.0,15.0,3.0]</div><div class="line">2: [25.0,40.0,5.0]</div><div class="line">2: [28.0,40.0,2.0]</div><div class="line">1: [50.0,50.0,1.0]</div><div class="line">1: [50.0,40.0,9.0]</div><div class="line">1: [50.0,40.0,9.0]</div><div class="line">2: [40.0,40.0,5.0]</div><div class="line">1: [50.0,50.0,9.0]</div><div class="line">1: [50.0,50.0,5.0]</div><div class="line">1: [50.0,50.0,9.0]</div><div class="line">2: [40.0,40.0,9.0]</div><div class="line">2: [40.0,32.0,17.0]</div><div class="line">1: [50.0,50.0,9.0]</div></pre></td></tr></table></figure>
-<p>这里的 K-Means Cost 是700，比前面的结果更加收敛。实际应用中也应该多次运行，取收敛性最好的结果（K-Means Cost 最低的）。这次的结果与上次稍有不同，第一集团的伊朗、沙特被归到了第二集团，其他没有变化，无论怎样中国足球总是亚洲三流的。（脚趾头都能想出来，还用Spark来分析，好吧，杀鸡用了牛刀……）</p>
-<h1 id="不适用场景"><a href="#不适用场景" class="headerlink" title="不适用场景"></a>不适用场景</h1><p>每一种算法都不是放之四海而皆准的，下面是 K-Means 算法不适用的两个场景：</p>
-<p><img src="/uploads/images/2016/0808/1400.png" alt=""><br>这种情况如果由人来聚类，分分钟搞定，但是 K-Means 算法是这样做的：<br><img src="/uploads/images/2016/0808/1405.png" alt=""></p>
-<p>下面这种情况更微妙一些，各个子集的密集程度相差很大：<br><img src="/uploads/images/2016/0808/1410.png" alt=""><br>看看 K-Means 算法是怎样做的：<br><img src="/uploads/images/2016/0808/1415.png" alt=""></p>
-<p>好吧，的确是差成渣了，但这真的不是算法的问题，而是我们人类对算法的选择问题。那么这两种情况应该选择什么算法呢？我现在用尽“洪荒之力”也想不出来，随着学习的深入再来求解吧，或者如果有高人读到这里，请和我联系指点指点吧！</p>
-<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
-<li><a href="https://en.wikipedia.org/wiki/K-means_clustering" target="_blank" rel="external">https://en.wikipedia.org/wiki/K-means_clustering</a></li>
-<li><a href="http://www.cnblogs.com/jerrylead/archive/2011/04/06/2006910.html" target="_blank" rel="external">http://www.cnblogs.com/jerrylead/archive/2011/04/06/2006910.html</a></li>
-<li><a href="http://www.cnblogs.com/leoo2sk/archive/2010/09/20/k-means.html" target="_blank" rel="external">http://www.cnblogs.com/leoo2sk/archive/2010/09/20/k-means.html</a></li>
-<li><a href="http://blog.selfup.cn/728.html" target="_blank" rel="external">http://blog.selfup.cn/728.html</a></li>
-<li><a href="http://blog.csdn.net/cyh_24/article/details/50444111" target="_blank" rel="external">http://blog.csdn.net/cyh_24/article/details/50444111</a></li>
-</ul>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/09/spark-machine-learning-2-k-means/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
