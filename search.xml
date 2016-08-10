@@ -4,6 +4,13 @@
   
     
     <entry>
+      <title><![CDATA[test-blog]]></title>
+      <url>https://qinm08.github.io/2016/08/test-blog/</url>
+      <content type="html"><![CDATA[<p>今天是七夕，看到一则关于“京东”名字来源的八卦，什么东哥的前女友、奶茶妹妹一个排的前男友balabala的，忽然想到能不能用算法对那一个排的前男友聚聚类，看看奶茶妹妹的喜好啊品味啊什么的，然后再看看东哥属于哪一类，一定很有（e）趣（su）。可惜手头没有那一排人的资料，只好作罢。不过由此可以看出聚类算法还是挺有应用价值的，比如研究下非诚勿扰、世纪佳缘之类的……</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Spark机器学习2：K-Means聚类算法]]></title>
       <url>https://qinm08.github.io/2016/08/spark-machine-learning-2-k-means/</url>
       <content type="html"><![CDATA[<p>今天是七夕，看到一则关于“京东”名字来源的八卦，什么东哥的前女友、奶茶妹妹一个排的前男友balabala的，忽然想到能不能用算法对那一个排的前男友聚聚类，看看奶茶妹妹的喜好啊品味啊什么的，然后再看看东哥属于哪一类，一定很有（e）趣（su）。可惜手头没有那一排人的资料，只好作罢。不过由此可以看出聚类算法还是挺有应用价值的，比如研究下非诚勿扰、世纪佳缘之类的……</p>
