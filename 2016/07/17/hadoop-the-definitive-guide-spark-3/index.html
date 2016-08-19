@@ -94,7 +94,7 @@
 <meta property="og:description" content="弹性分布式数据集RDD是每个spark程序的核心，本节我们来看看更多细节。
 创建创建RDD有三种方式：从一个内存中的对象集合，被称为并行化（parallelizing） 一个集合；使用一个外部存储（比如HDFS）的数据集；转换已存在的RDD。在对少量的输入数据并行地进行CPU密集型运算时，第一种方式非常有用。例如，下面执行从1到10的独立运算：
 12val params = sc.parallel">
-<meta property="og:updated_time" content="2016-07-23T05:23:06.304Z">
+<meta property="og:updated_time" content="2016-08-19T10:22:00.134Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="翻译：Hadoop权威指南之Spark-3">
 <meta name="twitter:description" content="弹性分布式数据集RDD是每个spark程序的核心，本节我们来看看更多细节。
@@ -344,7 +344,7 @@
 <h2 id="转换和行动"><a href="#转换和行动" class="headerlink" title="转换和行动"></a>转换和行动</h2><p>Spark提供两种类型的操作：转换<em>transformations</em>和行动<em>actions</em>。“转换”从已存在的RDD生成新的RDD，而“行动”会触发运算并输出结果——返回给用户，或者保存到外部存储。</p>
 <p>行动会立刻产生影响，而转换不会——它们是lazy的，它们不做任何工作，直到行动被触发。下面的例子，把文本文件中的每一行转为小写：</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> text = sc.textFile(inputPath)</div><div class="line"><span class="keyword">val</span> lower: <span class="type">RDD</span>[<span class="type">String</span>] = text.map(_.toLowerCase())</div><div class="line">lower.foreach(println(_))</div></pre></td></tr></table></figure>
-<p>map()方法是个转换操作，Spark内部这样处理：稍晚的时候，一个函数（这里是toLowerCase()）会被调用，来处理RDD中的每一个元素。这个函数实际上没有执行，直到foreach()方法（这是个行动）被调用，然后Spark会运行一个工作，读取输入的文件，对文件中的每一行调用toLowerCase()，然后把结果写到控制台。</p>
+<p>map()方法是个转换操作，Spark内部这样处理：稍晚的时候，一个函数（这里是toLowerCase()）会被调用，来处理RDD中的每一个元素。这个函数实际上没有执行，直到foreach()方法（这是个行动）被调用，然后Spark会运行一个作业，读取输入的文件，对文件中的每一行调用toLowerCase()，然后把结果写到控制台。</p>
 <p>怎样分辨一个操作究竟是转换还是行动呢？一个方法是看它的返回类型：如果返回类型是RDD，这是个转换；否则就是行动。当你查阅RDD的文档时，这种方法是很有用的。对RDD执行的大多数操作，可以在RDD的文档（org.apache.spark.rdd包）中找到，更多的操作在PairRDDFunctions里，这里包含了处理键值对RDD的转换和行动。</p>
 <p>Spark的库中包含了丰富的操作，有转换者诸如映射（mapping）、分组（grouping）、聚合（aggregating）、再分区（repartitioning）、取样（sampling）、连接（joining）多个RDD、把RDDs作为集合（sets）对待。还有行动者诸如把RDDs物化（materializing）为集合（collections）、对RDD进行计算统计、从RDD中取样出固定数目的元素，把RDD保存到外部存储。细节内容，查看文档。</p>
 <h3 id="Spark中的MapReduce"><a href="#Spark中的MapReduce" class="headerlink" title="Spark中的MapReduce"></a>Spark中的MapReduce</h3><p>尽管名字很有暗示性，Spark中的map()和reduce()操作，与Hadoop MapReduce中相同名字的函数，不是直接对应的。Hadoop MapReduce中的map和reduce的通常形式是：</p>

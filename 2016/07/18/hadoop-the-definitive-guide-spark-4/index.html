@@ -86,20 +86,20 @@
 
 <meta name="description" content="持久化回到本章开头的例子，我们可以把“年度-气温”的中间数据集缓存在内存中：
 12scala&amp;gt; tuples.cache()res1: tuples.type = MappedRDD[4] at map at &amp;lt;console&amp;gt;:18
-调用cache()不会立刻把RDD缓存到内存中，只是对这个RDD做一个标记，当Spark工作运行的时候，实际的缓存行为才会发生。因此我们首先强制运">
+调用cache()不会立刻把RDD缓存到内存中，只是对这个RDD做一个标记，当Spark作业运行的时候，实际的缓存行为才会发生。因此我们首先强制运">
 <meta property="og:type" content="article">
 <meta property="og:title" content="翻译：Hadoop权威指南之Spark-4">
 <meta property="og:url" content="https://qinm08.github.io/2016/07/18/hadoop-the-definitive-guide-spark-4/index.html">
 <meta property="og:site_name" content="Ming's Coding Life">
 <meta property="og:description" content="持久化回到本章开头的例子，我们可以把“年度-气温”的中间数据集缓存在内存中：
 12scala&amp;gt; tuples.cache()res1: tuples.type = MappedRDD[4] at map at &amp;lt;console&amp;gt;:18
-调用cache()不会立刻把RDD缓存到内存中，只是对这个RDD做一个标记，当Spark工作运行的时候，实际的缓存行为才会发生。因此我们首先强制运">
-<meta property="og:updated_time" content="2016-08-09T03:03:23.139Z">
+调用cache()不会立刻把RDD缓存到内存中，只是对这个RDD做一个标记，当Spark作业运行的时候，实际的缓存行为才会发生。因此我们首先强制运">
+<meta property="og:updated_time" content="2016-08-19T10:21:31.082Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="翻译：Hadoop权威指南之Spark-4">
 <meta name="twitter:description" content="持久化回到本章开头的例子，我们可以把“年度-气温”的中间数据集缓存在内存中：
 12scala&amp;gt; tuples.cache()res1: tuples.type = MappedRDD[4] at map at &amp;lt;console&amp;gt;:18
-调用cache()不会立刻把RDD缓存到内存中，只是对这个RDD做一个标记，当Spark工作运行的时候，实际的缓存行为才会发生。因此我们首先强制运">
+调用cache()不会立刻把RDD缓存到内存中，只是对这个RDD做一个标记，当Spark作业运行的时候，实际的缓存行为才会发生。因此我们首先强制运">
 
 
 
@@ -322,20 +322,20 @@
       
         <h2 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h2><p>回到本章开头的例子，我们可以把“年度-气温”的中间数据集缓存在内存中：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">scala&gt; tuples.cache()</div><div class="line">res1: tuples.type = MappedRDD[4] at map at &lt;console&gt;:18</div></pre></td></tr></table></figure>
-<p>调用cache()不会立刻把RDD缓存到内存中，只是对这个RDD做一个标记，当Spark工作运行的时候，实际的缓存行为才会发生。因此我们首先强制运行一个工作：</p>
+<p>调用cache()不会立刻把RDD缓存到内存中，只是对这个RDD做一个标记，当Spark作业运行的时候，实际的缓存行为才会发生。因此我们首先强制运行一个作业：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">scala&gt; tuples.reduceByKey((a, b) =&gt; Math.max(a, b)).foreach(println(_))</div><div class="line">INFO BlockManagerInfo: Added rdd_4_0 in memory on 192.168.1.90:64640</div><div class="line">INFO BlockManagerInfo: Added rdd_4_1 in memory on 192.168.1.90:64640</div><div class="line">(1950,22)</div><div class="line">(1949,111)</div></pre></td></tr></table></figure>
-<p>关于BlockManagerInfo的日志显示，作为工作运行的一部分，RDD的分区会被保持在内存中。日志显示这个RDD的编号是4（在调用cache()方法之后的控制台输出中，也能看到这个信息），它包含两个分区，标签分别是0和1。如果在这个缓存的数据集上运行另一个工作，我们会看到这个RDD将从内存中加载。这次我们计算最低气温：</p>
+<p>关于BlockManagerInfo的日志显示，作为作业运行的一部分，RDD的分区会被保持在内存中。日志显示这个RDD的编号是4（在调用cache()方法之后的控制台输出中，也能看到这个信息），它包含两个分区，标签分别是0和1。如果在这个缓存的数据集上运行另一个作业，我们会看到这个RDD将从内存中加载。这次我们计算最低气温：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">scala&gt; tuples.reduceByKey((a, b) =&gt; Math.min(a, b)).foreach(println(_))</div><div class="line">INFO BlockManager: Found block rdd_4_0 locally</div><div class="line">INFO BlockManager: Found block rdd_4_1 locally</div><div class="line">(1949,78)</div><div class="line">(1950,-11)</div></pre></td></tr></table></figure>
 <a id="more"></a>
-<p>这是在微小数据集上的简单示例，但是对于更大的工作，节省的时间将很可观。在MapReduce中，为了执行另一个计算，输入数据集必须再次从磁盘加载。即使中间数据可以作为输入（比如一个清洗后的数据集，无效行和不必要的字段都已移除），也不能改变“数据必须从磁盘加载”的事实，这是很慢的。Spark会把数据集缓存在一个遍布集群的内存高速缓存中，这就意味着任何基于此数据集的计算都会执行的非常快。</p>
-<p>在对数据进行交互式探索时，这种效率是极其有用的。这也自然适合某些类型的算法，比如迭代算法，一次迭代计算的结果可以缓存在内存中，成为下次迭代计算的输入。这种算法也可以用MapReduce实现，每次迭代都是一个单独的MapReduce工作，因此每次迭代的结果必须写入磁盘，然后在下次迭代时再读回来。</p>
+<p>这是在微小数据集上的简单示例，但是对于更大的作业，节省的时间将很可观。在MapReduce中，为了执行另一个计算，输入数据集必须再次从磁盘加载。即使中间数据可以作为输入（比如一个清洗后的数据集，无效行和不必要的字段都已移除），也不能改变“数据必须从磁盘加载”的事实，这是很慢的。Spark会把数据集缓存在一个遍布集群的内存高速缓存中，这就意味着任何基于此数据集的计算都会执行的非常快。</p>
+<p>在对数据进行交互式探索时，这种效率是极其有用的。这也自然适合某些类型的算法，比如迭代算法，一次迭代计算的结果可以缓存在内存中，成为下次迭代计算的输入。这种算法也可以用MapReduce实现，每次迭代都是一个单独的MapReduce作业，因此每次迭代的结果必须写入磁盘，然后在下次迭代时再读回来。</p>
 <blockquote>
-<p>缓存的RDD只能被同一个应用中的工作获取。要在不同的应用之间共享数据集，第一个应用必须使用某个saveAs*()方法（saveAsTextFile()，saveAsHadoopFile()等等）来写到外部存储中，然后第二个应用使用SparkContext中的对应方法（textFile()，hadoopFile()等等）再次加载。同样的，当一个应用终止时，它缓存的所有RDD都被销毁，除非显式的保存下来，否则不能再次访问。</p>
+<p>缓存的RDD只能被同一个应用中的作业获取。要在不同的应用之间共享数据集，第一个应用必须使用某个saveAs*()方法（saveAsTextFile()，saveAsHadoopFile()等等）来写到外部存储中，然后第二个应用使用SparkContext中的对应方法（textFile()，hadoopFile()等等）再次加载。同样的，当一个应用终止时，它缓存的所有RDD都被销毁，除非显式的保存下来，否则不能再次访问。</p>
 </blockquote>
 <h3 id="持久化级别"><a href="#持久化级别" class="headerlink" title="持久化级别"></a>持久化级别</h3><p>调用cache()会把RDD的每个分区持久化到执行器（executor）的内存中。如果执行器没有足够的内存来存储这个RDD分区，计算不会失败，相反该分区将会根据需要进行重算。对于带有很多转换操作的复杂程序，这是很昂贵的。因此Spark提供了不同类型的持久化行为供用户选择，在调用persist()时指定StorageLevel参数即可。</p>
 <p>默认的持久化级别是MEMORY_ONLY，这种方式使用对象的常规内存表示。要使用更紧凑的表现形式，可以把分区中的元素序列化为字节数组（byte array）。这种级别是MEMORY_ONLY_SER，相比MEMORY_ONLY，这种级别会导致CPU的开销，如果序列化之后的RDD分区能够适应内存，而常规的内存表示不适合，那么这种开销就是值得的。MEMORY_ONLY_SER还会减轻垃圾回收的压力，因为每个RDD都以字节数组的形式存储，而不是很多的对象。</p>
 <blockquote>
-<p>在驱动程序的日志文件中，检查BlockManager相关的信息，可以看到一个RDD分区是否不适合内存。另外，每个驱动程序的SparkContext会在4040端口启动一个HTTP服务，提供关于运行环境以及正在运行的工作的有用信息，包括缓存的RDD分区的信息。</p>
+<p>在驱动程序的日志文件中，检查BlockManager相关的信息，可以看到一个RDD分区是否不适合内存。另外，每个驱动程序的SparkContext会在4040端口启动一个HTTP服务，提供关于运行环境以及正在运行的作业的有用信息，包括缓存的RDD分区的信息。</p>
 </blockquote>
 <p>默认情况下，使用常规的Java序列化框架来序列化RDD分区，不过Kryo序列化框架（下节讨论）通常是更好的选择，在大小和速度两方面都更优秀。如果把序列化后的分区进行压缩，可以节省更多的空间（再一次付出CPU的代价），设置spark.rdd.compress属性为true来启用压缩，属性spark.io.compression.codec是可选设置。</p>
 <p>如果重算一个数据集非常昂贵，那么MEMORY_AND_DISK（如果数据集在内存中放不下，就写到磁盘上）或者MEMORY_AND_DISK_SER（如果序列化后的数据集在内存中放不下，就写到磁盘上）是合适的。</p>
@@ -358,9 +358,9 @@
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> lookup: <span class="type">Broadcast</span>[<span class="type">Map</span>[<span class="type">Int</span>, <span class="type">String</span>]] =</div><div class="line">    sc.broadcast(<span class="type">Map</span>(<span class="number">1</span> -&gt; <span class="string">"a"</span>, <span class="number">2</span> -&gt; <span class="string">"e"</span>, <span class="number">3</span> -&gt; <span class="string">"i"</span>, <span class="number">4</span> -&gt; <span class="string">"o"</span>, <span class="number">5</span> -&gt; <span class="string">"u"</span>))</div><div class="line"><span class="keyword">val</span> result = sc.parallelize(<span class="type">Array</span>(<span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>)).map(lookup.value(_))</div><div class="line">assert(result.collect().toSet === <span class="type">Set</span>(<span class="string">"a"</span>, <span class="string">"e"</span>, <span class="string">"i"</span>))</div></pre></td></tr></table></figure>
 <p>在RDD的map()操作中，调用这个广播变量的value来访问它。</p>
 <p>顾名思义，广播变量是单向传送的，从驱动到任务——没有办法更新一个广播变量，然后回传给驱动。为此，我们需要一个累加器。</p>
-<h3 id="累加器"><a href="#累加器" class="headerlink" title="累加器"></a>累加器</h3><p>累加器是一个共享变量，和MapReduce中的计数器一样，任务只能对其增加。在工作完成以后，累加器的最终值可以在驱动程序中获取。下面的例子中，使用累加器计算一个整数RDD中的元素数量，同时使用reduce()操作对RDD中的值求和：</p>
+<h3 id="累加器"><a href="#累加器" class="headerlink" title="累加器"></a>累加器</h3><p>累加器是一个共享变量，和MapReduce中的计数器一样，任务只能对其增加。在作业完成以后，累加器的最终值可以在驱动程序中获取。下面的例子中，使用累加器计算一个整数RDD中的元素数量，同时使用reduce()操作对RDD中的值求和：</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> count: <span class="type">Accumulator</span>[<span class="type">Int</span>] = sc.accumulator(<span class="number">0</span>)</div><div class="line"><span class="keyword">val</span> result = sc.parallelize(<span class="type">Array</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>))</div><div class="line">  .map(i =&gt; &#123; count += <span class="number">1</span>; i &#125;)</div><div class="line">  .reduce((x, y) =&gt; x + y)</div><div class="line">assert(count.value === <span class="number">3</span>)</div><div class="line">assert(result === <span class="number">6</span>)</div></pre></td></tr></table></figure>
-<p>第一行代码使用SparkContext的accumulator()方法，创建了一个累加器变量count。map()操作是一个恒等函数，副作用是增加count。当Spark工作的结果计算出来之后，累加器的值通过调用value来访问。</p>
+<p>第一行代码使用SparkContext的accumulator()方法，创建了一个累加器变量count。map()操作是一个恒等函数，副作用是增加count。当Spark作业的结果计算出来之后，累加器的值通过调用value来访问。</p>
 <p>在这个例子中，我们使用一个Int作为累加器，但任何的数值类型都是可以的。Spark还提供了两种方法，一是使用累加器的结果类型与“被增量”的类型不同（参见SparkContext的accumulable()方法），二是可以累加可变集合中的值（通过accumulableCollection()）。</p>
 
       
