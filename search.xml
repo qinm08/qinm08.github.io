@@ -4,15 +4,15 @@
   
     
     <entry>
-      <title><![CDATA[插曲：Activiti BPM - Say Hello and Goodbye]]></title>
-      <url>https://qinm08.github.io/2016/08/15/activiti-bpm-1-say-hello/</url>
+      <title><![CDATA[插曲：Activiti——从入门到放弃]]></title>
+      <url>https://qinm08.github.io/2016/08/15/activiti-bpm-1/</url>
       <content type="html"><![CDATA[<p><img src="/uploads/images/2016/0815/0955.png" alt=""></p>
 ]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[Spark机器学习2：K-Means聚类算法]]></title>
-      <url>https://qinm08.github.io/2016/08/09/spark-machine-learning-2-k-means/</url>
+      <url>https://qinm08.github.io/2016/08/09/spark-mllib-2-k-means/</url>
       <content type="html"><![CDATA[<p>今天是七夕，看到一则关于“京东”名字来源的八卦，什么东哥的前女友、奶茶妹妹一个排的前男友balabala的，忽然想到能不能用算法对那一个排的前男友聚聚类，看看奶茶妹妹的喜好啊品味啊什么的，然后再看看东哥属于哪一类，一定很有（e）趣（su）。可惜手头没有那一排人的资料，只好作罢。由此看来聚类算法还挺有价值的，比如研究下非诚勿扰、世纪佳缘之类的……</p>
 <h1 id="聚类问题"><a href="#聚类问题" class="headerlink" title="聚类问题"></a>聚类问题</h1><p>言归正传，所谓聚类问题，就是给定一个元素集合D，其中每个元素具有n个可观察属性，使用某种算法将D划分成k个子集，要求每个子集内部的元素之间相异度尽可能低，而不同子集的元素相异度尽可能高。其中每个子集叫做一个簇（cluster）。</p>
 <p>上面这段话翻译为人类语言是这样的：有一堆人，每个人的胸牌上都写着“性别：男/女；年龄：XX”，我们可以根据性别把这堆人分为男、女两个子集，或者根据年龄把他们分为老、中、青、少四个子集。</p>
@@ -169,7 +169,7 @@
     
     <entry>
       <title><![CDATA[Spark机器学习1：朴素贝叶斯分类]]></title>
-      <url>https://qinm08.github.io/2016/08/01/spark-machine-learning-1-naive-bayes/</url>
+      <url>https://qinm08.github.io/2016/08/01/spark-mllib-1-naive-bayes/</url>
       <content type="html"><![CDATA[<h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><p>每个人每天都会进行很多次的分类操作。比如，当你看到一个陌生人，你的大脑中的分类器就会根据TA的体貌特征、衣着举止，判断出TA是男是女，是穷是富等等。这就是分类操作。</p>
 <p>其中，男人、女人、穷人、富人，这些是类别；那个陌生人，是个待分类项；把一个待分类项映射到一个类别的映射规则，就是一个分类器。</p>
 <p>分类算法的任务就是构造出分类器。</p>
