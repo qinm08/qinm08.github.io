@@ -5,7 +5,7 @@
     
     <entry>
       <title><![CDATA[插曲：Activiti——从入门到放弃]]></title>
-      <url>https://qinm08.github.io/2016/08/15/activiti-bpm-1/</url>
+      <url>https://qinm08.github.io/2016/160815-activiti-bpm-1/</url>
       <content type="html"><![CDATA[<p>版权所有，随便拿走。</p>
 <p><img src="/uploads/images/2016/0815/0955.png" alt=""></p>
 ]]></content>
@@ -13,7 +13,7 @@
     
     <entry>
       <title><![CDATA[Spark机器学习2：K-Means聚类算法]]></title>
-      <url>https://qinm08.github.io/2016/08/09/spark-mllib-2-k-means/</url>
+      <url>https://qinm08.github.io/2016/160809-spark-mllib-2-kmeans/</url>
       <content type="html"><![CDATA[<p>今天是七夕，看到一则关于“京东”名字来源的八卦，什么东哥的前女友、奶茶妹妹一个排的前男友balabala的，忽然想到能不能用算法对那一个排的前男友聚聚类，看看奶茶妹妹的喜好啊品味啊什么的，然后再看看东哥属于哪一类，一定很有（e）趣（su）。可惜手头没有那一排人的资料，只好作罢。由此看来聚类算法还挺有价值的，比如研究下非诚勿扰、世纪佳缘之类的……</p>
 <h1 id="聚类问题"><a href="#聚类问题" class="headerlink" title="聚类问题"></a>聚类问题</h1><p>言归正传，所谓聚类问题，就是给定一个元素集合D，其中每个元素具有n个可观察属性，使用某种算法将D划分成k个子集，要求每个子集内部的元素之间相异度尽可能低，而不同子集的元素相异度尽可能高。其中每个子集叫做一个簇（cluster）。</p>
 <p>上面这段话翻译为人类语言是这样的：有一堆人，每个人的胸牌上都写着“性别：男/女；年龄：XX”，我们可以根据性别把这堆人分为男、女两个子集，或者根据年龄把他们分为老、中、青、少四个子集。</p>
@@ -170,7 +170,7 @@
     
     <entry>
       <title><![CDATA[Spark机器学习1：朴素贝叶斯分类]]></title>
-      <url>https://qinm08.github.io/2016/08/01/spark-mllib-1-naive-bayes/</url>
+      <url>https://qinm08.github.io/2016/160801-spark-mllib-1-naive-bayes/</url>
       <content type="html"><![CDATA[<h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><p>每个人每天都会进行很多次的分类操作。比如，当你看到一个陌生人，你的大脑中的分类器就会根据TA的体貌特征、衣着举止，判断出TA是男是女，是穷是富等等。这就是分类操作。</p>
 <p>其中，男人、女人、穷人、富人，这些是类别；那个陌生人，是个待分类项；把一个待分类项映射到一个类别的映射规则，就是一个分类器。</p>
 <p>分类算法的任务就是构造出分类器。</p>
@@ -296,7 +296,7 @@
     
     <entry>
       <title><![CDATA[翻译：Oryx——基于Spark和Kafka的机器学习系统]]></title>
-      <url>https://qinm08.github.io/2016/07/25/oryx-overview/</url>
+      <url>https://qinm08.github.io/2016/160725-oryx-overview/</url>
       <content type="html"><![CDATA[<h1 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h1><p>Oryx 2 是一个 Lambda 架构的实现，基于 <a href="http://spark.apache.org" target="_blank" rel="external">Apache Spark</a> 和 <a href="http://kafka.apache.org" target="_blank" rel="external">Apache Kafka</a> 构建，专门用于实时的、大规模的机器学习。它是用于构建应用的一套框架，还包括一些打包好的、端到端的应用，用于协同过滤、分类、回归和聚类。</p>
 <p>Oryx 2 是对最初的 <a href="https://github.com/cloudera/oryx" target="_blank" rel="external">Oryx 1</a> 项目的重构和延续。它包含了以下三个级别（<em>tiers</em>）：</p>
 <ol>
@@ -333,7 +333,7 @@
     
     <entry>
       <title><![CDATA[翻译：Hadoop权威指南之Spark-5]]></title>
-      <url>https://qinm08.github.io/2016/07/21/hadoop-the-definitive-guide-spark-5/</url>
+      <url>https://qinm08.github.io/2016/160721-hadoop-tdg-spark-5/</url>
       <content type="html"><![CDATA[<h1 id="剖析Spark作业的运行"><a href="#剖析Spark作业的运行" class="headerlink" title="剖析Spark作业的运行"></a>剖析Spark作业的运行</h1><p>我们来看一下当我们运行一个Spark作业时，会发生什么。在最高级别上，有两个独立的实体：驱动（driver）和执行器（executors）。驱动持有（hosts）应用（SparkContext），调度作业中的任务。执行器独立于应用，在应用的持续时间内运行，执行应用的任务。通常情况下，驱动作为客户端运行，不受集群管理器的管理，而执行器运行在集群中的多台机器上，但并非总是如此。在本节的其余部分，我们假定应用的执行器已经在运行。</p>
 <h2 id="作业的提交"><a href="#作业的提交" class="headerlink" title="作业的提交"></a>作业的提交</h2><p>图19-1说明了Spark是怎样运行一个作业的。当在一个RDD上执行一个行动时（比如count()），会自动提交一个Spark作业。内部来看，这会导致SparkContext的runJob()方法被调用（图19-1步骤1），该方法将调用传递给调度器，调度器作为驱动的一部分运行（步骤2）。调度器由两部分组成：DAG调度器和任务调度器。DAG调度器会把作业拆解为多个阶段组成的DAG。任务调度器的责任是把每个阶段的任务提交到集群。</p>
 <p><img src="/uploads/images/2016/0721/2145.png" alt=""><br><em>图19-1. Spark怎样运行一个作业</em></p>
@@ -400,7 +400,7 @@
     
     <entry>
       <title><![CDATA[翻译：Hadoop权威指南之Spark-4]]></title>
-      <url>https://qinm08.github.io/2016/07/18/hadoop-the-definitive-guide-spark-4/</url>
+      <url>https://qinm08.github.io/2016/160718-hadoop-tdg-spark-4/</url>
       <content type="html"><![CDATA[<h2 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h2><p>回到本章开头的例子，我们可以把“年度-气温”的中间数据集缓存在内存中：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">scala&gt; tuples.cache()</div><div class="line">res1: tuples.type = MappedRDD[4] at map at &lt;console&gt;:18</div></pre></td></tr></table></figure>
 <p>调用cache()不会立刻把RDD缓存到内存中，只是对这个RDD做一个标记，当Spark作业运行的时候，实际的缓存行为才会发生。因此我们首先强制运行一个作业：</p>
@@ -448,7 +448,7 @@
     
     <entry>
       <title><![CDATA[翻译：Hadoop权威指南之Spark-3]]></title>
-      <url>https://qinm08.github.io/2016/07/17/hadoop-the-definitive-guide-spark-3/</url>
+      <url>https://qinm08.github.io/2016/160717-hadoop-tdg-spark-3/</url>
       <content type="html"><![CDATA[<h1 id="弹性分布式数据集"><a href="#弹性分布式数据集" class="headerlink" title="弹性分布式数据集"></a>弹性分布式数据集</h1><p>RDD是每个spark程序的核心，本节我们来看看更多细节。</p>
 <h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><p>创建RDD有三种方式：从一个内存中的对象集合，被称为<em>并行化（parallelizing）</em> 一个集合；使用一个外部存储（比如HDFS）的数据集；转换已存在的RDD。在对少量的输入数据并行地进行CPU密集型运算时，第一种方式非常有用。例如，下面执行从1到10的独立运算：</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> params = sc.parallelize(<span class="number">1</span> to <span class="number">10</span>)</div><div class="line"><span class="keyword">val</span> result = params.map(performExpensiveComputation)</div></pre></td></tr></table></figure>
@@ -507,7 +507,7 @@
     
     <entry>
       <title><![CDATA[翻译：Hadoop权威指南之Spark-2]]></title>
-      <url>https://qinm08.github.io/2016/07/16/hadoop-the-definitive-guide-spark-2/</url>
+      <url>https://qinm08.github.io/2016/160716-hadoop-tdg-spark-2/</url>
       <content type="html"><![CDATA[<h2 id="Scala独立应用"><a href="#Scala独立应用" class="headerlink" title="Scala独立应用"></a>Scala独立应用</h2><p>在Spark shell中运行了一个小程序之后，你可能想要把它打包成自包含应用，这样就可以多次运行了。</p>
 <p>示例19-1. 使用Spark找出最高气温的Scala应用</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.apache.spark.<span class="type">SparkContext</span>._</div><div class="line"><span class="keyword">import</span> org.apache.spark.&#123;<span class="type">SparkConf</span>, <span class="type">SparkContext</span>&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">MaxTemperature</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]) &#123;</div><div class="line">        <span class="keyword">val</span> conf = <span class="keyword">new</span> <span class="type">SparkConf</span>().setAppName(<span class="string">"Max Temperature"</span>)</div><div class="line">        <span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(conf)</div><div class="line">        sc.textFile(args(<span class="number">0</span>))</div><div class="line">          .map(_.split(<span class="string">"\t"</span>))</div><div class="line">          .filter(rec =&gt; (rec(<span class="number">1</span>) != <span class="string">"9999"</span> &amp;&amp; rec(<span class="number">2</span>).matches(<span class="string">"[01459]"</span>)))</div><div class="line">          .map(rec =&gt; (rec(<span class="number">0</span>).toInt, rec(<span class="number">1</span>).toInt))</div><div class="line">          .reduceByKey((a, b) =&gt; <span class="type">Math</span>.max(a, b))</div><div class="line">          .saveAsTextFile(args(<span class="number">1</span>))</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -536,7 +536,7 @@
     
     <entry>
       <title><![CDATA[翻译：Hadoop权威指南之Spark-1]]></title>
-      <url>https://qinm08.github.io/2016/07/15/hadoop-the-definitive-guide-spark-1/</url>
+      <url>https://qinm08.github.io/2016/160715-hadoop-tdg-spark-1/</url>
       <content type="html"><![CDATA[<p>本文翻译自O’Reilly出版Tom White所著《Hadoop: The Definitive Guide》第4版第19章，向作者致敬。该书英文第4版已于2015年4月出版，至今已近15个月，而市面上中文第3版还在大行其道。Spark一章是第4版新增的内容，笔者在学习过程中顺便翻译记录。由于笔者也在学习，难免翻译不妥或出错，欢迎方家来信斧正。翻译纯属兴趣，不做商业用途。秦铭，Email地址<a href="mailto:qinm08@gmail.com" target="_blank" rel="external">qinm08@gmail.com</a>。</p>
 <hr>
 <p><a href="http://spark.apache.org" target="_blank" rel="external">Apache Spark</a> 是一个大规模数据处理的集群计算框架。和本书中讨论的大多数其他处理框架不同，Spark不使用MapReduce作为执行引擎，作为替代，Spark使用自己的分布式运行环境（distributed runtime）来执行集群上的工作。然而，Spark与MapReduce在API和runtime方面有许多相似，本章中我们将会看到。Spark和Hadoop紧密集成：它可以运行在YARN上，处理Hadoop的文件格式，后端存储采用HDFS。</p>
