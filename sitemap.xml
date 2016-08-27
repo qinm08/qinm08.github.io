@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://qinm08.github.io/2016/160725-oryx-overview/</loc>
+    
+    <lastmod>2016-08-27T02:51:12.930Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://qinm08.github.io/2016/160715-hadoop-tdg-spark-1/</loc>
     
     <lastmod>2016-08-19T10:23:11.783Z</lastmod>
@@ -33,13 +40,6 @@
     <loc>https://qinm08.github.io/2016/160721-hadoop-tdg-spark-5/</loc>
     
     <lastmod>2016-08-19T10:20:11.981Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://qinm08.github.io/2016/160725-oryx-overview/</loc>
-    
-    <lastmod>2016-08-17T06:01:04.208Z</lastmod>
     
   </url>
   
