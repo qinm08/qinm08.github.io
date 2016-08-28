@@ -271,6 +271,199 @@
             
               
                 
+                <a class="post-title-link" href="/2016/160825-spark-2-1-spark-sql/" itemprop="url">
+                  Spark 2.0 之1：Spark SQL 入门
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-25T00:00:00+08:00" content="2016-08-25">
+              2016-08-25
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>个人认为Spark SQL应该是Spark BDAS各个组件中最简单的了，在Spark 2.0中，Spark SQL变得更加简单了。本文不再介绍概念性的内容，仅仅通过一个示例来熟悉Spark 2.0中的Spark SQL。本文使用的数据下载自 <a href="http://maps.bristol.gov.uk/instantatlas/bopen/energy_generation_wc_140114.csv">DATA.GOV.UK</a>，点击即可下载。</p>
+<h1 id="创建-SparkSession"><a href="#创建-SparkSession" class="headerlink" title="创建 SparkSession"></a>创建 SparkSession</h1><p>这一步是Spark 2.0与之前版本的主要区别之一，2.0时代我们不再需要一步一个脚印地去创建SparkConf, SparkContext, SQLContext/HiveContext等等，只需要一个SparkSession就齐活了。在spark-shell中，Spark会为我们自动创建一个名为spark的SparkSession对象，这里我们与之保持一致：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> spark = <span class="type">SparkSession</span>.builder().appName(<span class="string">"Spark-2.0-SQL-APP-1"</span>).master(<span class="string">"local"</span>)</div><div class="line">    .config(<span class="string">"spark.some.config.option"</span>, <span class="string">"some-value"</span>)</div><div class="line">    .enableHiveSupport()</div><div class="line">    .getOrCreate()</div><div class="line"></div><div class="line"><span class="keyword">import</span> spark.implicits._</div><div class="line"><span class="keyword">import</span> spark.sql</div></pre></td></tr></table></figure></p>
+<p>这里首先指定了appName以及master运行方式，然后添加了一些配置选项，还启用了Hive支持（后面要把数据持久化到Hive仓库中）。两个import语句对于新手可能有点别扭，这里简单提一句，后面的toDF()方法和“$”操作符，需要第一个import的隐式转换。第二个import更容易理解一些，引入spark.sql之后，后面在需要调用spark.sql()方法来执行SQL语句的时候，直接使用sql()即可。注意这里的spark不是包名，而是我们刚刚创建的名为spark的SparkSession对象。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/160825-spark-2-1-spark-sql/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/160815-activiti-bpm-1/" itemprop="url">
+                  插曲：Activiti——从入门到放弃
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-15T00:00:00+08:00" content="2016-08-15">
+              2016-08-15
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>版权所有，随便拿走。</p>
+<p><img src="/uploads/images/2016/0815/0955.png" alt=""></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/160809-spark-mllib-2-kmeans/" itemprop="url">
                   Spark机器学习2：K-Means聚类算法
                 </a>
@@ -1119,7 +1312,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
