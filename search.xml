@@ -4,7 +4,7 @@
   
     
     <entry>
-      <title><![CDATA[Spark SQL 入门]]></title>
+      <title><![CDATA[原创：Spark SQL 入门]]></title>
       <url>https://qinm08.github.io/2016/160825-spark-2-1-spark-sql/</url>
       <content type="html"><![CDATA[<p>个人认为Spark SQL应该是Spark BDAS各个组件中最简单的了，在Spark 2.0中，Spark SQL变得更加简单了。本文不再介绍概念性的内容，仅仅通过一个示例来熟悉Spark 2.0中的Spark SQL。本文使用的数据下载自 <a href="http://maps.bristol.gov.uk/instantatlas/bopen/energy_generation_wc_140114.csv" target="_blank" rel="external">DATA.GOV.UK</a>，点击即可下载。</p>
 <h1 id="创建-SparkSession"><a href="#创建-SparkSession" class="headerlink" title="创建 SparkSession"></a>创建 SparkSession</h1><p>这一步是Spark 2.0与之前版本的主要区别之一，2.0时代我们不再需要一步一个脚印地去创建SparkConf, SparkContext, SQLContext/HiveContext等等，只需要一个SparkSession就齐活了。在spark-shell中，Spark会为我们自动创建一个名为spark的SparkSession对象，这里我们与之保持一致：</p>
@@ -47,7 +47,7 @@
     </entry>
     
     <entry>
-      <title><![CDATA[Spark机器学习2：K-Means聚类算法]]></title>
+      <title><![CDATA[原创：Spark机器学习2——K-Means聚类算法]]></title>
       <url>https://qinm08.github.io/2016/160809-spark-mllib-2-kmeans/</url>
       <content type="html"><![CDATA[<p>今天是七夕，看到一则关于“京东”名字来源的八卦，什么东哥的前女友、奶茶妹妹一个排的前男友balabala的，忽然想到能不能用算法对那一个排的前男友聚聚类，看看奶茶妹妹的喜好啊品味啊什么的，然后再看看东哥属于哪一类，一定很有（e）趣（su）。可惜手头没有那一排人的资料，只好作罢。由此看来聚类算法还挺有价值的，比如研究下非诚勿扰、世纪佳缘之类的……</p>
 <h1 id="聚类问题"><a href="#聚类问题" class="headerlink" title="聚类问题"></a>聚类问题</h1><p>言归正传，所谓聚类问题，就是给定一个元素集合D，其中每个元素具有n个可观察属性，使用某种算法将D划分成k个子集，要求每个子集内部的元素之间相异度尽可能低，而不同子集的元素相异度尽可能高。其中每个子集叫做一个簇（cluster）。</p>
@@ -204,7 +204,7 @@
     </entry>
     
     <entry>
-      <title><![CDATA[Spark机器学习1：朴素贝叶斯分类]]></title>
+      <title><![CDATA[原创：Spark机器学习1——朴素贝叶斯分类]]></title>
       <url>https://qinm08.github.io/2016/160801-spark-mllib-1-naive-bayes/</url>
       <content type="html"><![CDATA[<h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><p>每个人每天都会进行很多次的分类操作。比如，当你看到一个陌生人，你的大脑中的分类器就会根据TA的体貌特征、衣着举止，判断出TA是男是女，是穷是富等等。这就是分类操作。</p>
 <p>其中，男人、女人、穷人、富人，这些是类别；那个陌生人，是个待分类项；把一个待分类项映射到一个类别的映射规则，就是一个分类器。</p>
