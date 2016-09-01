@@ -4,7 +4,7 @@
   
     
     <entry>
-      <title><![CDATA[Spark 2.0 之1：Spark SQL 入门]]></title>
+      <title><![CDATA[Spark SQL 入门]]></title>
       <url>https://qinm08.github.io/2016/160825-spark-2-1-spark-sql/</url>
       <content type="html"><![CDATA[<p>个人认为Spark SQL应该是Spark BDAS各个组件中最简单的了，在Spark 2.0中，Spark SQL变得更加简单了。本文不再介绍概念性的内容，仅仅通过一个示例来熟悉Spark 2.0中的Spark SQL。本文使用的数据下载自 <a href="http://maps.bristol.gov.uk/instantatlas/bopen/energy_generation_wc_140114.csv" target="_blank" rel="external">DATA.GOV.UK</a>，点击即可下载。</p>
 <h1 id="创建-SparkSession"><a href="#创建-SparkSession" class="headerlink" title="创建 SparkSession"></a>创建 SparkSession</h1><p>这一步是Spark 2.0与之前版本的主要区别之一，2.0时代我们不再需要一步一个脚印地去创建SparkConf, SparkContext, SQLContext/HiveContext等等，只需要一个SparkSession就齐活了。在spark-shell中，Spark会为我们自动创建一个名为spark的SparkSession对象，这里我们与之保持一致：</p>
