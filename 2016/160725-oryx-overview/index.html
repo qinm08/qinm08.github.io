@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="spark,kafka,machine learning,oryx," />
 
 
 
@@ -84,15 +84,27 @@
 
 
 
-<meta name="description" content="不忘初心，方得始终">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Ming's Coding Life">
-<meta property="og:url" content="https://qinm08.github.io/archives/index.html">
+<meta name="description" content="概览Oryx 2 是一个 Lambda 架构的实现，基于 Apache Spark 和 Apache Kafka 构建，专门用于实时的、大规模的机器学习。它是用于构建应用的一套框架，还包括一些打包好的、端到端的应用，用于协同过滤、分类、回归和聚类。
+Oryx 2 是对最初的 Oryx 1 项目的重构和延续。它包含了以下三个级别（tiers）：
+
+通用的Lambda架构级别，提供了批处理层、速度层和">
+<meta property="og:type" content="article">
+<meta property="og:title" content="翻译：Oryx——基于Spark和Kafka的机器学习系统">
+<meta property="og:url" content="https://qinm08.github.io/2016/160725-oryx-overview/index.html">
 <meta property="og:site_name" content="Ming's Coding Life">
-<meta property="og:description" content="不忘初心，方得始终">
+<meta property="og:description" content="概览Oryx 2 是一个 Lambda 架构的实现，基于 Apache Spark 和 Apache Kafka 构建，专门用于实时的、大规模的机器学习。它是用于构建应用的一套框架，还包括一些打包好的、端到端的应用，用于协同过滤、分类、回归和聚类。
+Oryx 2 是对最初的 Oryx 1 项目的重构和延续。它包含了以下三个级别（tiers）：
+
+通用的Lambda架构级别，提供了批处理层、速度层和">
+<meta property="og:image" content="https://qinm08.github.io/uploads/images/2016/0725/1245.png">
+<meta property="og:updated_time" content="2016-09-19T12:32:39.376Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ming's Coding Life">
-<meta name="twitter:description" content="不忘初心，方得始终">
+<meta name="twitter:title" content="翻译：Oryx——基于Spark和Kafka的机器学习系统">
+<meta name="twitter:description" content="概览Oryx 2 是一个 Lambda 架构的实现，基于 Apache Spark 和 Apache Kafka 构建，专门用于实时的、大规模的机器学习。它是用于构建应用的一套框架，还包括一些打包好的、端到端的应用，用于协同过滤、分类、回归和聚类。
+Oryx 2 是对最初的 Oryx 1 项目的重构和延续。它包含了以下三个级别（tiers）：
+
+通用的Lambda架构级别，提供了批处理层、速度层和">
+<meta name="twitter:image" content="https://qinm08.github.io/uploads/images/2016/0725/1245.png">
 
 
 
@@ -113,9 +125,9 @@
 
 
 
-  <link rel="canonical" href="https://qinm08.github.io/archives/"/>
+  <link rel="canonical" href="https://qinm08.github.io/2016/160725-oryx-overview/"/>
 
-  <title> 归档 | Ming's Coding Life </title>
+  <title> 翻译：Oryx——基于Spark和Kafka的机器学习系统 | Ming's Coding Life </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -136,7 +148,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  page-archive  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -247,436 +259,167 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
-
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      嗯..! 目前共计 11 篇日志。 继续努力。
-    </span>
-
+  <div id="posts" class="posts-expand">
     
-
-      
-      
-      
-
-      
-        
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2016">2016</h2>
-        </div>
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/160920-cache-sync-pattern/" itemprop="url">
-              
-                <span itemprop="name">缓存同步的三种设计模式</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-09-20T00:00:00+08:00"
-              content="2016-09-20" >
-          09-20
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/160825-spark-2-1-spark-sql/" itemprop="url">
-              
-                <span itemprop="name">Spark 2.0 之1：Spark SQL 入门</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-08-25T00:00:00+08:00"
-              content="2016-08-25" >
-          08-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/160815-activiti-bpm-1/" itemprop="url">
-              
-                <span itemprop="name">插曲：Activiti——从入门到放弃</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-08-15T00:00:00+08:00"
-              content="2016-08-15" >
-          08-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/160809-spark-mllib-2-kmeans/" itemprop="url">
-              
-                <span itemprop="name">Spark机器学习2：K-Means聚类算法</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-08-09T00:00:00+08:00"
-              content="2016-08-09" >
-          08-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/160801-spark-mllib-1-naive-bayes/" itemprop="url">
-              
-                <span itemprop="name">Spark机器学习1：朴素贝叶斯分类</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-08-01T00:00:00+08:00"
-              content="2016-08-01" >
-          08-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/160725-oryx-overview/" itemprop="url">
-              
-                <span itemprop="name">翻译：Oryx——基于Spark和Kafka的机器学习系统</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-25T00:00:00+08:00"
-              content="2016-07-25" >
-          07-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/160721-hadoop-tdg-spark-5/" itemprop="url">
-              
-                <span itemprop="name">翻译：Hadoop权威指南之Spark-5</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-21T00:00:00+08:00"
-              content="2016-07-21" >
-          07-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/160718-hadoop-tdg-spark-4/" itemprop="url">
-              
-                <span itemprop="name">翻译：Hadoop权威指南之Spark-4</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-18T00:00:00+08:00"
-              content="2016-07-18" >
-          07-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/160717-hadoop-tdg-spark-3/" itemprop="url">
-              
-                <span itemprop="name">翻译：Hadoop权威指南之Spark-3</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-17T00:00:00+08:00"
-              content="2016-07-17" >
-          07-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/160716-hadoop-tdg-spark-2/" itemprop="url">
-              
-                <span itemprop="name">翻译：Hadoop权威指南之Spark-2</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-16T00:00:00+08:00"
-              content="2016-07-16" >
-          07-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/160715-hadoop-tdg-spark-1/" itemprop="url">
-              
-                <span itemprop="name">翻译：Hadoop权威指南之Spark-1</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-15T00:00:00+08:00"
-              content="2016-07-15" >
-          07-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-  </section>
 
   
+  
 
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                翻译：Oryx——基于Spark和Kafka的机器学习系统
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-25T00:00:00+08:00" content="2016-07-25">
+              2016-07-25
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv">阅读次数
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h1><p>Oryx 2 是一个 Lambda 架构的实现，基于 <a href="http://spark.apache.org" target="_blank" rel="external">Apache Spark</a> 和 <a href="http://kafka.apache.org" target="_blank" rel="external">Apache Kafka</a> 构建，专门用于实时的、大规模的机器学习。它是用于构建应用的一套框架，还包括一些打包好的、端到端的应用，用于协同过滤、分类、回归和聚类。</p>
+<p>Oryx 2 是对最初的 <a href="https://github.com/cloudera/oryx" target="_blank" rel="external">Oryx 1</a> 项目的重构和延续。它包含了以下三个级别（<em>tiers</em>）：</p>
+<ol>
+<li>通用的Lambda架构级别，提供了批处理层、速度层和服务层，这些并不是机器学习所特有的。</li>
+<li>专门的机器学习抽象级别，用于超参数选择等等。</li>
+<li>端到端的应用级别，是对标准的机器学习算法的实现。</li>
+</ol>
+<p>从另一个方面来看，它包含了Lambda架构的三个并行的协同操作层（<em>layers</em>），以及一个连接元素：</p>
+<ol>
+<li>批处理层，基于所有的历史数据以及之前的计算结果，计算出新的结果。这里的操作运行时间较长，可能需要数小时。</li>
+<li>速度层，基于新的数据流，产生和发布增量的模型更新。这些更新是秒级发生的。</li>
+<li>服务层，接收模型和更新，实现一个同步API，对结果进行查询操作。</li>
+<li>数据传输层，在层与层之间移动数据，从外部数据源接收输入。</li>
+</ol>
+<a id="more"></a>
+<p><img src="/uploads/images/2016/0725/1245.png" alt=""></p>
+<p>这个项目可以一级一级地重用（<em>tier by tier</em>）：比如，可以忽略第3级“应用级别”，把它作为构建新的机器学习应用的框架。它还可以一层一层地重用（<em>layer by layer</em>）：比如，如果不需要增量更新，速度层可以省略。它还可以一片一片地修改（<em>piece by piece</em>）：协同过滤应用的建模批处理层，可以被替换为自定义的实现，使用Spark MLlib之外的新算法，同时保留服务层和速度层的实现。</p>
+<h1 id="Lambda级的实现"><a href="#Lambda级的实现" class="headerlink" title="Lambda级的实现"></a>Lambda级的实现</h1><h2 id="数据传输"><a href="#数据传输" class="headerlink" title="数据传输"></a>数据传输</h2><p>数据传输机制是一个Apache Kafka的topic。任何进程——包括但不限于服务层——都能够向topic发送数据，然后被速度层和批处理层接收。Kafka的topic还被用于发布 <em>模型</em> 和 <em>模型更新</em>，然后被速度层和服务层消费。</p>
+<h2 id="批处理层"><a href="#批处理层" class="headerlink" title="批处理层"></a>批处理层</h2><p>批处理层的实现是一个Hadoop集群上的Spark Streaming进程，它从输入的Kafka topic中读取数据。这个Streaming进程必然需要较长时间——数小时甚至一天。它使用Spark来把当前窗口的数据保存到HDFS，然后结合HDFS上的所有历史数据，启动新结果的构建过程。结果被写到HDFS，同时发布到一个Kafka的更新topic。</p>
+<h2 id="速度层"><a href="#速度层" class="headerlink" title="速度层"></a>速度层</h2><p>速度层的实现也是一个Spark Streaming进程，它也从输入的Kafka topic中读取数据。它的时间要短的多，大约几秒钟。它周期性的从更新topic中加载新的模型，然后不断地产生模型更新，这些更新也会被放回到更新topic中。</p>
+<h2 id="服务层"><a href="#服务层" class="headerlink" title="服务层"></a>服务层</h2><p>服务层监听更新topic上的模型和模型更新。它在内存中维护模型的状态。在对内存中的模型进行查询的方法之上，它暴露一个HTTP REST API。它们中的大多数都可以伸缩部署，每一个都可以接收新的数据并写到Kafka中，在那里被速度层和批处理层获取。</p>
+<h2 id="使用和部署"><a href="#使用和部署" class="headerlink" title="使用和部署"></a>使用和部署</h2><p>这个应用是用Java语言写的，使用了Spark、Hadoop、Tomcat、Kafka、ZooKeeper等等组件。采用一个单独的<a href="https://github.com/typesafehub/config" target="_blank" rel="external">Typesafe Config</a>配置文件来做配置管理，其中applications配置了整个系统的部署。这里包括了关键接口类（批处理层、速度层和服务层的逻辑）的实现。应用把这些实现与每一层的二进制实例打包和部署在一起。每一个实例都是一个可运行的Java .jar文件（oryx-batch-2.x.jar、oryx-speed-2.x.jar、oryx-serving-2.x.jar），它会启动所有必需的服务。</p>
+<h1 id="ML级的实现"><a href="#ML级的实现" class="headerlink" title="ML级的实现"></a>ML级的实现</h1><p>ML级是对上述通用接口的实例化和特殊化。这里实现了通常的机器学习需求，然后对上层应用暴露出机器学习特定的接口。</p>
+<p>例如，这里实现了一个批处理层的更新进程，用来自动地查询出一个test和training集合。它会调用一个由上层应用提供的函数，来对test集合上的模型进行计算。它可以自动的重复这种过程，每次使用不同的超参数值，最后选择出最好的结果。它通过 <a href="http://dmg.org/pmml/v4-2-1/GeneralStructure.html" target="_blank" rel="external">PMML</a> 对模型进行序列化。</p>
+<h1 id="端到端的应用实现"><a href="#端到端的应用实现" class="headerlink" title="端到端的应用实现"></a>端到端的应用实现</h1><p>除了是一个框架以外，对于机器学习的三种用例，Oryx 2 包含了批处理层、速度层和服务层的完整实现。这些都是开箱即用的，或者也可以做为自定义应用的基础部分：</p>
+<ul>
+<li>基于交替最小二乘法的协同过滤或推荐系统</li>
+<li>基于k-means算法的聚类</li>
+<li>基于“随机决策森林”的分类和回归</li>
+</ul>
+<p>本文翻译自<a href="http://oryx.io/" target="_blank" rel="external">Oryx 官方网站</a>。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/spark/" rel="tag">#spark</a>
+          
+            <a href="/tags/kafka/" rel="tag">#kafka</a>
+          
+            <a href="/tags/machine-learning/" rel="tag">#machine learning</a>
+          
+            <a href="/tags/oryx/" rel="tag">#oryx</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/160721-hadoop-tdg-spark-5/" rel="next" title="翻译：Hadoop权威指南之Spark-5">
+                <i class="fa fa-chevron-left"></i> 翻译：Hadoop权威指南之Spark-5
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/160801-spark-mllib-1-naive-bayes/" rel="prev" title="Spark机器学习1：朴素贝叶斯分类">
+                Spark机器学习1：朴素贝叶斯分类 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -684,6 +427,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -703,8 +450,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https://avatars2.githubusercontent.com/u/20449740?v=3&s=460"
@@ -812,6 +568,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lambda级的实现"><span class="nav-number">2.</span> <span class="nav-text">Lambda级的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据传输"><span class="nav-number">2.1.</span> <span class="nav-text">数据传输</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#批处理层"><span class="nav-number">2.2.</span> <span class="nav-text">批处理层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#速度层"><span class="nav-number">2.3.</span> <span class="nav-text">速度层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务层"><span class="nav-number">2.4.</span> <span class="nav-text">服务层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用和部署"><span class="nav-number">2.5.</span> <span class="nav-text">使用和部署</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ML级的实现"><span class="nav-number">3.</span> <span class="nav-text">ML级的实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#端到端的应用实现"><span class="nav-number">4.</span> <span class="nav-text">端到端的应用实现</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -929,11 +696,9 @@
 
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
 
 
   
