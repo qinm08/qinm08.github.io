@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://qinm08.github.io/2016/160920-cache-sync-pattern/</loc>
+    
+    <lastmod>2016-09-19T12:39:27.401Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://qinm08.github.io/2016/160725-oryx-overview/</loc>
     
     <lastmod>2016-09-19T12:32:39.376Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>https://qinm08.github.io/2016/160815-activiti-bpm-1/</loc>
     
     <lastmod>2016-09-19T12:32:33.519Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://qinm08.github.io/2016/160920-cache-sync-pattern/</loc>
-    
-    <lastmod>2016-09-19T12:32:21.556Z</lastmod>
     
   </url>
   
