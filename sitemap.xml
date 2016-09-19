@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://qinm08.github.io/2016/160918-cache-sync-pattern/</loc>
+    
+    <lastmod>2016-09-19T13:05:49.067Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://qinm08.github.io/2016/160809-spark-mllib-2-kmeans/</loc>
     
     <lastmod>2016-09-19T12:57:27.650Z</lastmod>
@@ -33,13 +40,6 @@
     <loc>https://qinm08.github.io/2016/160825-spark-2-1-spark-sql/</loc>
     
     <lastmod>2016-09-19T12:49:40.073Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://qinm08.github.io/2016/160920-cache-sync-pattern/</loc>
-    
-    <lastmod>2016-09-19T12:48:27.039Z</lastmod>
     
   </url>
   
