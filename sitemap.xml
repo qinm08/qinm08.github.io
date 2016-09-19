@@ -2,9 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://qinm08.github.io/2016/160809-spark-mllib-2-kmeans/</loc>
+    
+    <lastmod>2016-09-19T12:50:33.523Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://qinm08.github.io/2016/160801-spark-mllib-1-naive-bayes/</loc>
+    
+    <lastmod>2016-09-19T12:50:15.501Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://qinm08.github.io/2016/160825-spark-2-1-spark-sql/</loc>
+    
+    <lastmod>2016-09-19T12:49:40.073Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://qinm08.github.io/2016/160920-cache-sync-pattern/</loc>
     
-    <lastmod>2016-09-19T12:39:27.401Z</lastmod>
+    <lastmod>2016-09-19T12:48:27.039Z</lastmod>
     
   </url>
   
@@ -19,27 +40,6 @@
     <loc>https://qinm08.github.io/2016/160815-activiti-bpm-1/</loc>
     
     <lastmod>2016-09-19T12:32:33.519Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://qinm08.github.io/2016/160801-spark-mllib-1-naive-bayes/</loc>
-    
-    <lastmod>2016-09-01T13:38:22.903Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://qinm08.github.io/2016/160809-spark-mllib-2-kmeans/</loc>
-    
-    <lastmod>2016-09-01T13:38:15.059Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://qinm08.github.io/2016/160825-spark-2-1-spark-sql/</loc>
-    
-    <lastmod>2016-09-01T13:38:02.245Z</lastmod>
     
   </url>
   
