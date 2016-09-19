@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://qinm08.github.io/2016/160725-oryx-overview/</loc>
+    
+    <lastmod>2016-09-19T12:51:35.997Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://qinm08.github.io/2016/160809-spark-mllib-2-kmeans/</loc>
     
     <lastmod>2016-09-19T12:50:33.523Z</lastmod>
@@ -26,13 +33,6 @@
     <loc>https://qinm08.github.io/2016/160920-cache-sync-pattern/</loc>
     
     <lastmod>2016-09-19T12:48:27.039Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://qinm08.github.io/2016/160725-oryx-overview/</loc>
-    
-    <lastmod>2016-09-19T12:32:39.376Z</lastmod>
     
   </url>
   
