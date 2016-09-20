@@ -84,34 +84,37 @@
 
 
 
-<meta name="description" content="Cache Aside Pattern这是最简单、最常用也最有效的缓存同步模式。
+<meta name="description" content="Cache Aside Pattern
+这是最简单、最常用也最有效的缓存同步模式。
 缓存失效： 应用程序访问缓存未命中，再从数据库中取数据，取到之后放到缓存中。
 缓存命中： 应用程序从缓存中取数据，取到之后返回。
 缓存更新： 先把数据保存到数据库中，成功后，删除缓存或让缓存失效。
 
-数据保存到数据库之后，为什么不是把数据保存到缓存中，而是删除缓存或让缓存失效？设想两个并发的写操作A和B，A保存数据库">
+数据保存到数据库之后，为什么不是把数据保存到缓存中，而是删除缓存或让缓存失效？设想两个并发的写操作A和B，A保存数据">
 <meta property="og:type" content="article">
-<meta property="og:title" content="原创：缓存同步的三种设计模式">
+<meta property="og:title" content="缓存同步的三种设计模式">
 <meta property="og:url" content="https://qinm08.github.io/2016/160918-cache-sync-pattern/index.html">
 <meta property="og:site_name" content="Ming's Coding Life">
-<meta property="og:description" content="Cache Aside Pattern这是最简单、最常用也最有效的缓存同步模式。
+<meta property="og:description" content="Cache Aside Pattern
+这是最简单、最常用也最有效的缓存同步模式。
 缓存失效： 应用程序访问缓存未命中，再从数据库中取数据，取到之后放到缓存中。
 缓存命中： 应用程序从缓存中取数据，取到之后返回。
 缓存更新： 先把数据保存到数据库中，成功后，删除缓存或让缓存失效。
 
-数据保存到数据库之后，为什么不是把数据保存到缓存中，而是删除缓存或让缓存失效？设想两个并发的写操作A和B，A保存数据库">
+数据保存到数据库之后，为什么不是把数据保存到缓存中，而是删除缓存或让缓存失效？设想两个并发的写操作A和B，A保存数据">
 <meta property="og:image" content="https://qinm08.github.io/uploads/images/2016/0918/2010.png">
 <meta property="og:image" content="https://qinm08.github.io/uploads/images/2016/0918/2015.png">
 <meta property="og:image" content="https://qinm08.github.io/uploads/images/2016/0918/2020.png">
-<meta property="og:updated_time" content="2016-09-20T02:19:50.212Z">
+<meta property="og:updated_time" content="2016-09-20T09:21:47.937Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="原创：缓存同步的三种设计模式">
-<meta name="twitter:description" content="Cache Aside Pattern这是最简单、最常用也最有效的缓存同步模式。
+<meta name="twitter:title" content="缓存同步的三种设计模式">
+<meta name="twitter:description" content="Cache Aside Pattern
+这是最简单、最常用也最有效的缓存同步模式。
 缓存失效： 应用程序访问缓存未命中，再从数据库中取数据，取到之后放到缓存中。
 缓存命中： 应用程序从缓存中取数据，取到之后返回。
 缓存更新： 先把数据保存到数据库中，成功后，删除缓存或让缓存失效。
 
-数据保存到数据库之后，为什么不是把数据保存到缓存中，而是删除缓存或让缓存失效？设想两个并发的写操作A和B，A保存数据库">
+数据保存到数据库之后，为什么不是把数据保存到缓存中，而是删除缓存或让缓存失效？设想两个并发的写操作A和B，A保存数据">
 <meta name="twitter:image" content="https://qinm08.github.io/uploads/images/2016/0918/2010.png">
 
 
@@ -135,7 +138,7 @@
 
   <link rel="canonical" href="https://qinm08.github.io/2016/160918-cache-sync-pattern/"/>
 
-  <title> 原创：缓存同步的三种设计模式 | Ming's Coding Life </title>
+  <title> 缓存同步的三种设计模式 | Ming's Coding Life </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -288,7 +291,7 @@
             
             
               
-                原创：缓存同步的三种设计模式
+                缓存同步的三种设计模式
               
             
           </h1>
@@ -333,7 +336,8 @@
       
 
       
-        <h1 id="Cache-Aside-Pattern"><a href="#Cache-Aside-Pattern" class="headerlink" title="Cache Aside Pattern"></a>Cache Aside Pattern</h1><p><img src="https://qinm08.github.io/uploads/images/2016/0918/2010.png" alt=""><br>这是最简单、最常用也最有效的缓存同步模式。</p>
+        <h1 id="Cache-Aside-Pattern"><a href="#Cache-Aside-Pattern" class="headerlink" title="Cache Aside Pattern"></a>Cache Aside Pattern</h1><p><img src="https://qinm08.github.io/uploads/images/2016/0918/2010.png" alt=""></p>
+<p>这是最简单、最常用也最有效的缓存同步模式。</p>
 <p><strong>缓存失效：</strong> 应用程序访问缓存未命中，再从数据库中取数据，取到之后放到缓存中。</p>
 <p><strong>缓存命中：</strong> 应用程序从缓存中取数据，取到之后返回。</p>
 <p><strong>缓存更新：</strong> 先把数据保存到数据库中，成功后，删除缓存或让缓存失效。</p>
@@ -346,6 +350,7 @@
 </li>
 </ol>
 <h1 id="Read-Write-Through-Pattern"><a href="#Read-Write-Through-Pattern" class="headerlink" title="Read/Write Through Pattern"></a>Read/Write Through Pattern</h1><p><img src="https://qinm08.github.io/uploads/images/2016/0918/2015.png" alt=""></p>
+<p>在上一个模式中，应用程序既要维护缓存又要维护数据库，因此比较麻烦。</p>
 <h1 id="Write-Behind-Caching-Pattern"><a href="#Write-Behind-Caching-Pattern" class="headerlink" title="Write Behind Caching Pattern"></a>Write Behind Caching Pattern</h1><p><img src="https://qinm08.github.io/uploads/images/2016/0918/2020.png" alt=""></p>
 
       
@@ -380,8 +385,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/160825-spark-2-1-spark-sql/" rel="next" title="原创：Spark 2.0 之 Spark SQL 入门">
-                <i class="fa fa-chevron-left"></i> 原创：Spark 2.0 之 Spark SQL 入门
+              <a href="/2016/160825-spark-2-1-spark-sql/" rel="next" title="Spark 2.0之Spark SQL入门">
+                <i class="fa fa-chevron-left"></i> Spark 2.0之Spark SQL入门
               </a>
             
           </div>
