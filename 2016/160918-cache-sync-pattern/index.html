@@ -84,25 +84,34 @@
 
 
 
-<meta name="description" content="Cache Aside Pattern
-Read/Write Through Pattern
-Write Behind Caching Pattern">
+<meta name="description" content="Cache Aside Pattern这是最简单、最常用也最有效的缓存同步模式。
+缓存失效： 应用程序先到缓存中取数据，没有取到，再从数据库中取数据，取到之后放到缓存中。
+缓存命中： 应用程序从缓存中去数据，取到之后返回。
+缓存更新： 先把数据保存到数据库中，成功后，删除缓存或让缓存失效。
+
+为什么不是先删除缓存，再保存数据库？设想两个并发操作A和B，A删除缓存，B读缓存没有命中，到数据库中取数据">
 <meta property="og:type" content="article">
 <meta property="og:title" content="原创：缓存同步的三种设计模式">
 <meta property="og:url" content="https://qinm08.github.io/2016/160918-cache-sync-pattern/index.html">
 <meta property="og:site_name" content="Ming's Coding Life">
-<meta property="og:description" content="Cache Aside Pattern
-Read/Write Through Pattern
-Write Behind Caching Pattern">
+<meta property="og:description" content="Cache Aside Pattern这是最简单、最常用也最有效的缓存同步模式。
+缓存失效： 应用程序先到缓存中取数据，没有取到，再从数据库中取数据，取到之后放到缓存中。
+缓存命中： 应用程序从缓存中去数据，取到之后返回。
+缓存更新： 先把数据保存到数据库中，成功后，删除缓存或让缓存失效。
+
+为什么不是先删除缓存，再保存数据库？设想两个并发操作A和B，A删除缓存，B读缓存没有命中，到数据库中取数据">
 <meta property="og:image" content="https://qinm08.github.io/uploads/images/2016/0918/2010.png">
 <meta property="og:image" content="https://qinm08.github.io/uploads/images/2016/0918/2015.png">
 <meta property="og:image" content="https://qinm08.github.io/uploads/images/2016/0918/2020.png">
-<meta property="og:updated_time" content="2016-09-19T13:05:49.067Z">
+<meta property="og:updated_time" content="2016-09-20T02:13:54.503Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="原创：缓存同步的三种设计模式">
-<meta name="twitter:description" content="Cache Aside Pattern
-Read/Write Through Pattern
-Write Behind Caching Pattern">
+<meta name="twitter:description" content="Cache Aside Pattern这是最简单、最常用也最有效的缓存同步模式。
+缓存失效： 应用程序先到缓存中取数据，没有取到，再从数据库中取数据，取到之后放到缓存中。
+缓存命中： 应用程序从缓存中去数据，取到之后返回。
+缓存更新： 先把数据保存到数据库中，成功后，删除缓存或让缓存失效。
+
+为什么不是先删除缓存，再保存数据库？设想两个并发操作A和B，A删除缓存，B读缓存没有命中，到数据库中取数据">
 <meta name="twitter:image" content="https://qinm08.github.io/uploads/images/2016/0918/2010.png">
 
 
@@ -324,9 +333,20 @@ Write Behind Caching Pattern">
       
 
       
-        <h1 id="Cache-Aside-Pattern"><a href="#Cache-Aside-Pattern" class="headerlink" title="Cache Aside Pattern"></a>Cache Aside Pattern</h1><p><img src="/uploads/images/2016/0918/2010.png" alt=""></p>
-<h1 id="Read-Write-Through-Pattern"><a href="#Read-Write-Through-Pattern" class="headerlink" title="Read/Write Through Pattern"></a>Read/Write Through Pattern</h1><p><img src="/uploads/images/2016/0918/2015.png" alt=""></p>
-<h1 id="Write-Behind-Caching-Pattern"><a href="#Write-Behind-Caching-Pattern" class="headerlink" title="Write Behind Caching Pattern"></a>Write Behind Caching Pattern</h1><p><img src="/uploads/images/2016/0918/2020.png" alt=""></p>
+        <h1 id="Cache-Aside-Pattern"><a href="#Cache-Aside-Pattern" class="headerlink" title="Cache Aside Pattern"></a>Cache Aside Pattern</h1><p><img src="https://qinm08.github.io/uploads/images/2016/0918/2010.png" alt=""><br>这是最简单、最常用也最有效的缓存同步模式。</p>
+<p><strong>缓存失效：</strong> 应用程序先到缓存中取数据，没有取到，再从数据库中取数据，取到之后放到缓存中。</p>
+<p><strong>缓存命中：</strong> 应用程序从缓存中去数据，取到之后返回。</p>
+<p><strong>缓存更新：</strong> 先把数据保存到数据库中，成功后，删除缓存或让缓存失效。</p>
+<ol>
+<li><p>为什么不是先删除缓存，再保存数据库？设想两个并发操作A和B，A删除缓存，B读缓存没有命中，到数据库中取数据然后放到缓存中，此时A保存数据库。这时缓存中是旧数据，数据库中是新数据，这种不一致的情况将永远持续下去。由于读的速度要远远快于写的速度，这种情况发生的概率极高。</p>
+</li>
+<li><p>数据保存到数据库之后，为什么不是把数据保存到缓存中，而是删除缓存或让缓存失效？设想两个并发的写操作A和B，A保存数据库，B保存数据库，B保存缓存，A保存缓存。这时缓存中是A的数据，数据库中是B的数据，这种不一致的情况也将永远持续下去。</p>
+</li>
+<li><p>这种模式没有一致性问题了吗？有！同样设想两个并发操作A和B，A读缓存未命中，到数据库中取数据，此时B更新数据库，然后删除缓存（缓存中本来就没有，因为A读时未命中），此时A读到的旧数据放到缓存中。这时数据库中是经过B更新的新数据，而缓存中是A读到的旧数据。这个case要求读操作先于写操作进入数据库，而又要晚于写操作更新缓存，同样由于读的速度要远远快于写的速度，这种情况发生的概率极低。</p>
+</li>
+</ol>
+<h1 id="Read-Write-Through-Pattern"><a href="#Read-Write-Through-Pattern" class="headerlink" title="Read/Write Through Pattern"></a>Read/Write Through Pattern</h1><p><img src="https://qinm08.github.io/uploads/images/2016/0918/2015.png" alt=""></p>
+<h1 id="Write-Behind-Caching-Pattern"><a href="#Write-Behind-Caching-Pattern" class="headerlink" title="Write Behind Caching Pattern"></a>Write Behind Caching Pattern</h1><p><img src="https://qinm08.github.io/uploads/images/2016/0918/2020.png" alt=""></p>
 
       
     </div>
