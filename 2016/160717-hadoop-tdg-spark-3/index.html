@@ -1,20 +1,4 @@
-<!doctype html>
-
-
-
-  
-
-
-<html class="theme-next pisces use-motion">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!DOCTYPE html>
 
 
 
@@ -28,47 +12,23 @@
 
 
   
-  
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
 
 
 
 
-  
-  
-  
-  
 
-  
-    
-    
-  
 
   
-
   
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="hadoop,spark," />
+  <link rel="stylesheet" href="/lib/Han/dist/han.min.css?v=3.3">
 
 
 
@@ -77,56 +37,99 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/blacktocat.png?v=5.0.1" />
 
 
 
 
 
 
-<meta name="description" content="弹性分布式数据集RDD是每个spark程序的核心，本节我们来看看更多细节。
-创建创建RDD有三种方式：从一个内存中的对象集合，被称为并行化（parallelizing） 一个集合；使用一个外部存储（比如HDFS）的数据集；转换已存在的RDD。在对少量的输入数据并行地进行CPU密集型运算时，第一种方式非常有用。例如，下面执行从1到10的独立运算：
-12val params = sc.parallel">
-<meta property="og:type" content="article">
-<meta property="og:title" content="翻译：Hadoop权威指南之Spark-3">
-<meta property="og:url" content="https://qinm08.github.io/2016/160717-hadoop-tdg-spark-3/index.html">
-<meta property="og:site_name" content="Key Memory">
-<meta property="og:description" content="弹性分布式数据集RDD是每个spark程序的核心，本节我们来看看更多细节。
-创建创建RDD有三种方式：从一个内存中的对象集合，被称为并行化（parallelizing） 一个集合；使用一个外部存储（比如HDFS）的数据集；转换已存在的RDD。在对少量的输入数据并行地进行CPU密集型运算时，第一种方式非常有用。例如，下面执行从1到10的独立运算：
-12val params = sc.parallel">
-<meta property="og:updated_time" content="2016-08-19T10:22:00.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="翻译：Hadoop权威指南之Spark-3">
-<meta name="twitter:description" content="弹性分布式数据集RDD是每个spark程序的核心，本节我们来看看更多细节。
-创建创建RDD有三种方式：从一个内存中的对象集合，被称为并行化（parallelizing） 一个集合；使用一个外部存储（比如HDFS）的数据集；转换已存在的RDD。在对少量的输入数据并行地进行CPU密集型运算时，第一种方式非常有用。例如，下面执行从1到10的独立运算：
-12val params = sc.parallel">
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post"},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: 0,
-      author: '博主'
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
 
+  
 
 
-  <link rel="canonical" href="https://qinm08.github.io/2016/160717-hadoop-tdg-spark-3/"/>
 
-  <title> 翻译：Hadoop权威指南之Spark-3 | Key Memory </title>
-</head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  <meta name="description" content="弹性分布式数据集RDD是每个spark程序的核心，本节我们来看看更多细节。 创建创建RDD有三种方式：从一个内存中的对象集合，被称为并行化（parallelizing） 一个集合；使用一个外部存储（比如HDFS）的数据集；转换已存在的RDD。在对少量的输入数据并行地进行CPU密集型运算时，第一种方式非常有用。例如，下面执行从1到10的独立运算： 12val params = sc.parallel">
+<meta name="keywords" content="hadoop,spark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="翻译：Hadoop权威指南之Spark-3">
+<meta property="og:url" content="https://qinm08.github.io/2016/160717-hadoop-tdg-spark-3/index.html">
+<meta property="og:site_name" content="Key Memory">
+<meta property="og:description" content="弹性分布式数据集RDD是每个spark程序的核心，本节我们来看看更多细节。 创建创建RDD有三种方式：从一个内存中的对象集合，被称为并行化（parallelizing） 一个集合；使用一个外部存储（比如HDFS）的数据集；转换已存在的RDD。在对少量的输入数据并行地进行CPU密集型运算时，第一种方式非常有用。例如，下面执行从1到10的独立运算： 12val params = sc.parallel">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2016-08-19T10:22:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="翻译：Hadoop权威指南之Spark-3">
+<meta name="twitter:description" content="弹性分布式数据集RDD是每个spark程序的核心，本节我们来看看更多细节。 创建创建RDD有三种方式：从一个内存中的对象集合，被称为并行化（parallelizing） 一个集合；使用一个外部存储（比如HDFS）的数据集；转换已存在的RDD。在对少量的输入数据并行地进行CPU密集型运算时，第一种方式非常有用。例如，下面执行从1到10的独立运算： 12val params = sc.parallel">
 
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://qinm08.github.io/2016/160717-hadoop-tdg-spark-3/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>翻译：Hadoop权威指南之Spark-3 | Key Memory</title>
   
 
 
@@ -137,120 +140,175 @@
 
 
 
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Key Memory</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Key Memory</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
   </div>
-  <p class="site-subtitle"></p>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
+
 
 <nav class="site-nav">
-  
-
   
     <ul id="menu" class="menu">
       
         
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
       
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
         
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
       
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
 
       
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
       
     </ul>
   
 
   
-    <div class="site-search">
-      
-  <div class="popup">
- <span class="search-icon fa fa-search"></span>
- <input type="text" id="local-search-input">
- <div id="local-search-result"></div>
- <span class="popup-btn-close">close</span>
-</div>
 
-
-    </div>
   
 </nav>
 
- </div>
+
+
+  
+
+
+
+</div>
     </header>
+
+    
+
 
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+          
+            
+
+          
           <div id="content" class="content">
             
 
@@ -258,24 +316,37 @@
     
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://qinm08.github.io/2016/160717-hadoop-tdg-spark-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="秦铭">
+      <meta itemprop="description" content="不忘初心，方得始终">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Key Memory">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                翻译：Hadoop权威指南之Spark-3
+          <h1 class="post-title" itemprop="name headline">翻译：Hadoop权威指南之Spark-3
+
               
             
           </h1>
@@ -283,33 +354,69 @@
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-17T00:00:00+08:00" content="2016-07-17">
-              2016-07-17
-            </time>
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2016-07-17 00:00:00" itemprop="dateCreated datePublished" datetime="2016-07-17T00:00:00+08:00">2016-07-17</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2016-08-19 18:22:00" itemprop="dateModified" datetime="2016-08-19T18:22:00+08:00">2016-08-19</time>
+              
+            
           </span>
 
           
 
           
             
+            
+          
+
+          
           
 
           
 
           
-          
 
           
+
         </div>
       </header>
     
 
-
-    <div class="post-body" itemprop="articleBody">
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
 
       
       
@@ -317,54 +424,54 @@
       
         <h1 id="弹性分布式数据集"><a href="#弹性分布式数据集" class="headerlink" title="弹性分布式数据集"></a>弹性分布式数据集</h1><p>RDD是每个spark程序的核心，本节我们来看看更多细节。</p>
 <h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><p>创建RDD有三种方式：从一个内存中的对象集合，被称为<em>并行化（parallelizing）</em> 一个集合；使用一个外部存储（比如HDFS）的数据集；转换已存在的RDD。在对少量的输入数据并行地进行CPU密集型运算时，第一种方式非常有用。例如，下面执行从1到10的独立运算：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> params = sc.parallelize(<span class="number">1</span> to <span class="number">10</span>)</div><div class="line"><span class="keyword">val</span> result = params.map(performExpensiveComputation)</div></pre></td></tr></table></figure>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> params = sc.parallelize(<span class="number">1</span> to <span class="number">10</span>)</span><br><span class="line"><span class="keyword">val</span> result = params.map(performExpensiveComputation)</span><br></pre></td></tr></table></figure>
 <p>函数performExpensiveComputation并行处理输入数据。并行性的级别由属性spark.default.parallelism决定，该属性的默认值取决于Spark的运行方式。本地运行时，是本地机器的核心数量，集群运行时，是集群中所有执行器（executor）节点的核心总数量。</p>
 <p>可以为某个特定运算设置并行性级别，指定parallelize()方法的第二个参数即可：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sc.parallelize(<span class="number">1</span> to <span class="number">10</span>, <span class="number">10</span>)</div></pre></td></tr></table></figure>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc.parallelize(<span class="number">1</span> to <span class="number">10</span>, <span class="number">10</span>)</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <p>创建RDD的第二种方式，是创建一个指向外部数据集的引用。我们已经见过怎样为一个文本文件创建String对象的RDD：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> text:<span class="type">RDD</span>[<span class="type">String</span>] = sc.textFile(inputPath)</div></pre></td></tr></table></figure>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> text:<span class="type">RDD</span>[<span class="type">String</span>] = sc.textFile(inputPath)</span><br></pre></td></tr></table></figure>
 <p>路径inputPath可以是任意的Hadoop文件系统路径，比如本地文件系统或HDFS上的一个文件。内部来看，Spark使用旧的MapReduce API中的TextInputFormat来读取这个文件。这就意味着文件切分行为与Hadoop是一样的，因此在HDFS的情况下，一个Spark分区对应一个HDFS块（block）。这个默认行为可以改变，传入第二个参数来请求一个特殊的切分数量：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sc.textFile(inputPath, <span class="number">10</span>)</div></pre></td></tr></table></figure>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc.textFile(inputPath, <span class="number">10</span>)</span><br></pre></td></tr></table></figure>
 <p>另外一个方法允许把多个文本文件作为一个整体来处理，返回的RDD中，是成对的string，第一个string是文件的路径，第二个string是文件的内容。因为每个文件都会加载进内存，所以这种方式仅仅适合于小文件：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> files:<span class="type">RDD</span>[(<span class="type">String</span>, <span class="type">String</span>)] = sc.wholeTextFiles(inputPath)</div></pre></td></tr></table></figure>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> files:<span class="type">RDD</span>[(<span class="type">String</span>, <span class="type">String</span>)] = sc.wholeTextFiles(inputPath)</span><br></pre></td></tr></table></figure>
 <p>Spark能够处理文本文件以外的其他文件格式，比如，序列文件可以这样读入：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sc.sequenceFile[<span class="type">IntWritable</span>, <span class="type">Text</span>](inputPath)</div></pre></td></tr></table></figure>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc.sequenceFile[<span class="type">IntWritable</span>, <span class="type">Text</span>](inputPath)</span><br></pre></td></tr></table></figure>
 <p>注意这里指定序列文件的键和值的Writable类型的方式。对于常用的Writable类型，Spark能够映射到Java中的等价物，因此我们可以使用等价的方式：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sc.sequenceFile[<span class="type">Int</span>, <span class="type">String</span>](inputPath)</div></pre></td></tr></table></figure>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc.sequenceFile[<span class="type">Int</span>, <span class="type">String</span>](inputPath)</span><br></pre></td></tr></table></figure>
 <p>从任意的Hadoop InputFormat来创建RDD，有两种方式：基于文件的格式，使用hadoopFile()，接收一个路径；其他格式，比如HBase的TableInputFormat，使用hadoopRDD()。这些方法使用的是旧的MapReduce API。如果要用新的MapReduce API，使用newAPIHadoopFile()和newAPIHadoopRDD()。下面是读取Avro数据文件的示例，使用特定的API和一个WeatherRecord类：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> job = <span class="keyword">new</span> <span class="type">Job</span>()</div><div class="line"><span class="type">AvroJob</span>.setInputKeySchema(job, <span class="type">WeatherRecord</span>.getClassSchema)</div><div class="line"><span class="keyword">val</span> data = sc.newAPIHadoopFile(inputPath,</div><div class="line">    classOf[<span class="type">AvroKeyInputFormat</span>[<span class="type">WeatherRecord</span>]],</div><div class="line">    classOf[<span class="type">AvroKey</span>[<span class="type">WeatherRecord</span>]], classOf[<span class="type">NullWritable</span>],</div><div class="line">    job.getConfiguration)</div></pre></td></tr></table></figure>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> job = <span class="keyword">new</span> <span class="type">Job</span>()</span><br><span class="line"><span class="type">AvroJob</span>.setInputKeySchema(job, <span class="type">WeatherRecord</span>.getClassSchema)</span><br><span class="line"><span class="keyword">val</span> data = sc.newAPIHadoopFile(inputPath,</span><br><span class="line">    classOf[<span class="type">AvroKeyInputFormat</span>[<span class="type">WeatherRecord</span>]],</span><br><span class="line">    classOf[<span class="type">AvroKey</span>[<span class="type">WeatherRecord</span>]], classOf[<span class="type">NullWritable</span>],</span><br><span class="line">    job.getConfiguration)</span><br></pre></td></tr></table></figure>
 <p>除了路径之外，newAPIHadoopFile()方法还需要InputFormat的类型、键的类型、值的类型，再加上Hadoop配置，该配置中带有Avro的模式 <em>schema</em>，在第二行我们使用AvroJob帮助类做了设置。</p>
 <p>创建RDD的第三种方式，是转换已存在的RDD。</p>
 <h2 id="转换和行动"><a href="#转换和行动" class="headerlink" title="转换和行动"></a>转换和行动</h2><p>Spark提供两种类型的操作：转换<em>transformations</em>和行动<em>actions</em>。“转换”从已存在的RDD生成新的RDD，而“行动”会触发运算并输出结果——返回给用户，或者保存到外部存储。</p>
 <p>行动会立刻产生影响，而转换不会——它们是lazy的，它们不做任何工作，直到行动被触发。下面的例子，把文本文件中的每一行转为小写：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> text = sc.textFile(inputPath)</div><div class="line"><span class="keyword">val</span> lower: <span class="type">RDD</span>[<span class="type">String</span>] = text.map(_.toLowerCase())</div><div class="line">lower.foreach(println(_))</div></pre></td></tr></table></figure>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> text = sc.textFile(inputPath)</span><br><span class="line"><span class="keyword">val</span> lower: <span class="type">RDD</span>[<span class="type">String</span>] = text.map(_.toLowerCase())</span><br><span class="line">lower.foreach(println(_))</span><br></pre></td></tr></table></figure>
 <p>map()方法是个转换操作，Spark内部这样处理：稍晚的时候，一个函数（这里是toLowerCase()）会被调用，来处理RDD中的每一个元素。这个函数实际上没有执行，直到foreach()方法（这是个行动）被调用，然后Spark会运行一个作业，读取输入的文件，对文件中的每一行调用toLowerCase()，然后把结果写到控制台。</p>
 <p>怎样分辨一个操作究竟是转换还是行动呢？一个方法是看它的返回类型：如果返回类型是RDD，这是个转换；否则就是行动。当你查阅RDD的文档时，这种方法是很有用的。对RDD执行的大多数操作，可以在RDD的文档（org.apache.spark.rdd包）中找到，更多的操作在PairRDDFunctions里，这里包含了处理键值对RDD的转换和行动。</p>
 <p>Spark的库中包含了丰富的操作，有转换者诸如映射（mapping）、分组（grouping）、聚合（aggregating）、再分区（repartitioning）、取样（sampling）、连接（joining）多个RDD、把RDDs作为集合（sets）对待。还有行动者诸如把RDDs物化（materializing）为集合（collections）、对RDD进行计算统计、从RDD中取样出固定数目的元素，把RDD保存到外部存储。细节内容，查看文档。</p>
 <h3 id="Spark中的MapReduce"><a href="#Spark中的MapReduce" class="headerlink" title="Spark中的MapReduce"></a>Spark中的MapReduce</h3><p>尽管名字很有暗示性，Spark中的map()和reduce()操作，与Hadoop MapReduce中相同名字的函数，不是直接对应的。Hadoop MapReduce中的map和reduce的通常形式是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">map: (K1, V1) -&gt; list(K2, V2)</div><div class="line">reduce: (K2, list(V2)) -&gt; list(K3, V3)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">map: (K1, V1) -&gt; list(K2, V2)</span><br><span class="line">reduce: (K2, list(V2)) -&gt; list(K3, V3)</span><br></pre></td></tr></table></figure>
 <p>从list标记可以看出，这两个函数都可以返回多个输出对。这种操作在Spark（Scala）中被实现为flatMap()，与map()很像，但是移除了一层嵌套：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">scala&gt; val l = List(1, 2, 3)</div><div class="line">l: List[Int] = List(1, 2, 3)</div><div class="line"></div><div class="line">scala&gt; l.map(a =&gt; List(a))</div><div class="line">res0: List[List[Int]] = List(List(1), List(2), List(3))</div><div class="line"></div><div class="line">scala&gt; l.flatMap(a =&gt; List(a))</div><div class="line">res1: List[Int] = List(1, 2, 3)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; val l = List(1, 2, 3)</span><br><span class="line">l: List[Int] = List(1, 2, 3)</span><br><span class="line"></span><br><span class="line">scala&gt; l.map(a =&gt; List(a))</span><br><span class="line">res0: List[List[Int]] = List(List(1), List(2), List(3))</span><br><span class="line"></span><br><span class="line">scala&gt; l.flatMap(a =&gt; List(a))</span><br><span class="line">res1: List[Int] = List(1, 2, 3)</span><br></pre></td></tr></table></figure>
 <p>有一种朴素的方式，可以在Spark中模拟Hadoop MapReduce。用两个flatMap()操作，中间用groupByKey()和sortByKey()来执行MapReduce的混洗和排序：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> input: <span class="type">RDD</span>[(<span class="type">K1</span>, <span class="type">V1</span>)] = ...</div><div class="line"><span class="keyword">val</span> mapOutput: <span class="type">RDD</span>[(<span class="type">K2</span>, <span class="type">V2</span>)] = input.flatMap(mapFn)</div><div class="line"><span class="keyword">val</span> shuffled: <span class="type">RDD</span>[(<span class="type">K2</span>, <span class="type">Iterable</span>[<span class="type">V2</span>])] = mapOutput.groupByKey().sortByKey()</div><div class="line"><span class="keyword">val</span> output: <span class="type">RDD</span>[(<span class="type">K3</span>, <span class="type">V3</span>)] = shuffled.flatMap(reduceFn)</div></pre></td></tr></table></figure>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> input: <span class="type">RDD</span>[(<span class="type">K1</span>, <span class="type">V1</span>)] = ...</span><br><span class="line"><span class="keyword">val</span> mapOutput: <span class="type">RDD</span>[(<span class="type">K2</span>, <span class="type">V2</span>)] = input.flatMap(mapFn)</span><br><span class="line"><span class="keyword">val</span> shuffled: <span class="type">RDD</span>[(<span class="type">K2</span>, <span class="type">Iterable</span>[<span class="type">V2</span>])] = mapOutput.groupByKey().sortByKey()</span><br><span class="line"><span class="keyword">val</span> output: <span class="type">RDD</span>[(<span class="type">K3</span>, <span class="type">V3</span>)] = shuffled.flatMap(reduceFn)</span><br></pre></td></tr></table></figure>
 <p>这里key的类型K2要继承自Scala的Ordering类型，以满足sortByKey()。</p>
 <p>这个例子可以帮助我们理解MapReduce和Spark的关系，但是不能盲目应用。首先，这里的语义和Hadoop的MapReduce有微小的差别，sortByKey()执行的是全量排序。使用repartitionAndSortWithinPartitions()方法来执行部分排序，可以避免这个问题。然而，这样还是无效的，因为Spark有两次混洗的过程（一次groupByKey()，一次sort）。</p>
 <p>与其重造MapReduce，不如仅仅使用那些你实际需要的操作。比如，如果不需要按key排序，你可以省略sortByKey()，这在Hadoop MapReduce中是不可能的。</p>
 <p>同样的，大多数情况下groupByKey()太普遍了。通常只在聚合数据时需要混洗，因此应该使用reduceByKey()，foldByKey()，或者aggregateByKey()，这些函数比groupByKey()更有效率，因为它们可以在map任务中作为combiner运行。最后，flatMap()可能总是不需要的，如果总有一个返回值，map()是首选，如果有0或1个返回值，使用filter()。</p>
 <h3 id="聚合转换"><a href="#聚合转换" class="headerlink" title="聚合转换"></a>聚合转换</h3><p>根据key来聚合键值对RDD的三个主要的转换操作是reduceByKey()，foldByKey()，和aggregateByKey()。它们的工作方式稍有不同，但它们都是根据键来聚合值的，为每一个键生成一个单独的值。对应的行动是reduce()，fold()和aggregate()，它们以类似的方式运行，为整个RDD输出一个单独的值。</p>
 <p>最简单的是reduceByKey()，它对成对儿的值反复执行一个函数，直到生成一个单独的值。例如：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> pairs: <span class="type">RDD</span>[(<span class="type">String</span>, <span class="type">Int</span>)] =</div><div class="line">    sc.parallelize(<span class="type">Array</span>((<span class="string">"a"</span>, <span class="number">3</span>), (<span class="string">"a"</span>, <span class="number">1</span>), (<span class="string">"b"</span>, <span class="number">7</span>), (<span class="string">"a"</span>, <span class="number">5</span>)))</div><div class="line"><span class="keyword">val</span> sums: <span class="type">RDD</span>[(<span class="type">String</span>, <span class="type">Int</span>)] = pairs.reduceByKey(_+_)</div><div class="line">assert(sums.collect().toSet === <span class="type">Set</span>((<span class="string">"a"</span>, <span class="number">9</span>), (<span class="string">"b"</span>, <span class="number">7</span>)))</div></pre></td></tr></table></figure>
-<p>键 a 对应的值，使用相加函数（<em>+</em>）聚合起来，（3 + 1）+ 5 = 9，而键 b 对应的值只有一个，因此不需要聚合。一般来说，这些操作是分布式的，在RDD的不同分区对应的任务中分别执行，因此这些函数要具有互换性和连接性。换句话说，操作的顺序和分组是不重要的。这种情况下，聚合函数可以这样执行 5 +（3 + 1），或者 3 + （1 + 5），都会返回相同的结果。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> pairs: <span class="type">RDD</span>[(<span class="type">String</span>, <span class="type">Int</span>)] =</span><br><span class="line">    sc.parallelize(<span class="type">Array</span>((<span class="string">"a"</span>, <span class="number">3</span>), (<span class="string">"a"</span>, <span class="number">1</span>), (<span class="string">"b"</span>, <span class="number">7</span>), (<span class="string">"a"</span>, <span class="number">5</span>)))</span><br><span class="line"><span class="keyword">val</span> sums: <span class="type">RDD</span>[(<span class="type">String</span>, <span class="type">Int</span>)] = pairs.reduceByKey(_+_)</span><br><span class="line">assert(sums.collect().toSet === <span class="type">Set</span>((<span class="string">"a"</span>, <span class="number">9</span>), (<span class="string">"b"</span>, <span class="number">7</span>)))</span><br></pre></td></tr></table></figure>
+<p>键 a 对应的值，使用相加函数（_+_）聚合起来，（3 + 1）+ 5 = 9，而键 b 对应的值只有一个，因此不需要聚合。一般来说，这些操作是分布式的，在RDD的不同分区对应的任务中分别执行，因此这些函数要具有互换性和连接性。换句话说，操作的顺序和分组是不重要的。这种情况下，聚合函数可以这样执行 5 +（3 + 1），或者 3 + （1 + 5），都会返回相同的结果。</p>
 <blockquote>
 <p>在assert语句中使用的三联相等操作符（===），来自ScalaTest，比通常的 == 操作符提供更多有用的失败信息。</p>
 </blockquote>
 <p>下面是用foldByKey()来执行相同的操作：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> sums: <span class="type">RDD</span>[(<span class="type">String</span>, <span class="type">Int</span>)] = pairs.foldByKey(<span class="number">0</span>)(_+_)</div><div class="line">assert(sums.collect().toSet === <span class="type">Set</span>((<span class="string">"a"</span>, <span class="number">9</span>), (<span class="string">"b"</span>, <span class="number">7</span>)))</div></pre></td></tr></table></figure>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> sums: <span class="type">RDD</span>[(<span class="type">String</span>, <span class="type">Int</span>)] = pairs.foldByKey(<span class="number">0</span>)(_+_)</span><br><span class="line">assert(sums.collect().toSet === <span class="type">Set</span>((<span class="string">"a"</span>, <span class="number">9</span>), (<span class="string">"b"</span>, <span class="number">7</span>)))</span><br></pre></td></tr></table></figure>
 <p>注意到这次我们需要提供一个 <em>零值</em>，整数相加时是0，但如果是别的类型和操作，零值将是其他不同的东西。这一次，键 a 对应的值聚合的方式是（（0 + 3）+ 1）+ 5）= 9（也可能是其他的顺序，不过加 0 总是第一个操作）。对于 b 是0 + 7 = 7。</p>
 <p>使用foldByKey()，并不比reduceByKey()更强或更弱。特别地，也不能改变聚合结果的值类型。为此我们需要aggregateByKey()，例如，我们可以把那些整数值聚合到一个集合里：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> sets: <span class="type">RDD</span>[(<span class="type">String</span>, <span class="type">HashSet</span>[<span class="type">Int</span>])] =</div><div class="line">    pairs.aggregateByKey(<span class="keyword">new</span> <span class="type">HashSet</span>[<span class="type">Int</span>])(_+=_, _++=_)</div><div class="line">assert(sets.collect.toSet === <span class="type">Set</span>((<span class="string">"a"</span>, <span class="type">Set</span>(<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>)), (<span class="string">"b"</span>, <span class="type">Set</span>(<span class="number">7</span>))))</div></pre></td></tr></table></figure>
-<p>集合相加时，零值是空集合，因此我们用new HashSet[Int]来创建一个新的可变集合。我们需要向aggregateByKey()提供两个函数作为参数。第一个函数用来控制怎样把一个Int和一个HashSet[Int]相加，本例中我们用加等函数 <em>+=</em> 把整数加到集合里面（<em>+</em> 会返回一个新集合，旧集合不会改变）。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> sets: <span class="type">RDD</span>[(<span class="type">String</span>, <span class="type">HashSet</span>[<span class="type">Int</span>])] =</span><br><span class="line">    pairs.aggregateByKey(<span class="keyword">new</span> <span class="type">HashSet</span>[<span class="type">Int</span>])(_+=_, _++=_)</span><br><span class="line">assert(sets.collect.toSet === <span class="type">Set</span>((<span class="string">"a"</span>, <span class="type">Set</span>(<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>)), (<span class="string">"b"</span>, <span class="type">Set</span>(<span class="number">7</span>))))</span><br></pre></td></tr></table></figure>
+<p>集合相加时，零值是空集合，因此我们用new HashSet[Int]来创建一个新的可变集合。我们需要向aggregateByKey()提供两个函数作为参数。第一个函数用来控制怎样把一个Int和一个HashSet[Int]相加，本例中我们用加等函数 _+=_ 把整数加到集合里面（_+_ 会返回一个新集合，旧集合不会改变）。</p>
 <p>第二个函数用来控制怎样把两个HashSet[Int]相加（这种情况发生在map任务的combiner执行之后，reduce任务把两个分区聚合之时），这里我们使用 <em>++=</em> 把第二个集合的所有元素加到第一个集合里。</p>
 <p>对于键 a，操作的顺序可能是：<br>(( ∅ + 3) + 1) + 5) = (1, 3, 5)<br>或者：<br>( ∅ + 3) + 1) ++ ( ∅ + 5) = (1, 3) ++ (5) = (1, 3, 5)<br>如果Spark使用了组合器（combiner）的话。</p>
 <p>转换后的RDD可以持久化到内存中，因此后续的操作效率很高。</p>
@@ -372,29 +479,34 @@
       
     </div>
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
+    
+    
 
-    <div>
-      
-        
+    
 
+    
       
-    </div>
+    
+    
+
+    
 
     <footer class="post-footer">
       
         <div class="post-tags">
           
-            <a href="/tags/hadoop/" rel="tag">#hadoop</a>
+            <a href="/tags/hadoop/" rel="tag"># hadoop</a>
           
-            <a href="/tags/spark/" rel="tag">#spark</a>
+            <a href="/tags/spark/" rel="tag"># spark</a>
           
         </div>
+      
+
+      
+      
       
 
       
@@ -406,6 +518,8 @@
               </a>
             
           </div>
+
+          <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
@@ -420,24 +534,21 @@
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
-
-    <div class="post-spread">
-      
-    </div>
   </div>
 
 
           </div>
           
 
+  
 
-          
-  <div class="comments" id="comments">
-    
-  </div>
 
 
         </div>
@@ -459,138 +570,124 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
           </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
           </li>
         </ul>
       
 
-      <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="https://avatars2.githubusercontent.com/u/20449740?v=3&s=460"
-               alt="秦铭" />
-          <p class="site-author-name" itemprop="name">秦铭</p>
-          <p class="site-description motion-element" itemprop="description">不忘初心，方得始终</p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">10</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">秦铭</p>
+              <div class="site-description motion-element" itemprop="description">不忘初心，方得始终</div>
           </div>
 
           
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
 
           
-            <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">12</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
+
           
 
-        </nav>
+          
 
-        
+          
 
-        <div class="links-of-author motion-element">
+          
+          
+
           
             
-              <span class="links-of-author-item">
-                <a href="https://github.com/qinm08" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
           
+          
+
         </div>
-
-        
-        
-
-        
-        
-          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
-            <div class="links-of-blogroll-title">
-              <i class="fa  fa-fw fa-globe"></i>
-              
-            </div>
-            <ul class="links-of-blogroll-list">
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://blog.csdn.net/u013719780?viewmode=contents" title="allen" target="_blank">allen</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://kafeitu.me/" title="kafeitu" target="_blank">kafeitu</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://coolshell.cn/" title="coolshell" target="_blank">coolshell</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://selfup.cn/" title="selfup" target="_blank">selfup</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://www.cnblogs.com/jerrylead/" title="jerrylead" target="_blank">jerrylead</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://www.iteblog.com/" title="iteblog" target="_blank">iteblog</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://shiyanjun.cn/" title="shiyanjun" target="_blank">shiyanjun</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://notes.iissnan.com/" title="iissnan" target="_blank">iissnan</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://theme-next.iissnan.com/" title="theme-next" target="_blank">theme-next</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://selfboot.cn/" title="selfboot" target="_blank">selfboot</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://stormzhang.com/" title="stormzhang" target="_blank">stormzhang</a>
-                </li>
-              
-            </ul>
-          </div>
-        
-
-      </section>
+      </div>
 
       
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
           <div class="post-toc">
+
             
-              
             
+            
+            
+
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#弹性分布式数据集"><span class="nav-number">1.</span> <span class="nav-text">弹性分布式数据集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建"><span class="nav-number">1.1.</span> <span class="nav-text">创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转换和行动"><span class="nav-number">1.2.</span> <span class="nav-text">转换和行动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Spark中的MapReduce"><span class="nav-number">1.2.1.</span> <span class="nav-text">Spark中的MapReduce</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聚合转换"><span class="nav-number">1.2.2.</span> <span class="nav-text">聚合转换</span></a></li></ol></li></ol></li></ol></div>
             
+
           </div>
-        </section>
+        </div>
+      <!--/noindex-->
+      
+
       
 
     </div>
   </aside>
+  
 
 
         
@@ -599,41 +696,61 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy;  2016 - 
-  <span itemprop="copyrightYear">2019</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">秦铭</span>
+
+  
+
+  
 </div>
 
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
-</div>
 
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
-  </a>
-</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
 
         
+
+
+
+
+
+
+
 
         
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
   </div>
 
   
 
-<script type="text/javascript">
+<script>
   if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
     window.Promise = null;
   }
@@ -647,201 +764,103 @@
 
 
 
-  
 
 
 
-  
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 
-  
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+
+
+
 
 
 
   
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
-
-
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
 
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
 
 
 
   
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
 
 
 
   
 
 
+  <script src="/js/next-boot.js?v=7.1.1"></script>
 
 
   
+
   
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length == 0) {
-       search_path = "search.xml";
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
 
-    function proceedsearch() {
-      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
-      $('.popup').toggle();
+  
 
-    }
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-    'use strict';
-    $.ajax({
-        url: path,
-        dataType: "xml",
-        async: true,
-        success: function( xmlResponse ) {
-            // get the contents from search data
-            isfetched = true;
-            $('.popup').detach().appendTo('.header-inner');
-            var datas = $( "entry", xmlResponse ).map(function() {
-                return {
-                    title: $( "title", this ).text(),
-                    content: $("content",this).text(),
-                    url: $( "url" , this).text()
-                };
-            }).get();
-            var $input = document.getElementById(search_id);
-            var $resultContent = document.getElementById(content_id);
-            $input.addEventListener('input', function(){
-                var matchcounts = 0;
-                var str='<ul class=\"search-result-list\">';
-                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-                $resultContent.innerHTML = "";
-                if (this.value.trim().length > 1) {
-                // perform local searching
-                datas.forEach(function(data) {
-                    var isMatch = true;
-                    var content_index = [];
-                    var data_title = data.title.trim().toLowerCase();
-                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
-                    var data_url = data.url;
-                    var index_title = -1;
-                    var index_content = -1;
-                    var first_occur = -1;
-                    // only match artiles with not empty titles and contents
-                    if(data_title != '' && data_content != '') {
-                        keywords.forEach(function(keyword, i) {
-                            index_title = data_title.indexOf(keyword);
-                            index_content = data_content.indexOf(keyword);
-                            if( index_title < 0 && index_content < 0 ){
-                                isMatch = false;
-                            } else {
-                                if (index_content < 0) {
-                                    index_content = 0;
-                                }
-                                if (i == 0) {
-                                    first_occur = index_content;
-                                }
-                            }
-                        });
-                    }
-                    // show search results
-                    if (isMatch) {
-                        matchcounts += 1;
-                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
-                        var content = data.content.trim().replace(/<[^>]+>/g,"");
-                        if (first_occur >= 0) {
-                            // cut out 100 characters
-                            var start = first_occur - 20;
-                            var end = first_occur + 80;
-                            if(start < 0){
-                                start = 0;
-                            }
-                            if(start == 0){
-                                end = 50;
-                            }
-                            if(end > content.length){
-                                end = content.length;
-                            }
-                            var match_content = content.substring(start, end);
-                            // highlight all keywords
-                            keywords.forEach(function(keyword){
-                                var regS = new RegExp(keyword, "gi");
-                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
-                            });
+  
 
-                            str += "<p class=\"search-result\">" + match_content +"...</p>"
-                        }
-                        str += "</li>";
-                    }
-                })};
-                str += "</ul>";
-                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
-                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
-                $resultContent.innerHTML = str;
-            });
-            proceedsearch();
-        }
-    });}
 
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched == false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
+  
 
-    });
 
-    $('.popup-btn-close').click(function(e){
-      $('.popup').hide();
-      $(".popoverlay").remove();
-      $('body').css('overflow', '');
-    });
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-  </script>
+  
 
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
   
 

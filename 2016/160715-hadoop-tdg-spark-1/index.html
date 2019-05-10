@@ -1,20 +1,4 @@
-<!doctype html>
-
-
-
-  
-
-
-<html class="theme-next pisces use-motion">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!DOCTYPE html>
 
 
 
@@ -28,68 +12,102 @@
 
 
   
-  
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
 
 
 
 
-  
-  
-  
-  
 
-  
-    
-    
-  
 
   
+  
+  <link rel="stylesheet" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
 
   
 
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
 
 
 
-
-
-
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="hadoop,spark," />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/blacktocat.png?v=5.0.1" />
-
-
-
-
-
-
-<meta name="description" content="本文翻译自O’Reilly出版Tom White所著《Hadoop: The Definitive Guide》第4版第19章，向作者致敬。该书英文第4版已于2015年4月出版，至今已近15个月，而市面上中文第3版还在大行其道。Spark一章是第4版新增的内容，笔者在学习过程中顺便翻译记录。由于笔者也在学习，难免翻译不妥或出错，欢迎方家斧正。翻译纯属兴趣，不做商业用途。秦铭，Email地址qinm">
+  <meta name="description" content="本文翻译自O’Reilly出版Tom White所著《Hadoop: The Definitive Guide》第4版第19章，向作者致敬。该书英文第4版已于2015年4月出版，至今已近15个月，而市面上中文第3版还在大行其道。Spark一章是第4版新增的内容，笔者在学习过程中顺便翻译记录。由于笔者也在学习，难免翻译不妥或出错，欢迎方家斧正。翻译纯属兴趣，不做商业用途。秦铭，Email地址qinm">
+<meta name="keywords" content="hadoop,spark">
 <meta property="og:type" content="article">
 <meta property="og:title" content="翻译：Hadoop权威指南之Spark-1">
 <meta property="og:url" content="https://qinm08.github.io/2016/160715-hadoop-tdg-spark-1/index.html">
 <meta property="og:site_name" content="Key Memory">
 <meta property="og:description" content="本文翻译自O’Reilly出版Tom White所著《Hadoop: The Definitive Guide》第4版第19章，向作者致敬。该书英文第4版已于2015年4月出版，至今已近15个月，而市面上中文第3版还在大行其道。Spark一章是第4版新增的内容，笔者在学习过程中顺便翻译记录。由于笔者也在学习，难免翻译不妥或出错，欢迎方家斧正。翻译纯属兴趣，不做商业用途。秦铭，Email地址qinm">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-02-16T15:02:10.527Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="翻译：Hadoop权威指南之Spark-1">
@@ -97,30 +115,21 @@
 
 
 
-<script type="text/javascript" id="hexo.configuration">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post"},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: 0,
-      author: '博主'
-    }
+
+
+  
+  
+  <link rel="canonical" href="https://qinm08.github.io/2016/160715-hadoop-tdg-spark-1/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
   };
 </script>
 
-
-
-
-  <link rel="canonical" href="https://qinm08.github.io/2016/160715-hadoop-tdg-spark-1/"/>
-
-  <title> 翻译：Hadoop权威指南之Spark-1 | Key Memory </title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
+  <title>翻译：Hadoop权威指南之Spark-1 | Key Memory</title>
   
 
 
@@ -131,120 +140,175 @@
 
 
 
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Key Memory</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Key Memory</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
   </div>
-  <p class="site-subtitle"></p>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
+
 
 <nav class="site-nav">
-  
-
   
     <ul id="menu" class="menu">
       
         
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
       
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
         
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
       
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
 
       
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
       
     </ul>
   
 
   
-    <div class="site-search">
-      
-  <div class="popup">
- <span class="search-icon fa fa-search"></span>
- <input type="text" id="local-search-input">
- <div id="local-search-result"></div>
- <span class="popup-btn-close">close</span>
-</div>
 
-
-    </div>
   
 </nav>
 
- </div>
+
+
+  
+
+
+
+</div>
     </header>
+
+    
+
 
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+          
+            
+
+          
           <div id="content" class="content">
             
 
@@ -252,24 +316,37 @@
     
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://qinm08.github.io/2016/160715-hadoop-tdg-spark-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="秦铭">
+      <meta itemprop="description" content="不忘初心，方得始终">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Key Memory">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                翻译：Hadoop权威指南之Spark-1
+          <h1 class="post-title" itemprop="name headline">翻译：Hadoop权威指南之Spark-1
+
               
             
           </h1>
@@ -277,76 +354,112 @@
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-15T00:00:00+08:00" content="2016-07-15">
-              2016-07-15
-            </time>
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2016-07-15 00:00:00" itemprop="dateCreated datePublished" datetime="2016-07-15T00:00:00+08:00">2016-07-15</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-02-16 23:02:10" itemprop="dateModified" datetime="2019-02-16T23:02:10+08:00">2019-02-16</time>
+              
+            
           </span>
 
           
 
           
             
+            
+          
+
+          
           
 
           
 
           
-          
 
           
+
         </div>
       </header>
     
 
-
-    <div class="post-body" itemprop="articleBody">
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
 
       
       
 
       
-        <p>本文翻译自O’Reilly出版Tom White所著《Hadoop: The Definitive Guide》第4版第19章，向作者致敬。该书英文第4版已于2015年4月出版，至今已近15个月，而市面上中文第3版还在大行其道。Spark一章是第4版新增的内容，笔者在学习过程中顺便翻译记录。由于笔者也在学习，难免翻译不妥或出错，欢迎方家斧正。翻译纯属兴趣，不做商业用途。秦铭，Email地址<a href="mailto:qinm08@gmail.com" target="_blank" rel="external">qinm08@gmail.com</a>。</p>
+        <p>本文翻译自O’Reilly出版Tom White所著《Hadoop: The Definitive Guide》第4版第19章，向作者致敬。该书英文第4版已于2015年4月出版，至今已近15个月，而市面上中文第3版还在大行其道。Spark一章是第4版新增的内容，笔者在学习过程中顺便翻译记录。由于笔者也在学习，难免翻译不妥或出错，欢迎方家斧正。翻译纯属兴趣，不做商业用途。秦铭，Email地址<a href="mailto:qinm08@gmail.com" target="_blank" rel="noopener">qinm08@gmail.com</a>。</p>
 <hr>
-<p><a href="http://spark.apache.org" target="_blank" rel="external">Apache Spark</a> 是一个大规模数据处理的集群计算框架。和本书中讨论的大多数其他处理框架不同，Spark不使用MapReduce作为执行引擎，作为替代，Spark使用自己的分布式运行环境（distributed runtime）来执行集群上的工作。然而，Spark与MapReduce在API和runtime方面有许多相似，本章中我们将会看到。Spark和Hadoop紧密集成：它可以运行在YARN上，处理Hadoop的文件格式，后端存储采用HDFS。</p>
+<p><a href="http://spark.apache.org" target="_blank" rel="noopener">Apache Spark</a> 是一个大规模数据处理的集群计算框架。和本书中讨论的大多数其他处理框架不同，Spark不使用MapReduce作为执行引擎，作为替代，Spark使用自己的分布式运行环境（distributed runtime）来执行集群上的工作。然而，Spark与MapReduce在API和runtime方面有许多相似，本章中我们将会看到。Spark和Hadoop紧密集成：它可以运行在YARN上，处理Hadoop的文件格式，后端存储采用HDFS。</p>
 <p>Spark最著名的是它拥有把大量的工作数据集保持在内存中的能力。这种能力使得Spark胜过对应的MapReduce工作流（某些情况下差别显著），在MapReduce中数据集总是要从磁盘加载。两种类型的应用从Spark这种处理模型中受益巨大：1）迭代算法，一个函数在某数据集上反复执行直到满足退出条件。2）交互式分析，用户在某数据集上执行一系列的特定查询。</p>
 <p>即使你不需要内存缓存，Spark依然有充满魅力的理由：它的DAG引擎和用户体验。与MapReduce不同，Spark的DAG引擎能够处理任意的多个操作组成的管道（pipelines of operators）并翻译为单个Job。</p>
 <p>Spark的用户体验也是首屈一指的（second to none），它有丰富的API用来执行很多常见的数据处理任务，比如join。行文之时，Spark提供三种语言的API：Scala，Java和Python。本章中的大多数例子将采用Scala API，但翻译为别的语言也是容易的。Spark还带有一个基于Scala或Python的REPL（read-eval-print loop）环境，可以快速简便的查看数据集。</p>
-<p>Spark是个构建分析工具的好平台，为达此目的，Apache Spark项目包含了众多的模块：机器学习（MLlib），图形处理（GraphX），流式处理（Spark Streaming），还有SQL（Spark SQL）。本章内容不涉及这些模块，感兴趣的读者可以访问 <a href="http://spark.apache.org" target="_blank" rel="external">Apache Spark 网站</a> 。</p>
+<p>Spark是个构建分析工具的好平台，为达此目的，Apache Spark项目包含了众多的模块：机器学习（MLlib），图形处理（GraphX），流式处理（Spark Streaming），还有SQL（Spark SQL）。本章内容不涉及这些模块，感兴趣的读者可以访问 <a href="http://spark.apache.org" target="_blank" rel="noopener">Apache Spark 网站</a> 。</p>
 <a id="more"></a>
-<h1 id="安装Spark"><a href="#安装Spark" class="headerlink" title="安装Spark"></a>安装Spark</h1><p>从 <a href="http://spark.apache.org/downloads.html" target="_blank" rel="external">下载页面</a> 下载Spark二进制分发包的稳定版本（选择和你正在使用的Hadoop版本相匹配的）。在合适的地方解压这个tar包。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">% tar xzf spark-x.y.z-bin-distro.tgz</div></pre></td></tr></table></figure>
+<h1 id="安装Spark"><a href="#安装Spark" class="headerlink" title="安装Spark"></a>安装Spark</h1><p>从 <a href="http://spark.apache.org/downloads.html" target="_blank" rel="noopener">下载页面</a> 下载Spark二进制分发包的稳定版本（选择和你正在使用的Hadoop版本相匹配的）。在合适的地方解压这个tar包。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">% tar xzf spark-x.y.z-bin-distro.tgz</span><br></pre></td></tr></table></figure>
 <p>把Spark加入到PATH环境变量中</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">% <span class="built_in">export</span> SPARK_HOME=~/sw/spark-x.y.z-bin-distro</div><div class="line">% <span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$SPARK_HOME</span>/bin</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">% <span class="built_in">export</span> SPARK_HOME=~/sw/spark-x.y.z-bin-distro</span><br><span class="line">% <span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$SPARK_HOME</span>/bin</span><br></pre></td></tr></table></figure>
 <p>我们现在可以运行Spark的例子了。</p>
 <h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>为了介绍Spark，我们使用spark-shell来运行一个交互式会话，这是带有Spark附加组件的Scala REPL，用下面的命令启动shell：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">% spark-shell</div><div class="line">Spark context available as sc.</div><div class="line">scala&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">% spark-shell</span><br><span class="line">Spark context available as sc.</span><br><span class="line">scala&gt;</span><br></pre></td></tr></table></figure>
 <p>从控制台的输出，我们可以看到shell创建了一个Scala变量，sc，用来存储SparkContext实例。这是Spark的入口，我们可以这样加载一个文本文件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">scala&gt; val lines = sc.textFile(&quot;input/ncdc/micro-tab/sample.txt&quot;)</div><div class="line">lines: org.apache.spark.rdd.RDD[String] = MappedRDD[1] at textFile at &lt;console&gt;:12</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; val lines = sc.textFile(&quot;input/ncdc/micro-tab/sample.txt&quot;)</span><br><span class="line">lines: org.apache.spark.rdd.RDD[String] = MappedRDD[1] at textFile at &lt;console&gt;:12</span><br></pre></td></tr></table></figure>
 <p>lines变量是对一个弹性数据集（RDD）的引用，RDD是Spark的核心抽象：分区在集群中多台机器上的只读的对象集合。在典型的Spark程序中，一个或多个RDD被加载进来作为输入，经过一系列的转换操作（transformation），成为一组目标RDD，可以对其执行行动（action）（比如计算结果或者写入持久化存储） 。“弹性数据集”中的“弹性”是指，Spark会通过从源RDD中重新计算的方式，来自动重建一个丢失的分区。</p>
 <blockquote>
 <p><em>加载RDD和执行转换操作不会触发数据处理，仅仅是创建一个执行计算的计划。当行动（比如 foreach()）执行的时候，才会触发计算。</em></p>
 </blockquote>
 <p>我们要做的第一个转换操作，是把lines拆分为fields：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">scala&gt; val records = lines.map(_.split(&quot;\t&quot;))</div><div class="line">records: org.apache.spark.rdd.RDD[Array[String]] = MappedRDD[2] at map at &lt;console&gt;:14</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; val records = lines.map(_.split(&quot;\t&quot;))</span><br><span class="line">records: org.apache.spark.rdd.RDD[Array[String]] = MappedRDD[2] at map at &lt;console&gt;:14</span><br></pre></td></tr></table></figure>
 <p>这里使用了RDD的map()方法，对RDD中的每一个元素，执行一个函数。本例中，我们把每一行（字符串String）拆分为 Scala 的字符串数组（Array of Strings）。</p>
 <p>接下来，我们使用过滤器（filter）来去掉可能存在的坏记录：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">scala&gt; val filtered = records.filter(rec =&gt; (rec(1) != &quot;9999&quot; &amp;&amp; rec(2).matches(&quot;[01459]&quot;)))</div><div class="line">filtered: org.apache.spark.rdd.RDD[Array[String]] = FilteredRDD[3] at filter at &lt;console&gt;:16</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; val filtered = records.filter(rec =&gt; (rec(1) != &quot;9999&quot; &amp;&amp; rec(2).matches(&quot;[01459]&quot;)))</span><br><span class="line">filtered: org.apache.spark.rdd.RDD[Array[String]] = FilteredRDD[3] at filter at &lt;console&gt;:16</span><br></pre></td></tr></table></figure>
 <p>RDD的filter方法接收一个返回布尔值的函数作为参数。这个函数过滤掉那些温度缺失的（由9999表示）或者质量不好的记录。</p>
 <p>为了找到每一年的最高气温，我们需要在year字段上执行分组操作，这样才能处理每一年的所有温度值。Spark提供reduceByKey()方法来做这件事情，但它需要一个键值对RDD，因此我们需要通过另一个map来把现有的RDD转变为正确的形式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">scala&gt; val tuples = filtered.map(rec =&gt; (rec(0).toInt, rec(1).toInt))</div><div class="line">tuples: org.apache.spark.rdd.RDD[(Int, Int)] = MappedRDD[4] at map at &lt;console&gt;:18</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; val tuples = filtered.map(rec =&gt; (rec(0).toInt, rec(1).toInt))</span><br><span class="line">tuples: org.apache.spark.rdd.RDD[(Int, Int)] = MappedRDD[4] at map at &lt;console&gt;:18</span><br></pre></td></tr></table></figure>
 <p>现在可以执行聚合了。reduceByKey()方法的参数是一个函数，这个函数接受两个数值并联合为一个单独的数值。这里我们使用Java的Math.max函数：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">scala&gt; val maxTemps = tuples.reduceByKey((a, b) =&gt; Math.max(a, b))</div><div class="line">maxTemps: org.apache.spark.rdd.RDD[(Int, Int)] = MapPartitionsRDD[7] at reduceByKey at &lt;console&gt;:21</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; val maxTemps = tuples.reduceByKey((a, b) =&gt; Math.max(a, b))</span><br><span class="line">maxTemps: org.apache.spark.rdd.RDD[(Int, Int)] = MapPartitionsRDD[7] at reduceByKey at &lt;console&gt;:21</span><br></pre></td></tr></table></figure>
 <p>现在可以展示maxTemps的内容了，调用foreach()方法并传入println()，把每个元素打印到控制台：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">scala&gt; maxTemps.foreach(println(_))</div><div class="line">(1950,22)</div><div class="line">(1949,111)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; maxTemps.foreach(println(_))</span><br><span class="line">(1950,22)</span><br><span class="line">(1949,111)</span><br></pre></td></tr></table></figure>
 <p>这个foreach()方法，与标准Scala集合（比如List）中的等价物相同，对RDD中的每个元素应用一个函数（此函数具有副作用）。正是这个操作，促使Spark运行一个作业来计算RDD中的数据，使之能够跑步通过println()方法:-)</p>
 <p>或者，也可以把RDD保存到文件系统：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scala&gt; maxTemps.saveAsTextFile(&quot;output&quot;)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; maxTemps.saveAsTextFile(&quot;output&quot;)</span><br></pre></td></tr></table></figure>
 <p>这样会创建一个output目录，包含分区文件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">% cat output/part-*</div><div class="line">(1950,22)</div><div class="line">(1949,111)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">% cat output/part-*</span><br><span class="line">(1950,22)</span><br><span class="line">(1949,111)</span><br></pre></td></tr></table></figure>
 <p>这个saveAsTextFile()方法也会触发一个Spark作业。主要的区别是没有返回值，而是把RDD的计算结果及其分区文件写入output目录中。</p>
 <h2 id="Spark应用、作业、阶段、任务"><a href="#Spark应用、作业、阶段、任务" class="headerlink" title="Spark应用、作业、阶段、任务"></a>Spark应用、作业、阶段、任务</h2><p>示例中我们看到，和MapReduce一样，Spark也有作业的概念。然而，Spark作业比MapReduce作业更通用，因为它是由任意的阶段组成的有向无环图（DAG）。每个阶段大致等同于MapReduce中的map或者reduce阶段。</p>
 <p>阶段被Spark运行时拆分为任务，并行地运行在RDD的分区之上，就像MapReduce的任务一样。</p>
@@ -355,29 +468,34 @@
       
     </div>
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
+    
+    
 
-    <div>
-      
-        
+    
 
+    
       
-    </div>
+    
+    
+
+    
 
     <footer class="post-footer">
       
         <div class="post-tags">
           
-            <a href="/tags/hadoop/" rel="tag">#hadoop</a>
+            <a href="/tags/hadoop/" rel="tag"># hadoop</a>
           
-            <a href="/tags/spark/" rel="tag">#spark</a>
+            <a href="/tags/spark/" rel="tag"># spark</a>
           
         </div>
+      
+
+      
+      
       
 
       
@@ -385,6 +503,8 @@
           <div class="post-nav-next post-nav-item">
             
           </div>
+
+          <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
@@ -399,24 +519,21 @@
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
-
-    <div class="post-spread">
-      
-    </div>
   </div>
 
 
           </div>
           
 
+  
 
-          
-  <div class="comments" id="comments">
-    
-  </div>
 
 
         </div>
@@ -438,138 +555,124 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
           </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
           </li>
         </ul>
       
 
-      <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="https://avatars2.githubusercontent.com/u/20449740?v=3&s=460"
-               alt="秦铭" />
-          <p class="site-author-name" itemprop="name">秦铭</p>
-          <p class="site-description motion-element" itemprop="description">不忘初心，方得始终</p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">10</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">秦铭</p>
+              <div class="site-description motion-element" itemprop="description">不忘初心，方得始终</div>
           </div>
 
           
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
 
           
-            <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">12</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
+
           
 
-        </nav>
+          
 
-        
+          
 
-        <div class="links-of-author motion-element">
+          
+          
+
           
             
-              <span class="links-of-author-item">
-                <a href="https://github.com/qinm08" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
           
+          
+
         </div>
-
-        
-        
-
-        
-        
-          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
-            <div class="links-of-blogroll-title">
-              <i class="fa  fa-fw fa-globe"></i>
-              
-            </div>
-            <ul class="links-of-blogroll-list">
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://blog.csdn.net/u013719780?viewmode=contents" title="allen" target="_blank">allen</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://kafeitu.me/" title="kafeitu" target="_blank">kafeitu</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://coolshell.cn/" title="coolshell" target="_blank">coolshell</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://selfup.cn/" title="selfup" target="_blank">selfup</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://www.cnblogs.com/jerrylead/" title="jerrylead" target="_blank">jerrylead</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://www.iteblog.com/" title="iteblog" target="_blank">iteblog</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://shiyanjun.cn/" title="shiyanjun" target="_blank">shiyanjun</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://notes.iissnan.com/" title="iissnan" target="_blank">iissnan</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://theme-next.iissnan.com/" title="theme-next" target="_blank">theme-next</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://selfboot.cn/" title="selfboot" target="_blank">selfboot</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://stormzhang.com/" title="stormzhang" target="_blank">stormzhang</a>
-                </li>
-              
-            </ul>
-          </div>
-        
-
-      </section>
+      </div>
 
       
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
           <div class="post-toc">
+
             
-              
             
+            
+            
+
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Spark"><span class="nav-number">1.</span> <span class="nav-text">安装Spark</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#示例"><span class="nav-number">2.</span> <span class="nav-text">示例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spark应用、作业、阶段、任务"><span class="nav-number">2.1.</span> <span class="nav-text">Spark应用、作业、阶段、任务</span></a></li></ol></li></ol></div>
             
+
           </div>
-        </section>
+        </div>
+      <!--/noindex-->
+      
+
       
 
     </div>
   </aside>
+  
 
 
         
@@ -578,41 +681,61 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy;  2016 - 
-  <span itemprop="copyrightYear">2019</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">秦铭</span>
+
+  
+
+  
 </div>
 
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
-</div>
 
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
-  </a>
-</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
 
         
+
+
+
+
+
+
+
 
         
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
   </div>
 
   
 
-<script type="text/javascript">
+<script>
   if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
     window.Promise = null;
   }
@@ -626,201 +749,103 @@
 
 
 
-  
 
 
 
-  
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 
-  
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+
+
+
 
 
 
   
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
-
-
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
 
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
 
 
 
   
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
 
 
 
   
 
 
+  <script src="/js/next-boot.js?v=7.1.1"></script>
 
 
   
+
   
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length == 0) {
-       search_path = "search.xml";
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
 
-    function proceedsearch() {
-      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
-      $('.popup').toggle();
+  
 
-    }
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-    'use strict';
-    $.ajax({
-        url: path,
-        dataType: "xml",
-        async: true,
-        success: function( xmlResponse ) {
-            // get the contents from search data
-            isfetched = true;
-            $('.popup').detach().appendTo('.header-inner');
-            var datas = $( "entry", xmlResponse ).map(function() {
-                return {
-                    title: $( "title", this ).text(),
-                    content: $("content",this).text(),
-                    url: $( "url" , this).text()
-                };
-            }).get();
-            var $input = document.getElementById(search_id);
-            var $resultContent = document.getElementById(content_id);
-            $input.addEventListener('input', function(){
-                var matchcounts = 0;
-                var str='<ul class=\"search-result-list\">';
-                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-                $resultContent.innerHTML = "";
-                if (this.value.trim().length > 1) {
-                // perform local searching
-                datas.forEach(function(data) {
-                    var isMatch = true;
-                    var content_index = [];
-                    var data_title = data.title.trim().toLowerCase();
-                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
-                    var data_url = data.url;
-                    var index_title = -1;
-                    var index_content = -1;
-                    var first_occur = -1;
-                    // only match artiles with not empty titles and contents
-                    if(data_title != '' && data_content != '') {
-                        keywords.forEach(function(keyword, i) {
-                            index_title = data_title.indexOf(keyword);
-                            index_content = data_content.indexOf(keyword);
-                            if( index_title < 0 && index_content < 0 ){
-                                isMatch = false;
-                            } else {
-                                if (index_content < 0) {
-                                    index_content = 0;
-                                }
-                                if (i == 0) {
-                                    first_occur = index_content;
-                                }
-                            }
-                        });
-                    }
-                    // show search results
-                    if (isMatch) {
-                        matchcounts += 1;
-                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
-                        var content = data.content.trim().replace(/<[^>]+>/g,"");
-                        if (first_occur >= 0) {
-                            // cut out 100 characters
-                            var start = first_occur - 20;
-                            var end = first_occur + 80;
-                            if(start < 0){
-                                start = 0;
-                            }
-                            if(start == 0){
-                                end = 50;
-                            }
-                            if(end > content.length){
-                                end = content.length;
-                            }
-                            var match_content = content.substring(start, end);
-                            // highlight all keywords
-                            keywords.forEach(function(keyword){
-                                var regS = new RegExp(keyword, "gi");
-                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
-                            });
+  
 
-                            str += "<p class=\"search-result\">" + match_content +"...</p>"
-                        }
-                        str += "</li>";
-                    }
-                })};
-                str += "</ul>";
-                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
-                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
-                $resultContent.innerHTML = str;
-            });
-            proceedsearch();
-        }
-    });}
 
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched == false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
+  
 
-    });
 
-    $('.popup-btn-close').click(function(e){
-      $('.popup').hide();
-      $(".popoverlay").remove();
-      $('body').css('overflow', '');
-    });
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-  </script>
+  
 
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
   
 

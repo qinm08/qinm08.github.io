@@ -1,20 +1,4 @@
-<!doctype html>
-
-
-
-  
-
-
-<html class="theme-next pisces use-motion">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!DOCTYPE html>
 
 
 
@@ -28,47 +12,23 @@
 
 
   
-  
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
 
 
 
 
-  
-  
-  
-  
 
-  
-    
-    
-  
 
   
-
   
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="hadoop,spark," />
+  <link rel="stylesheet" href="/lib/Han/dist/han.min.css?v=3.3">
 
 
 
@@ -77,56 +37,99 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/blacktocat.png?v=5.0.1" />
 
 
 
 
 
 
-<meta name="description" content="Scala独立应用在Spark shell中运行了一个小程序之后，你可能想要把它打包成自包含应用，这样就可以多次运行了。
-示例19-1. 使用Spark找出最高气温的Scala应用
-123456789101112131415import org.apache.spark.SparkContext._import org.apache.spark.&amp;#123;SparkConf, SparkCont">
-<meta property="og:type" content="article">
-<meta property="og:title" content="翻译：Hadoop权威指南之Spark-2">
-<meta property="og:url" content="https://qinm08.github.io/2016/160716-hadoop-tdg-spark-2/index.html">
-<meta property="og:site_name" content="Key Memory">
-<meta property="og:description" content="Scala独立应用在Spark shell中运行了一个小程序之后，你可能想要把它打包成自包含应用，这样就可以多次运行了。
-示例19-1. 使用Spark找出最高气温的Scala应用
-123456789101112131415import org.apache.spark.SparkContext._import org.apache.spark.&amp;#123;SparkConf, SparkCont">
-<meta property="og:updated_time" content="2016-08-19T10:22:20.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="翻译：Hadoop权威指南之Spark-2">
-<meta name="twitter:description" content="Scala独立应用在Spark shell中运行了一个小程序之后，你可能想要把它打包成自包含应用，这样就可以多次运行了。
-示例19-1. 使用Spark找出最高气温的Scala应用
-123456789101112131415import org.apache.spark.SparkContext._import org.apache.spark.&amp;#123;SparkConf, SparkCont">
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post"},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: 0,
-      author: '博主'
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
 
+  
 
 
-  <link rel="canonical" href="https://qinm08.github.io/2016/160716-hadoop-tdg-spark-2/"/>
 
-  <title> 翻译：Hadoop权威指南之Spark-2 | Key Memory </title>
-</head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  <meta name="description" content="Scala独立应用在Spark shell中运行了一个小程序之后，你可能想要把它打包成自包含应用，这样就可以多次运行了。 示例19-1. 使用Spark找出最高气温的Scala应用 123456789101112131415import org.apache.spark.SparkContext._import org.apache.spark.&amp;#123;SparkConf, SparkCont">
+<meta name="keywords" content="hadoop,spark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="翻译：Hadoop权威指南之Spark-2">
+<meta property="og:url" content="https://qinm08.github.io/2016/160716-hadoop-tdg-spark-2/index.html">
+<meta property="og:site_name" content="Key Memory">
+<meta property="og:description" content="Scala独立应用在Spark shell中运行了一个小程序之后，你可能想要把它打包成自包含应用，这样就可以多次运行了。 示例19-1. 使用Spark找出最高气温的Scala应用 123456789101112131415import org.apache.spark.SparkContext._import org.apache.spark.&amp;#123;SparkConf, SparkCont">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2016-08-19T10:22:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="翻译：Hadoop权威指南之Spark-2">
+<meta name="twitter:description" content="Scala独立应用在Spark shell中运行了一个小程序之后，你可能想要把它打包成自包含应用，这样就可以多次运行了。 示例19-1. 使用Spark找出最高气温的Scala应用 123456789101112131415import org.apache.spark.SparkContext._import org.apache.spark.&amp;#123;SparkConf, SparkCont">
 
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://qinm08.github.io/2016/160716-hadoop-tdg-spark-2/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>翻译：Hadoop权威指南之Spark-2 | Key Memory</title>
   
 
 
@@ -137,120 +140,175 @@
 
 
 
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Key Memory</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Key Memory</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
   </div>
-  <p class="site-subtitle"></p>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
+
 
 <nav class="site-nav">
-  
-
   
     <ul id="menu" class="menu">
       
         
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
       
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
         
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
       
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
 
       
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
       
     </ul>
   
 
   
-    <div class="site-search">
-      
-  <div class="popup">
- <span class="search-icon fa fa-search"></span>
- <input type="text" id="local-search-input">
- <div id="local-search-result"></div>
- <span class="popup-btn-close">close</span>
-</div>
 
-
-    </div>
   
 </nav>
 
- </div>
+
+
+  
+
+
+
+</div>
     </header>
+
+    
+
 
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+          
+            
+
+          
           <div id="content" class="content">
             
 
@@ -258,24 +316,37 @@
     
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://qinm08.github.io/2016/160716-hadoop-tdg-spark-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="秦铭">
+      <meta itemprop="description" content="不忘初心，方得始终">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Key Memory">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                翻译：Hadoop权威指南之Spark-2
+          <h1 class="post-title" itemprop="name headline">翻译：Hadoop权威指南之Spark-2
+
               
             
           </h1>
@@ -283,33 +354,69 @@
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-16T00:00:00+08:00" content="2016-07-16">
-              2016-07-16
-            </time>
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2016-07-16 00:00:00" itemprop="dateCreated datePublished" datetime="2016-07-16T00:00:00+08:00">2016-07-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2016-08-19 18:22:20" itemprop="dateModified" datetime="2016-08-19T18:22:20+08:00">2016-08-19</time>
+              
+            
           </span>
 
           
 
           
             
+            
+          
+
+          
           
 
           
 
           
-          
 
           
+
         </div>
       </header>
     
 
-
-    <div class="post-body" itemprop="articleBody">
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
 
       
       
@@ -317,54 +424,61 @@
       
         <h2 id="Scala独立应用"><a href="#Scala独立应用" class="headerlink" title="Scala独立应用"></a>Scala独立应用</h2><p>在Spark shell中运行了一个小程序之后，你可能想要把它打包成自包含应用，这样就可以多次运行了。</p>
 <p>示例19-1. 使用Spark找出最高气温的Scala应用</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.apache.spark.<span class="type">SparkContext</span>._</div><div class="line"><span class="keyword">import</span> org.apache.spark.&#123;<span class="type">SparkConf</span>, <span class="type">SparkContext</span>&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">MaxTemperature</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]) &#123;</div><div class="line">        <span class="keyword">val</span> conf = <span class="keyword">new</span> <span class="type">SparkConf</span>().setAppName(<span class="string">"Max Temperature"</span>)</div><div class="line">        <span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(conf)</div><div class="line">        sc.textFile(args(<span class="number">0</span>))</div><div class="line">          .map(_.split(<span class="string">"\t"</span>))</div><div class="line">          .filter(rec =&gt; (rec(<span class="number">1</span>) != <span class="string">"9999"</span> &amp;&amp; rec(<span class="number">2</span>).matches(<span class="string">"[01459]"</span>)))</div><div class="line">          .map(rec =&gt; (rec(<span class="number">0</span>).toInt, rec(<span class="number">1</span>).toInt))</div><div class="line">          .reduceByKey((a, b) =&gt; <span class="type">Math</span>.max(a, b))</div><div class="line">          .saveAsTextFile(args(<span class="number">1</span>))</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.spark.<span class="type">SparkContext</span>._</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.&#123;<span class="type">SparkConf</span>, <span class="type">SparkContext</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">MaxTemperature</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]) &#123;</span><br><span class="line">        <span class="keyword">val</span> conf = <span class="keyword">new</span> <span class="type">SparkConf</span>().setAppName(<span class="string">"Max Temperature"</span>)</span><br><span class="line">        <span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(conf)</span><br><span class="line">        sc.textFile(args(<span class="number">0</span>))</span><br><span class="line">          .map(_.split(<span class="string">"\t"</span>))</span><br><span class="line">          .filter(rec =&gt; (rec(<span class="number">1</span>) != <span class="string">"9999"</span> &amp;&amp; rec(<span class="number">2</span>).matches(<span class="string">"[01459]"</span>)))</span><br><span class="line">          .map(rec =&gt; (rec(<span class="number">0</span>).toInt, rec(<span class="number">1</span>).toInt))</span><br><span class="line">          .reduceByKey((a, b) =&gt; <span class="type">Math</span>.max(a, b))</span><br><span class="line">          .saveAsTextFile(args(<span class="number">1</span>))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <p>运行独立程序时，没有shell为我们提供SparkContext，我们需要自己创建。我们用一个SparkConf来创建这个实例。SparkConf可以用来向应用中传递多个Spark属性，这里我们仅仅设置应用的名字。</p>
 <p>还有一些别的微小变化。首先是我们使用命令行参数来指定输入和输出路径。另外还使用了方法链来避免为每一个RDD创建中间变量，这样程序更紧凑，如果需要的话，我们仍然可以在Scala IDE中查看每次转换操作的类型信息。</p>
 <blockquote>
-<p>并非所有的Spark定义的转换操作都可用于RDD类本身。在本例中，reduceByKey()（仅仅在键值对的RDD上起作用）实际上定义在PairRDDFunctions类中，但我们能用下面的import来让Scala隐含地把RDD[(Int, Int)]转为PairRDDFunctions：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">import org.apache.spark.SparkContext._</div></pre></td></tr></table></figure></p>
+<p>并非所有的Spark定义的转换操作都可用于RDD类本身。在本例中，reduceByKey()（仅仅在键值对的RDD上起作用）实际上定义在PairRDDFunctions类中，但我们能用下面的import来让Scala隐含地把RDD[(Int, Int)]转为PairRDDFunctions：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.spark.SparkContext._</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
 <p>这个import不同于Spark使用的隐式转型函数，因此理所当然地值得包含在程序中。</p>
 </blockquote>
 <p>这一次我们使用spark-submit来运行这个程序，把包含编译后的Scala程序的JAR包作为参数传入，接着传入命令行参数（输入和输出路径）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">% spark-submit --class MaxTemperature --master local \</div><div class="line">spark-examples.jar input/ncdc/micro-tab/sample.txt output</div><div class="line">% cat output/part-*</div><div class="line">(1950,22)</div><div class="line">(1949,111)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">% spark-submit --class MaxTemperature --master local \</span><br><span class="line">spark-examples.jar input/ncdc/micro-tab/sample.txt output</span><br><span class="line">% cat output/part-*</span><br><span class="line">(1950,22)</span><br><span class="line">(1949,111)</span><br></pre></td></tr></table></figure>
 <p>我们还指定了两个选项：–class 告诉Spark应用类的名字，–master 指定作业的运行方式，local值告诉Spark在本地机器的单个JVM中运行，在“执行器和集群管理器”一节我们将会学到一些在集群中运行的选项。接下来，我们看看怎样用Java语言来使用Spark。</p>
 <h2 id="Java示例"><a href="#Java示例" class="headerlink" title="Java示例"></a>Java示例</h2><p>Spark是使用Scala实现的，Scala是基于JVM的语言，可以和Java完美集成。同样的例子用Java来表达，很直接也很啰嗦（使用Java 8的lambda表达式可以使这个版本更紧凑）。</p>
-<p>示例19-2. 使用Spark找出最高气温的Java应用<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MaxTemperatureSpark</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="keyword">if</span> (args.length != <span class="number">2</span>) &#123;</div><div class="line">            System.err.println(<span class="string">"Usage: MaxTemperatureSpark &lt;input path&gt; &lt;output path&gt;"</span>);</div><div class="line">            System.exit(-<span class="number">1</span>);</div><div class="line">        &#125;</div><div class="line">        SparkConf conf = <span class="keyword">new</span> SparkConf();</div><div class="line">        JavaSparkContext sc = <span class="keyword">new</span> JavaSparkContext(<span class="string">"local"</span>, <span class="string">"MaxTemperatureSpark"</span>, conf);</div><div class="line">        JavaRDD&lt;String&gt; lines = sc.textFile(args[<span class="number">0</span>]);</div><div class="line">        JavaRDD&lt;String[]&gt; records = lines.map(<span class="keyword">new</span> Function&lt;String, String[]&gt;() &#123;</div><div class="line">            <span class="meta">@Override</span> <span class="keyword">public</span> String[] call(String s) &#123;</div><div class="line">                <span class="keyword">return</span> s.split(<span class="string">"\t"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        JavaRDD&lt;String[]&gt; filtered = records.filter(<span class="keyword">new</span> Function&lt;String[], Boolean&gt;() &#123;</div><div class="line">            <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> Boolean <span class="title">call</span><span class="params">(String[] rec)</span> </span>&#123;</div><div class="line">                <span class="keyword">return</span> rec[<span class="number">1</span>] != <span class="string">"9999"</span> &amp;&amp; rec[<span class="number">2</span>].matches(<span class="string">"[01459]"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        JavaPairRDD&lt;Integer, Integer&gt; tuples = filtered.mapToPair(</div><div class="line">            <span class="keyword">new</span> PairFunction&lt;String[], Integer, Integer&gt;() &#123;</div><div class="line">                <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> Tuple2&lt;Integer, Integer&gt; <span class="title">call</span><span class="params">(String[] rec)</span> </span>&#123;</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">new</span> Tuple2&lt;Integer, Integer&gt;(</div><div class="line">                        Integer.parseInt(rec[<span class="number">0</span>]), Integer.parseInt(rec[<span class="number">1</span>]));</div><div class="line">                &#125;</div><div class="line">        &#125;);</div><div class="line">        JavaPairRDD&lt;Integer, Integer&gt; maxTemps = tuples.reduceByKey(</div><div class="line">            <span class="keyword">new</span> Function2&lt;Integer, Integer, Integer&gt;() &#123;</div><div class="line">                <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> Integer <span class="title">call</span><span class="params">(Integer i1, Integer i2)</span> </span>&#123;</div><div class="line">                    <span class="keyword">return</span> Math.max(i1, i2);</div><div class="line">                &#125;</div><div class="line">        &#125;);</div><div class="line">        maxTemps.saveAsTextFile(args[<span class="number">1</span>]);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>示例19-2. 使用Spark找出最高气温的Java应用<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MaxTemperatureSpark</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (args.length != <span class="number">2</span>) &#123;</span><br><span class="line">            System.err.println(<span class="string">"Usage: MaxTemperatureSpark &lt;input path&gt; &lt;output path&gt;"</span>);</span><br><span class="line">            System.exit(-<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        SparkConf conf = <span class="keyword">new</span> SparkConf();</span><br><span class="line">        JavaSparkContext sc = <span class="keyword">new</span> JavaSparkContext(<span class="string">"local"</span>, <span class="string">"MaxTemperatureSpark"</span>, conf);</span><br><span class="line">        JavaRDD&lt;String&gt; lines = sc.textFile(args[<span class="number">0</span>]);</span><br><span class="line">        JavaRDD&lt;String[]&gt; records = lines.map(<span class="keyword">new</span> Function&lt;String, String[]&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span> <span class="keyword">public</span> String[] call(String s) &#123;</span><br><span class="line">                <span class="keyword">return</span> s.split(<span class="string">"\t"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        JavaRDD&lt;String[]&gt; filtered = records.filter(<span class="keyword">new</span> Function&lt;String[], Boolean&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> Boolean <span class="title">call</span><span class="params">(String[] rec)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> rec[<span class="number">1</span>] != <span class="string">"9999"</span> &amp;&amp; rec[<span class="number">2</span>].matches(<span class="string">"[01459]"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        JavaPairRDD&lt;Integer, Integer&gt; tuples = filtered.mapToPair(</span><br><span class="line">            <span class="keyword">new</span> PairFunction&lt;String[], Integer, Integer&gt;() &#123;</span><br><span class="line">                <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> Tuple2&lt;Integer, Integer&gt; <span class="title">call</span><span class="params">(String[] rec)</span> </span>&#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">new</span> Tuple2&lt;Integer, Integer&gt;(</span><br><span class="line">                        Integer.parseInt(rec[<span class="number">0</span>]), Integer.parseInt(rec[<span class="number">1</span>]));</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        JavaPairRDD&lt;Integer, Integer&gt; maxTemps = tuples.reduceByKey(</span><br><span class="line">            <span class="keyword">new</span> Function2&lt;Integer, Integer, Integer&gt;() &#123;</span><br><span class="line">                <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> Integer <span class="title">call</span><span class="params">(Integer i1, Integer i2)</span> </span>&#123;</span><br><span class="line">                    <span class="keyword">return</span> Math.max(i1, i2);</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        maxTemps.saveAsTextFile(args[<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>在Spark的Java API中，一个RDD由JavaRDD的实例表示，在键值对RDD的特殊情况下是JavaPairRDD 。这两个类都实现了JavaRDDLike接口，该接口中可以找到操作RDD的大多数方法。</p>
 <p>运行这个程序和运行Scala版本一样，除了类名字是MaxTemperatureSpark 。</p>
 <h2 id="Python示例"><a href="#Python示例" class="headerlink" title="Python示例"></a>Python示例</h2><p>Spark也支持Python语言，API叫做PySpark。由于Python语言有lambda表达式，例子程序非常接近Scala的版本。</p>
-<p>示例19-3. 使用Spark找出最高气温的Python应用<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">form pyspark <span class="keyword">import</span> SparkContext</div><div class="line"><span class="keyword">import</span> re, sys</div><div class="line"></div><div class="line">sc = SparkContext(<span class="string">"local"</span>, <span class="string">"Max Temperature"</span>)</div><div class="line">sc.textFile(sys.argv[<span class="number">1</span>]) \</div><div class="line">  .map(<span class="keyword">lambda</span> s: s.split(<span class="string">"\t"</span>)) \</div><div class="line">  .filter(<span class="keyword">lambda</span> rec: (rec[<span class="number">1</span>] != <span class="string">"9999"</span> <span class="keyword">and</span> re.match(<span class="string">"[01459]"</span>, rec[<span class="number">2</span>]))) \</div><div class="line">  .map(<span class="keyword">lambda</span> rec: (int(rec[<span class="number">0</span>]), int(rec[<span class="number">1</span>]))) \</div><div class="line">  .reduceByKey(max) \</div><div class="line">  .saveAsTextFile(sys.argv[<span class="number">2</span>])</div></pre></td></tr></table></figure></p>
+<p>示例19-3. 使用Spark找出最高气温的Python应用<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">form pyspark <span class="keyword">import</span> SparkContext</span><br><span class="line"><span class="keyword">import</span> re, sys</span><br><span class="line"></span><br><span class="line">sc = SparkContext(<span class="string">"local"</span>, <span class="string">"Max Temperature"</span>)</span><br><span class="line">sc.textFile(sys.argv[<span class="number">1</span>]) \</span><br><span class="line">  .map(<span class="keyword">lambda</span> s: s.split(<span class="string">"\t"</span>)) \</span><br><span class="line">  .filter(<span class="keyword">lambda</span> rec: (rec[<span class="number">1</span>] != <span class="string">"9999"</span> <span class="keyword">and</span> re.match(<span class="string">"[01459]"</span>, rec[<span class="number">2</span>]))) \</span><br><span class="line">  .map(<span class="keyword">lambda</span> rec: (int(rec[<span class="number">0</span>]), int(rec[<span class="number">1</span>]))) \</span><br><span class="line">  .reduceByKey(max) \</span><br><span class="line">  .saveAsTextFile(sys.argv[<span class="number">2</span>])</span><br></pre></td></tr></table></figure></p>
 <p>注意在reduceByKey()的转换操作中，我们可以使用Python语言内建的max函数。</p>
 <p>需要留意的一点是，这个程序是用CPython写的，Spark会创建一个Python子进程来执行用户的Python代码（在启动程序 <em>launcher</em> 和在集群上运行用户任务的执行器 <em>executor</em> 上）。两个进程间使用socket通讯来传递RDD分区数据。</p>
-<p>要运行这个程序，只需指定Python文件即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">% spark-submit --master local \</div><div class="line">  ch19-spark/src/main/python/MaxTemperature.py \</div><div class="line">  input/ncdc/micro-tab/sample.txt output</div></pre></td></tr></table></figure></p>
+<p>要运行这个程序，只需指定Python文件即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">% spark-submit --master local \</span><br><span class="line">  ch19-spark/src/main/python/MaxTemperature.py \</span><br><span class="line">  input/ncdc/micro-tab/sample.txt output</span><br></pre></td></tr></table></figure></p>
 <p>还可以使用pyspark命令，以交互模式运行Spark和Python。</p>
 
       
     </div>
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
+    
+    
 
-    <div>
-      
-        
+    
 
+    
       
-    </div>
+    
+    
+
+    
 
     <footer class="post-footer">
       
         <div class="post-tags">
           
-            <a href="/tags/hadoop/" rel="tag">#hadoop</a>
+            <a href="/tags/hadoop/" rel="tag"># hadoop</a>
           
-            <a href="/tags/spark/" rel="tag">#spark</a>
+            <a href="/tags/spark/" rel="tag"># spark</a>
           
         </div>
+      
+
+      
+      
       
 
       
@@ -376,6 +490,8 @@
               </a>
             
           </div>
+
+          <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
@@ -390,24 +506,21 @@
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
-
-    <div class="post-spread">
-      
-    </div>
   </div>
 
 
           </div>
           
 
+  
 
-          
-  <div class="comments" id="comments">
-    
-  </div>
 
 
         </div>
@@ -429,138 +542,124 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
           </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
           </li>
         </ul>
       
 
-      <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="https://avatars2.githubusercontent.com/u/20449740?v=3&s=460"
-               alt="秦铭" />
-          <p class="site-author-name" itemprop="name">秦铭</p>
-          <p class="site-description motion-element" itemprop="description">不忘初心，方得始终</p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">10</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">秦铭</p>
+              <div class="site-description motion-element" itemprop="description">不忘初心，方得始终</div>
           </div>
 
           
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
 
           
-            <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">12</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
+
           
 
-        </nav>
+          
 
-        
+          
 
-        <div class="links-of-author motion-element">
+          
+          
+
           
             
-              <span class="links-of-author-item">
-                <a href="https://github.com/qinm08" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
           
+          
+
         </div>
-
-        
-        
-
-        
-        
-          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
-            <div class="links-of-blogroll-title">
-              <i class="fa  fa-fw fa-globe"></i>
-              
-            </div>
-            <ul class="links-of-blogroll-list">
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://blog.csdn.net/u013719780?viewmode=contents" title="allen" target="_blank">allen</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://kafeitu.me/" title="kafeitu" target="_blank">kafeitu</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://coolshell.cn/" title="coolshell" target="_blank">coolshell</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://selfup.cn/" title="selfup" target="_blank">selfup</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://www.cnblogs.com/jerrylead/" title="jerrylead" target="_blank">jerrylead</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://www.iteblog.com/" title="iteblog" target="_blank">iteblog</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://shiyanjun.cn/" title="shiyanjun" target="_blank">shiyanjun</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://notes.iissnan.com/" title="iissnan" target="_blank">iissnan</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://theme-next.iissnan.com/" title="theme-next" target="_blank">theme-next</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://selfboot.cn/" title="selfboot" target="_blank">selfboot</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://stormzhang.com/" title="stormzhang" target="_blank">stormzhang</a>
-                </li>
-              
-            </ul>
-          </div>
-        
-
-      </section>
+      </div>
 
       
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
           <div class="post-toc">
+
             
-              
             
+            
+            
+
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Scala独立应用"><span class="nav-number">1.</span> <span class="nav-text">Scala独立应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java示例"><span class="nav-number">2.</span> <span class="nav-text">Java示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python示例"><span class="nav-number">3.</span> <span class="nav-text">Python示例</span></a></li></ol></div>
             
+
           </div>
-        </section>
+        </div>
+      <!--/noindex-->
+      
+
       
 
     </div>
   </aside>
+  
 
 
         
@@ -569,41 +668,61 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy;  2016 - 
-  <span itemprop="copyrightYear">2019</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">秦铭</span>
+
+  
+
+  
 </div>
 
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
-</div>
 
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
-  </a>
-</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
 
         
+
+
+
+
+
+
+
 
         
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
   </div>
 
   
 
-<script type="text/javascript">
+<script>
   if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
     window.Promise = null;
   }
@@ -617,201 +736,103 @@
 
 
 
-  
 
 
 
-  
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 
-  
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+
+
+
 
 
 
   
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
-
-
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
 
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
 
 
 
   
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
 
 
 
   
 
 
+  <script src="/js/next-boot.js?v=7.1.1"></script>
 
 
   
+
   
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length == 0) {
-       search_path = "search.xml";
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
 
-    function proceedsearch() {
-      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
-      $('.popup').toggle();
+  
 
-    }
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-    'use strict';
-    $.ajax({
-        url: path,
-        dataType: "xml",
-        async: true,
-        success: function( xmlResponse ) {
-            // get the contents from search data
-            isfetched = true;
-            $('.popup').detach().appendTo('.header-inner');
-            var datas = $( "entry", xmlResponse ).map(function() {
-                return {
-                    title: $( "title", this ).text(),
-                    content: $("content",this).text(),
-                    url: $( "url" , this).text()
-                };
-            }).get();
-            var $input = document.getElementById(search_id);
-            var $resultContent = document.getElementById(content_id);
-            $input.addEventListener('input', function(){
-                var matchcounts = 0;
-                var str='<ul class=\"search-result-list\">';
-                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-                $resultContent.innerHTML = "";
-                if (this.value.trim().length > 1) {
-                // perform local searching
-                datas.forEach(function(data) {
-                    var isMatch = true;
-                    var content_index = [];
-                    var data_title = data.title.trim().toLowerCase();
-                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
-                    var data_url = data.url;
-                    var index_title = -1;
-                    var index_content = -1;
-                    var first_occur = -1;
-                    // only match artiles with not empty titles and contents
-                    if(data_title != '' && data_content != '') {
-                        keywords.forEach(function(keyword, i) {
-                            index_title = data_title.indexOf(keyword);
-                            index_content = data_content.indexOf(keyword);
-                            if( index_title < 0 && index_content < 0 ){
-                                isMatch = false;
-                            } else {
-                                if (index_content < 0) {
-                                    index_content = 0;
-                                }
-                                if (i == 0) {
-                                    first_occur = index_content;
-                                }
-                            }
-                        });
-                    }
-                    // show search results
-                    if (isMatch) {
-                        matchcounts += 1;
-                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
-                        var content = data.content.trim().replace(/<[^>]+>/g,"");
-                        if (first_occur >= 0) {
-                            // cut out 100 characters
-                            var start = first_occur - 20;
-                            var end = first_occur + 80;
-                            if(start < 0){
-                                start = 0;
-                            }
-                            if(start == 0){
-                                end = 50;
-                            }
-                            if(end > content.length){
-                                end = content.length;
-                            }
-                            var match_content = content.substring(start, end);
-                            // highlight all keywords
-                            keywords.forEach(function(keyword){
-                                var regS = new RegExp(keyword, "gi");
-                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
-                            });
+  
 
-                            str += "<p class=\"search-result\">" + match_content +"...</p>"
-                        }
-                        str += "</li>";
-                    }
-                })};
-                str += "</ul>";
-                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
-                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
-                $resultContent.innerHTML = str;
-            });
-            proceedsearch();
-        }
-    });}
 
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched == false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
+  
 
-    });
 
-    $('.popup-btn-close').click(function(e){
-      $('.popup').hide();
-      $(".popoverlay").remove();
-      $('body').css('overflow', '');
-    });
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-  </script>
+  
 
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
   
 
