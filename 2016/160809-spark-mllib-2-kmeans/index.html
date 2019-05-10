@@ -89,7 +89,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spark机器学习2 - KMeans聚类算法">
 <meta property="og:url" content="https://qinm08.github.io/2016/160809-spark-mllib-2-kmeans/index.html">
-<meta property="og:site_name" content="Ming's Coding Life">
+<meta property="og:site_name" content="Key Memory">
 <meta property="og:description" content="今天是七夕，看到一则关于“京东”名字来源的八卦，什么东哥的前女友、奶茶妹妹一个排的前男友balabala的，忽然想到能不能用算法对那一个排的前男友聚聚类，看看奶茶妹妹的喜好啊品味啊什么的，然后再看看东哥属于哪一类，一定很有（e）趣（su）。可惜手头没有那一排人的资料，只好作罢。由此看来聚类算法还挺有价值的，比如研究下非诚勿扰、世纪佳缘之类的……
 聚类问题言归正传，所谓聚类问题，就是给定一个元素集合">
 <meta property="og:image" content="https://qinm08.github.io/uploads/images/2016/0808/1105.png">
@@ -97,7 +97,7 @@
 <meta property="og:image" content="https://qinm08.github.io/uploads/images/2016/0808/1405.png">
 <meta property="og:image" content="https://qinm08.github.io/uploads/images/2016/0808/1410.png">
 <meta property="og:image" content="https://qinm08.github.io/uploads/images/2016/0808/1415.png">
-<meta property="og:updated_time" content="2016-09-20T09:22:16.000Z">
+<meta property="og:updated_time" content="2017-01-21T02:42:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark机器学习2 - KMeans聚类算法">
 <meta name="twitter:description" content="今天是七夕，看到一则关于“京东”名字来源的八卦，什么东哥的前女友、奶茶妹妹一个排的前男友balabala的，忽然想到能不能用算法对那一个排的前男友聚聚类，看看奶茶妹妹的喜好啊品味啊什么的，然后再看看东哥属于哪一类，一定很有（e）趣（su）。可惜手头没有那一排人的资料，只好作罢。由此看来聚类算法还挺有价值的，比如研究下非诚勿扰、世纪佳缘之类的……
@@ -125,7 +125,7 @@
 
   <link rel="canonical" href="https://qinm08.github.io/2016/160809-spark-mllib-2-kmeans/"/>
 
-  <title> Spark机器学习2 - KMeans聚类算法 | Ming's Coding Life </title>
+  <title> Spark机器学习2 - KMeans聚类算法 | Key Memory </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -156,11 +156,11 @@
   <div class="custom-logo-site-title">
     <a href="/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Ming's Coding Life</span>
+      <span class="site-title">Key Memory</span>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
-  <p class="site-subtitle">To Be a Professional Coder</p>
+  <p class="site-subtitle"></p>
 </div>
 
 <div class="site-nav-toggle">
@@ -329,7 +329,7 @@
 <p>乍一看，这不还是在做分类操作吗？聚类（clustering）与分类（classification）的不同之处在于：分类是一种示例式的有监督学习算法，它要求必须事先明确知道各个类别的信息，并且断言所有待分类项都有一个类别与之对应，很多时候这个条件是不成立的，尤其是面对海量数据的时候；而聚类是一种观察式的无监督学习算法，在聚类之前可以不知道类别甚至不给定类别数量，由算法通过对样本数据的特征进行观察，然后进行相似度或相异度的分析，从而达到“物以类聚”的目的。</p>
 <p>K-Means算法是最简单的一种聚类算法。</p>
 <a id="more"></a>
-<h1 id="K-Means聚类算法"><a href="#K-Means聚类算法" class="headerlink" title="K-Means聚类算法"></a>K-Means聚类算法</h1><p><img src="/uploads/images/2016/0808/1105.png" alt=""></p>
+<h1 id="K-Means聚类算法"><a href="#K-Means聚类算法" class="headerlink" title="K-Means聚类算法"></a>K-Means聚类算法</h1><p><img src="https://qinm08.github.io/uploads/images/2016/0808/1105.png" alt=""></p>
 <p>使用K-Means算法进行聚类，过程非常直观：<br>(a) 给定集合D，有n个样本点<br>(b) 随机指定两个点，作为两个子集的质心<br>(c) 根据样本点与两个质心的距离远近，将每个样本点划归最近质心所在的子集<br>(d) 对两个子集重新计算质心<br>(e) 根据新的质心，重复操作(c)<br>(f) 重复操作(d)和(e)，直至结果足够收敛或者不再变化</p>
 <h1 id="Spark聚类示例"><a href="#Spark聚类示例" class="headerlink" title="Spark聚类示例"></a>Spark聚类示例</h1><p>首先还是明确任务，我们要对下面这组数据进行聚类，看看中国足球在亚洲处于什么水平，数据来源于<a href="http://www.cnblogs.com/leoo2sk/archive/2010/09/20/k-means.html" target="_blank" rel="external">张洋的算法杂货铺</a>。</p>
 <table>
@@ -464,8 +464,8 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">[22.5,12.0,3.5]</div><div class="line">[50.0,47.5,7.5]</div><div class="line">[34.6,38.400000000000006,7.6000000000000005]</div><div class="line">K-Means Cost: 700.5999999999995</div><div class="line">1: [50.0,50.0,9.0]</div><div class="line">0: [28.0,9.0,4.0]</div><div class="line">0: [17.0,15.0,3.0]</div><div class="line">2: [25.0,40.0,5.0]</div><div class="line">2: [28.0,40.0,2.0]</div><div class="line">1: [50.0,50.0,1.0]</div><div class="line">1: [50.0,40.0,9.0]</div><div class="line">1: [50.0,40.0,9.0]</div><div class="line">2: [40.0,40.0,5.0]</div><div class="line">1: [50.0,50.0,9.0]</div><div class="line">1: [50.0,50.0,5.0]</div><div class="line">1: [50.0,50.0,9.0]</div><div class="line">2: [40.0,40.0,9.0]</div><div class="line">2: [40.0,32.0,17.0]</div><div class="line">1: [50.0,50.0,9.0]</div></pre></td></tr></table></figure>
 <p>这里的 K-Means Cost 是700，比前面的结果更加收敛。实际应用中也应该多次运行，取收敛性最好的结果（K-Means Cost 最低的）。这次的结果与上次稍有不同，第一集团的伊朗、沙特被归到了第二集团，其他没有变化，无论怎样中国足球总是亚洲三流的。（脚趾头都能想出来，还用Spark来分析，好吧，杀鸡用了牛刀……）</p>
 <h1 id="不适用场景"><a href="#不适用场景" class="headerlink" title="不适用场景"></a>不适用场景</h1><p>每一种算法都不是放之四海而皆准的，下面是 K-Means 算法不适用的两个场景：</p>
-<p><img src="/uploads/images/2016/0808/1400.png" alt=""><br>这种情况如果由人来聚类，分分钟搞定，但是 K-Means 算法是这样做的：<br><img src="/uploads/images/2016/0808/1405.png" alt=""></p>
-<p>下面这种情况更微妙一些，各个子集的密集程度相差很大：<br><img src="/uploads/images/2016/0808/1410.png" alt=""><br>看看 K-Means 算法是怎样做的：<br><img src="/uploads/images/2016/0808/1415.png" alt=""></p>
+<p><img src="https://qinm08.github.io/uploads/images/2016/0808/1400.png" alt=""><br>这种情况如果由人来聚类，分分钟搞定，但是 K-Means 算法是这样做的：<br><img src="https://qinm08.github.io/uploads/images/2016/0808/1405.png" alt=""></p>
+<p>下面这种情况更微妙一些，各个子集的密集程度相差很大：<br><img src="https://qinm08.github.io/uploads/images/2016/0808/1410.png" alt=""><br>看看 K-Means 算法是怎样做的：<br><img src="https://qinm08.github.io/uploads/images/2016/0808/1415.png" alt=""></p>
 <p>好吧，的确是差成渣了，但这真的不是算法的问题，而是我们人类对算法的选择问题。那么这两种情况应该选择什么算法呢？我现在用尽“洪荒之力”也想不出来，随着学习的深入再来求解吧，或者如果有高人读到这里，请和我联系指点指点吧！</p>
 <h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
 <li><a href="https://en.wikipedia.org/wiki/K-means_clustering" target="_blank" rel="external">https://en.wikipedia.org/wiki/K-means_clustering</a></li>
@@ -709,8 +709,8 @@
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
