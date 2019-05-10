@@ -100,20 +100,20 @@
 
 
 
-  <meta name="description" content="简单粗暴，直接高效，这里不说WHAT和WHY，直接记录HOW。">
+  <meta name="description" content="简单粗暴，直接高效，这里不说WHAT和WHY，直接记录HOW。 添加maven依赖12345&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.projectlombok&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;lombok&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;1.18.8&amp;lt;/version">
 <meta name="keywords" content="Lombok">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lombok入门指南">
 <meta property="og:url" content="https://qinm08.github.io/2019/190510-lombok-1-get-started/index.html">
 <meta property="og:site_name" content="Key Memory">
-<meta property="og:description" content="简单粗暴，直接高效，这里不说WHAT和WHY，直接记录HOW。">
+<meta property="og:description" content="简单粗暴，直接高效，这里不说WHAT和WHY，直接记录HOW。 添加maven依赖12345&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.projectlombok&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;lombok&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;1.18.8&amp;lt;/version">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://qinm08.github.io/uploads/images/2019/0510/1115.png">
 <meta property="og:image" content="https://qinm08.github.io/uploads/images/2019/0510/1405.jpg">
-<meta property="og:updated_time" content="2019-05-10T07:57:14.844Z">
+<meta property="og:updated_time" content="2019-05-10T08:22:45.527Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lombok入门指南">
-<meta name="twitter:description" content="简单粗暴，直接高效，这里不说WHAT和WHY，直接记录HOW。">
+<meta name="twitter:description" content="简单粗暴，直接高效，这里不说WHAT和WHY，直接记录HOW。 添加maven依赖12345&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.projectlombok&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;lombok&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;1.18.8&amp;lt;/version">
 <meta name="twitter:image" content="https://qinm08.github.io/uploads/images/2019/0510/1115.png">
 
 
@@ -374,7 +374,7 @@
                 
               
 
-              <time title="Created: 2019-05-10 00:00:00 / Modified: 15:57:14" itemprop="dateCreated datePublished" datetime="2019-05-10T00:00:00+08:00">2019-05-10</time>
+              <time title="Created: 2019-05-10 00:00:00 / Modified: 16:22:45" itemprop="dateCreated datePublished" datetime="2019-05-10T00:00:00+08:00">2019-05-10</time>
             
 
             
@@ -414,8 +414,8 @@
 
       
         <p>简单粗暴，直接高效，这里不说WHAT和WHY，直接记录HOW。</p>
-<a id="more"></a>
 <h1 id="添加maven依赖"><a href="#添加maven依赖" class="headerlink" title="添加maven依赖"></a>添加maven依赖</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.18.8<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <h1 id="IDEA-Lombok-plugin"><a href="#IDEA-Lombok-plugin" class="headerlink" title="IDEA Lombok plugin"></a>IDEA Lombok plugin</h1><p><img src="https://qinm08.github.io/uploads/images/2019/0510/1115.png" alt></p>
 <h1 id="入门级使用"><a href="#入门级使用" class="headerlink" title="入门级使用"></a>入门级使用</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> lombok.Getter;</span><br><span class="line"><span class="keyword">import</span> lombok.Setter;</span><br><span class="line"><span class="keyword">import</span> lombok.ToString;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="meta">@Setter</span></span><br><span class="line"><span class="meta">@ToString</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReturnResult</span>&lt;<span class="title">R</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> success;</span><br><span class="line">    <span class="keyword">private</span> String code;</span><br><span class="line">    <span class="keyword">private</span> String msg;</span><br><span class="line">    <span class="keyword">private</span> R data;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="Lombok注解说明"><a href="#Lombok注解说明" class="headerlink" title="Lombok注解说明"></a>Lombok注解说明</h1><p>以下内容节选自 <a href="http://codepub.cn/2015/07/30/Lombok-development-guidelines/" target="_blank" rel="noopener">IT草根–Lombok开发指南</a></p>
