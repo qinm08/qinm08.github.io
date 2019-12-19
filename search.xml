@@ -4,6 +4,69 @@
   
     
     <entry>
+      <title><![CDATA[雕虫小技 使用awk printf优化jps的输出]]></title>
+      <url>https://qinm08.github.io/2019/191219-awk-printf-jps-output/</url>
+      <content type="html"><![CDATA[<h1 id="前戏"><a href="#前戏" class="headerlink" title="前戏"></a>前戏</h1><p>对于Java程序员来说，经常需要查看运行中的Java进程，命令<code>ps -ef | grep java</code>提供了很详细的进程信息，相比之下<code>jps</code>的输出要简洁一些。如果你只需要查看进程名字和进程号，<code>jps</code>是个很不错的选择。</p>
+<a id="more"></a>
+<p><img src="https://qinm08.github.io/uploads/images/2019/1219/01.png" alt></p>
+<p>然而，这个输出实在是杂乱无章，对于我等重度强迫症患者，不优化它简直天理难容。</p>
+<h1 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h1><ol>
+<li>过滤掉Jps进程 <code>grep -v Jps</code></li>
+</ol>
+<p><img src="https://qinm08.github.io/uploads/images/2019/1219/02.png" alt></p>
+<ol start="2">
+<li>将进程名与进程号位置掉转 <code>awk &#39;{print $2 &quot; &quot; $1}&#39;</code></li>
+</ol>
+<p><img src="https://qinm08.github.io/uploads/images/2019/1219/03.png" alt></p>
+<ol start="3">
+<li><p>按照进程名排序 <code>sort</code></p>
+<p><img src="https://qinm08.github.io/uploads/images/2019/1219/04.png" alt></p>
+<p>这样看起来已经好多了，不过强迫症可没那么容易满足，继续……</p>
+</li>
+<li><p>再把进程号和进程名掉换一下位置 <code>awk &#39;{printf &quot;%s %s\n&quot;, $2, $1}&#39;</code></p>
+<p><img src="https://qinm08.github.io/uploads/images/2019/1219/05.png" alt></p>
+<p>怎么感觉又不顺眼了呢？Be patient，we almost there！</p>
+</li>
+<li><p>给进程号一个固定长度 <code>awk &#39;{printf &quot;%8s %s\n&quot;, $2, $1}&#39;</code></p>
+<p><img src="https://qinm08.github.io/uploads/images/2019/1219/06.png" alt></p>
+<p>Very good！强迫症已经基本痊愈了！</p>
+</li>
+<li><p>再添加个行号不是更完美？ <code>awk &#39;{printf &quot;%2d %8s %s\n&quot;, NR, $2, $1}&#39;</code></p>
+<p><img src="https://qinm08.github.io/uploads/images/2019/1219/07.png" alt></p>
+<p>好了，就这样！Perfect！不过，每次都要输入这么长一串？No way！</p>
+</li>
+<li><p>在<code>.bashrc</code>中为<code>jps</code>添加<code>alias</code>，注意要对特殊符号做转义。</p>
+<p><img src="https://qinm08.github.io/uploads/images/2019/1219/08.png" alt></p>
+<p><code>source .bashrc</code>使之生效。</p>
+</li>
+<li><p>检验结果：</p>
+<p><img src="https://qinm08.github.io/uploads/images/2019/1219/09.png" alt></p>
+<p>大功告成！</p>
+</li>
+</ol>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>学习<code>grep</code>以及<code>zgrep</code>的用法</li>
+<li>学习<code>awk</code>的<code>print</code>和<code>printf</code>的用法</li>
+<li><code>awk print</code>打印整行使用关键字<code>NR</code></li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> Linux </tag>
+            
+            <tag> awk </tag>
+            
+            <tag> printf </tag>
+            
+            <tag> 雕虫小技 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Lombok入门指南]]></title>
       <url>https://qinm08.github.io/2019/190510-lombok-1-get-started/</url>
       <content type="html"><![CDATA[<p>简单粗暴，直接高效，这里不说WHAT和WHY，直接记录HOW。</p>
