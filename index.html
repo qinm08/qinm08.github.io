@@ -15,7 +15,7 @@
 
 
 <html class="theme-next gemini use-motion" lang="zh-CN">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -336,6 +336,330 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://qinm08.github.io/2016/160801-spark-mllib-1-naive-bayes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="秦铭">
+      <meta itemprop="description" content="不忘初心，方得始终">
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/20449740?v=3&s=460">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Key Memory">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2016/160801-spark-mllib-1-naive-bayes/" class="post-title-link" itemprop="url">Spark机器学习1 - 朴素贝叶斯分类</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2016-08-01 00:00:00" itemprop="dateCreated datePublished" datetime="2016-08-01T00:00:00+08:00">2016-08-01</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-12-24 13:16:39" itemprop="dateModified" datetime="2019-12-24T13:16:39+08:00">2019-12-24</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><p>每个人每天都会进行很多次的分类操作。比如，当你看到一个陌生人，你的大脑中的分类器就会根据TA的体貌特征、衣着举止，判断出TA是男是女，是穷是富等等。这就是分类操作。</p>
+<p>其中，男人、女人、穷人、富人，这些是类别；那个陌生人，是个待分类项；把一个待分类项映射到一个类别的映射规则，就是一个分类器。</p>
+<p>分类算法的任务就是构造出分类器。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2016/160801-spark-mllib-1-naive-bayes/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://qinm08.github.io/2016/160715-hadoop-tdg-spark-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="秦铭">
+      <meta itemprop="description" content="不忘初心，方得始终">
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/20449740?v=3&s=460">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Key Memory">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2016/160715-hadoop-tdg-spark-1/" class="post-title-link" itemprop="url">翻译：Hadoop权威指南之Spark-1</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2016-07-15 00:00:00" itemprop="dateCreated datePublished" datetime="2016-07-15T00:00:00+08:00">2016-07-15</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-12-24 10:46:56" itemprop="dateModified" datetime="2019-12-24T10:46:56+08:00">2019-12-24</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>本文翻译自O’Reilly出版Tom White所著《Hadoop: The Definitive Guide》第4版第19章，向作者致敬。该书英文第4版已于2015年4月出版，至今已近15个月，而市面上中文第3版还在大行其道。Spark一章是第4版新增的内容，笔者在学习过程中顺便翻译记录。由于笔者也在学习，难免翻译不妥或出错，欢迎方家斧正。翻译纯属兴趣，不做商业用途。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2016/160715-hadoop-tdg-spark-1/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -815,162 +1139,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://qinm08.github.io/2016/160815-activiti-bpm-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="秦铭">
-      <meta itemprop="description" content="不忘初心，方得始终">
-      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/20449740?v=3&s=460">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Key Memory">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2016/160815-activiti-bpm-1/" class="post-title-link" itemprop="url">插曲：Activiti BPM - 从入门到放弃</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2016-08-15 00:00:00" itemprop="dateCreated datePublished" datetime="2016-08-15T00:00:00+08:00">2016-08-15</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2017-01-08 17:01:06" itemprop="dateModified" datetime="2017-01-08T17:01:06+08:00">2017-01-08</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>版权所有，随便拿走。</p>
-<p><img src="https://qinm08.github.io/uploads/images/2016/0815/0955.png" alt></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://qinm08.github.io/2016/160809-spark-mllib-2-kmeans/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1136,189 +1304,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://qinm08.github.io/2016/160801-spark-mllib-1-naive-bayes/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="秦铭">
-      <meta itemprop="description" content="不忘初心，方得始终">
-      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/20449740?v=3&s=460">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Key Memory">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2016/160801-spark-mllib-1-naive-bayes/" class="post-title-link" itemprop="url">Spark机器学习1 - 朴素贝叶斯分类</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2016-08-01 00:00:00" itemprop="dateCreated datePublished" datetime="2016-08-01T00:00:00+08:00">2016-08-01</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2016-09-20 17:22:22" itemprop="dateModified" datetime="2016-09-20T17:22:22+08:00">2016-09-20</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><p>每个人每天都会进行很多次的分类操作。比如，当你看到一个陌生人，你的大脑中的分类器就会根据TA的体貌特征、衣着举止，判断出TA是男是女，是穷是富等等。这就是分类操作。</p>
-<p>其中，男人、女人、穷人、富人，这些是类别；那个陌生人，是个待分类项；把一个待分类项映射到一个类别的映射规则，就是一个分类器。</p>
-<p>分类算法的任务就是构造出分类器。</p>
-<h1 id="贝叶斯定理"><a href="#贝叶斯定理" class="headerlink" title="贝叶斯定理"></a>贝叶斯定理</h1><p>贝叶斯定理解决的是这样一个问题：已知在事件B发生的条件下，事件A的发生概率P(A|B)，怎样得到事件A发生的条件下，事件B的发生概率 P(B|A)？贝叶斯定理为我们打通了从 P(A|B) 到 P(B|A) 的道路。</p>
-<p>P(B|A) = P(A|B) × P(B) / P(A)</p>
-<p>举例说明，假设已经有了100个 email，其中：</p>
-<ol>
-<li>垃圾邮件占比60%，即 P(Spam) = 0.6<ul>
-<li>80%的垃圾邮件包含关键字“buy”，即 P(Buy|Spam) = 0.8</li>
-<li>20%的垃圾邮件不包含关键字“buy”</li>
-</ul>
-</li>
-<li>正常邮件占比40%，即 P(NotSpam) = 0.4<ul>
-<li>10%的正常邮件包含关键字“buy”，即 P(Buy|NotSpam) = 0.1</li>
-<li>90%的正常邮件不包含关键字“buy”</li>
-</ul>
-</li>
-</ol>
-<p>现在，第101个 email 进来了，它包含关键字“buy”，那么它是垃圾邮件的概率 P(Spam|Buy) 是多少？</p>
-<p>P(Spam|Buy) = P(Buy|Spam) × P(Spam) / P(Buy)</p>
-<p>P(Buy) = P(Buy|Spam) × P(Spam) + P(Buy|NotSpam) × P(NotSpam)</p>
-<p>P(Spam|Buy) = (0.8 × 0.6) / (0.8 × 0.6 + 0.1 × 0.4) = 0.48 / 0.52 = 0.923</p>
-<p>由此得出，这个 email 有92.3%的可能是一个垃圾邮件。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2016/160801-spark-mllib-1-naive-bayes/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://qinm08.github.io/2016/160721-hadoop-tdg-spark-5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1381,7 +1366,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2016-08-19 18:20:12" itemprop="dateModified" datetime="2016-08-19T18:20:12+08:00">2016-08-19</time>
+                <time title="修改时间：2019-12-24 10:06:03" itemprop="dateModified" datetime="2019-12-24T10:06:03+08:00">2019-12-24</time>
               
             
           </span>
@@ -1545,7 +1530,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2016-08-19 18:21:32" itemprop="dateModified" datetime="2016-08-19T18:21:32+08:00">2016-08-19</time>
+                <time title="修改时间：2019-12-24 10:05:49" itemprop="dateModified" datetime="2019-12-24T10:05:49+08:00">2019-12-24</time>
               
             
           </span>
@@ -1711,7 +1696,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2016-08-19 18:22:00" itemprop="dateModified" datetime="2016-08-19T18:22:00+08:00">2016-08-19</time>
+                <time title="修改时间：2019-12-24 10:05:35" itemprop="dateModified" datetime="2019-12-24T10:05:35+08:00">2019-12-24</time>
               
             
           </span>
@@ -1877,7 +1862,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2016-08-19 18:22:20" itemprop="dateModified" datetime="2016-08-19T18:22:20+08:00">2016-08-19</time>
+                <time title="修改时间：2019-12-24 10:05:18" itemprop="dateModified" datetime="2019-12-24T10:05:18+08:00">2019-12-24</time>
               
             
           </span>
@@ -1966,10 +1951,6 @@
   </section>
 
   
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
-
 
 
           </div>
@@ -2011,7 +1992,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2058,11 +2039,7 @@
                     
                       
                     
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2116,7 +2093,7 @@
 </div>
 
 
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
 
 
 
